@@ -7,6 +7,7 @@ export class RegisterUser
     birthDate: Date;
     jmbg: number;
     emailConfirmed: boolean;
+    userRole: string;
     
    
     constructor
@@ -17,7 +18,8 @@ export class RegisterUser
         password: string,
         emailConfirmed: boolean,
         birthDate: Date,
-        jmbg: number
+        jmbg: number,
+        userRole: string
     ){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,6 +28,7 @@ export class RegisterUser
         this.emailConfirmed = emailConfirmed;
         this.birthDate = birthDate;
         this.jmbg = jmbg;
+        this.userRole = userRole;
         
     }
 }

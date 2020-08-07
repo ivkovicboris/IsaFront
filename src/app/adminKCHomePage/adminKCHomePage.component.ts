@@ -39,6 +39,7 @@ export class AdminKCHomePageComponent {
             true,
             this.users.birthDate,
             this.users.jmbg,
+            "Pacijent"
         );
         this.data.SendMail(userToRegister).subscribe( response => {
             this.ngOnInit();
@@ -56,6 +57,7 @@ export class AdminKCHomePageComponent {
             false,
             this.users.birthDate,
             this.users.jmbg,
+            "Pacijent"
             );
         this.data.SendMail(userToRegister).subscribe( response => {
             this.ngOnInit();

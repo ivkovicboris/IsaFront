@@ -25,7 +25,8 @@ export class RegisterComponent {
             form.value.password, 
             false, 
             form.value.birthDate, 
-            form.value.jmbg)
+            form.value.jmbg,
+            "Pacijent")
         this.data.register(user).subscribe(response =>
         {
             ;
