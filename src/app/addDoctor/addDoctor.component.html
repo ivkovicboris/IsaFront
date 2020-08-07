@@ -1,0 +1,31 @@
+DODAVANJE DOKTORA
+
+<form (ngSubmit)="addDoctor(form)" #form="ngForm">
+        <div class="form-group">
+            <input type="text"  name="email" ngModel #email="ngModel" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="text"  name="specialization" ngModel #specialization="ngModel" placeholder="Specijalizacija">
+        </div>
+        <div class="form-group">
+          <input type="text"  name="jmbg" ngModel #jmbg="ngModel" placeholder="JMBG">
+       </div>
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput [matDatepicker]="birthDate" name="birthDate" ngModel #birthDate="ngModel" placeholder="Datum rodjenja">
+            <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+            <mat-datepicker #birthDate></mat-datepicker>
+         </mat-form-field>
+        </div>
+        <div class="form-group">
+          <input type="text"  name="firstName" ngModel #firstName="ngModel" placeholder="Ime">
+       </div>
+       <div class="form-group">
+        <input type="text"  name="lastName" ngModel #lastName="ngModel" placeholder="Prezime">
+    </div>
+    
+
+ 
+        
+      <input type="submit"  value="Dodaj doktora">
+    </form>

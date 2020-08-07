@@ -1,0 +1,37 @@
+<div>
+    <nav class="menu navbar navbar-expand-lg navbar-light bg-light ">
+       <div> 
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="navbar-brand"  routerLink="/login">
+                    <img src="../assets/images/hospital.svg" width="30" height="30" alt="Hospital Logo"> Hospital
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="text navbar-brand" routerLink="/login">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="text navbar-brand" routerLink="/adminKCHomePage">Admin KC Page</a>
+                </li>
+                <li class="nav-item">
+                        <a class="text navbar-brand" routerLink="/adminClinicHomePage">Admin Klinike</a>
+                </li>
+                <li class="nav-item">
+                    <a class="text navbar-brand" routerLink="/doctorHomePage">Doctor Home Page</a>
+                </li>
+                <li class="nav-item">
+                        <a class="text navbar-brand" routerLink="/Examinations">Zakazivanje pregleda</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="padding-top:100px; z-index: 0;">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="footer fixed-bottom footer-bg">
+        <div class="container text-center">
+          <span>Impressum</span>
+        </div>
+    </footer>
+    </div>
+           

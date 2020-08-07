@@ -1,0 +1,12 @@
+.menu { 
+  background-color: #b5e1ff !important;
+  position: fixed;
+  width:100%;
+  z-index: 999;
+  
+}
+
+.text{
+  color:black !important;
+}
+

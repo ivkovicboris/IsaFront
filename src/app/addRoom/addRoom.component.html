@@ -1,0 +1,13 @@
+DODAVANJE SOBE
+
+<form (ngSubmit)="addRoom(form)" #form="ngForm">
+        <div class="form-group">
+            <input type="text"  name="name" ngModel #name="ngModel" placeholder="Naziv sobe">
+        </div>
+        <div class="form-group">
+            <input type="text"  name="number" ngModel #number="ngModel" placeholder="Broj sobe">
+        </div>
+ 
+        
+      <input type="submit"  value="Dodaj sobu">
+    </form>
