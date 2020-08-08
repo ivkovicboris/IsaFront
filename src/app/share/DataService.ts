@@ -12,6 +12,7 @@ import { Examination } from './Examination';
 import { Room } from './Room';
 import {RequestExamination} from './RequestExamination';
 import { NewExamination } from './NewExamination';
+import { Mail } from './Mail';
 
 
 const httpOptions = {
@@ -40,15 +41,20 @@ export class DataService {
           environment.webApiBaseUrl + 'Account/Login', creds);
     }
 
-    public GetRequests(): Observable<User[]> {
+    public GetRegisterRequests(): Observable<User[]> {
         return this.http.get<User[]>(environment.webApiBaseUrl + 'Account/GetRegisterRequests', {
             responseType: 'json'
         });
     }
 
-    public SendMail(user: RegisterUser){
+    public AcceptPatientRegisterRequest(mail: Mail){
         //const params = new HttpParams()        
-        return this.http.post(environment.webApiBaseUrl + 'Account/SendMailAccept', user);
+        return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
+    }
+
+    public DenyPatientRegisterRequest(mail: Mail){
+        //const params = new HttpParams()        
+        return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
     }
 
     public GetUserById(id: string): Observable<User[]>{
