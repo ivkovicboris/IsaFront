@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterUser } from '../share/RegisterUser';
+import { Mail } from "../share/Mail";
 
 
 @Component({
@@ -15,51 +16,45 @@ export class AdminKCHomePageComponent {
 
     public id:any;
     public error:boolean = true;
-    public registerUser:any;
     public users:any;
+    public mail:any;
     public accepted:boolean;
 
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
     ngOnInit(){
        // this.id = this.arouter.snapshot.paramMap.get('id');
-        this.data.GetRequests().subscribe( response => {
+        this.data.GetRegisterRequests().subscribe( response => {
             this.users = response;
         });
     }
 
     Accept(email: any){
-       // this.accepted = true;
-        const userToRegister = new RegisterUser
+       
+        const mail = new Mail
         (
-            this.users.firstName,
-            this.users.lastName,
+            "HOSPITAL ISA - registration ACCEPTED",
+            "",
             email,
-            this.users.password,
-            true,
-            this.users.birthDate,
-            this.users.jmbg,
-            "Pacijent"
+            "Your registration request has been accepted. Activate your account on this link:" + "http://localhost:4200/"
         );
-        this.data.SendMail(userToRegister).subscribe( response => {
+        this.data.AcceptPatientRegisterRequest(mail).subscribe( response => {
             this.ngOnInit();
         });   
     }
 
     Deny(email: any){
-        //this.accepted = false;
-        const userToRegister = new RegisterUser
+        
+        const mail = new Mail
         (
-            this.users.firstName,
-            this.users.lastName,
+            "HOSPITAL ISA - registration DENIED",
+            "",
             email,
-            this.users.password,
-            false,
-            this.users.birthDate,
-            this.users.jmbg,
-            "Pacijent"
-            );
-        this.data.SendMail(userToRegister).subscribe( response => {
+            "Your registration request has been denied!"
+            
+            
+        );
+        this.data.DenyPatientRegisterRequest(mail).subscribe( response => {
             this.ngOnInit();
         });
     }
