@@ -4,55 +4,59 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
-      <h1>REGISTER</h1>
+      <h1>Registration</h1>
       <!-- Icon -->
       <div class="fadeIn first">
        <img src="../../assets/images/hospital.svg" width="50" height="50" id="icon" alt="User Icon" /> 
       </div>
   
-      <!-- Login Form -->
-      <div [hidden]="hiddenForm">
-      <form (ngSubmit)="NewUser(form)" #form="ngForm">
-          <div class="form-group">
-              <input type="text" id="login" class="fadeIn second" name="email" ngModel #email="ngModel" placeholder="email@example.com">
-              <div class="text-danger" *ngIf="!email.valid && email.touched ">Username is required</div>
-          </div>
-          <div class="form-group">
-              <input type="password" id="password" class="fadeIn third" name="password" ngModel #password="ngModel" placeholder="password">
-              <div class="text-danger" *ngIf="!password.valid && password.touched ">Passowrd is required</div>
-          </div>
-          <div class="form-group">
-            <input type="text"  name="jmbg" ngModel #jmbg="ngModel" placeholder="JMBG">
-         </div>
-          <div class="form-group">
-            <mat-form-field>
-              <input matInput [matDatepicker]="birthDate" name="birthDate" ngModel #birthDate="ngModel" placeholder="Datum rodjenja">
-              <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
-              <mat-datepicker #birthDate></mat-datepicker>
-           </mat-form-field>
-          </div>
-          <div class="form-group">
-            <input type="text"  name="firstName" ngModel #firstName="ngModel" placeholder="Ime">
-         </div>
-         <div class="form-group">
-          <input type="text"  name="lastName" ngModel #lastName="ngModel" placeholder="Prezime">
+      <!-- Register Form -->
+      <div [hidden]="submitted">
+        <form (ngSubmit)="NewUser(form)" #form="ngForm">
+            <br><p>Please fill in the following information</p>
+            <div class="form-group"> <!--email-->
+                <input  type="text" id="login" class="fadeIn second" name="email" ngModel #email="ngModel" placeholder="email@example.com" >
+                <div class="text-danger" *ngIf="!email.valid && email.touched">Email is required!</div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" class="fadeIn third" name="password" ngModel #password="ngModel" placeholder="Password">
+                <div class="text-danger" *ngIf="!password.valid && password.touched ">Password is required (minimum 8 characters. Make sure to use at least one Uppercase letter, Lowercase letter, Number, Special character </div>
+            </div>
+            
+            <div class="form-group">
+              <input type="text"  name="jmbg" ngModel #jmbg="ngModel" placeholder="JMBG">
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput [matDatepicker]="birthDate" name="birthDate" ngModel #birthDate="ngModel" placeholder="BirthDate">
+                <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+                <mat-datepicker #birthDate></mat-datepicker>
+            </mat-form-field>
+            </div>
+            <div class="form-group">
+              <input type="text"  name="firstName" ngModel #firstName="ngModel" placeholder="First Name">
+            </div>
+            <div class="form-group">
+              <input type="text"  name="lastName" ngModel #lastName="ngModel" placeholder="Last Name">
+            </div>
+
+            <input type="submit" class="fadeIn fourth" value="Sign up"> <!--[disabled]="!ngForm.form.valid"-->
+        </form>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <p>Already have an account?</p>
+          <a class="underlineHover" routerLink="/login">LOG IN</a> 
         </div>
+      </div>
 
-   
-          
-        <input type="submit" class="fadeIn fourth" value="Sign up">
-      </form>
-  
-      <!-- Remind Passowrd -->
-      <div id="formFooter">
-          <p>Already have an account?</p>
-        <a class="underlineHover" routerLink="/register">LOG IN</a> 
+      <div [hidden]="!submitted">
+        <div>
+          Your registration request has been recieved.<br> 
+          Please check your email
+        </div>
+        <div>{{form.Email}}</div>
+        <div>for confirmation link.</div> 
         
-      </div>
-      </div>
-
-      <div [hidden]="!hiddenForm">
-        TEXT
       </div>
 
     </div>
