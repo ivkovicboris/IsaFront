@@ -18,24 +18,24 @@ export class AddClinicAdminComponent {
     public clinicID:string;
    
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
-/*
-    addClinicAdmin(form:NgForm){
-        const token = localStorage.getItem('token');
-        const decodeToken = jwt_decode(token);
-        //ISCITATI ID KLINIKE 
-        const clinicAdmin = new RegisterUser
-                (
-                form.value.email, 
-                form.value.specialization,
-                form.value.birthDate,
-                form.value.jmbg,
-                form.value.firstName,
-                form.value.lastName,
-                decodeToken.clinicId,
-                "123456789",
-                true,
-                );
-        this.data.AddClinicAdmin(clinicAdmin);
+    NewUser(form: NgForm){
+
+        const user = new RegisterUser
+        (
+            form.value.firstName, 
+            form.value.lastName, 
+            form.value.email, 
+            form.value.password, 
+            false, 
+            form.value.birthDate, 
+            form.value.jmbg,
+            "ClinicAdmin",
+            ""
+        )
+        this.data.register(user).subscribe(response =>
+        {
+            ;
+        });
+        
     }
-    */
 }

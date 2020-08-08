@@ -34,7 +34,8 @@ export class RegisterComponent {
             false, 
             form.value.birthDate, 
             form.value.jmbg,
-            "Pacijent"
+            "Patient",
+            ""
         )
         this.data.register(user).subscribe(response =>
         {

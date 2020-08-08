@@ -19,7 +19,6 @@ export class PatientProfileComponent implements OnInit {
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
     ngOnInit() {
-
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;

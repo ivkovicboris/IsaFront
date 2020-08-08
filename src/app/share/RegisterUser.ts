@@ -8,7 +8,7 @@ export class RegisterUser
     jmbg: number;
     emailConfirmed: boolean;
     userRole: string;
-    
+    specialization:string;
    
     constructor
     (
@@ -19,7 +19,8 @@ export class RegisterUser
         emailConfirmed: boolean,
         birthDate: Date,
         jmbg: number,
-        userRole: string
+        userRole: string,
+        specialization:string,
     ){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +30,7 @@ export class RegisterUser
         this.birthDate = birthDate;
         this.jmbg = jmbg;
         this.userRole = userRole;
+        this.specialization = specialization;
         
     }
 }
