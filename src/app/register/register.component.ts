@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RegisterUser } from '../share/RegisterUser';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'register-component',
@@ -12,11 +13,18 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
 
     public error:boolean = true;
-    public hiddenForm = false;
-
+    public submitted = false;
+ 
     constructor(private data: DataService, private router: Router) {}
 
     NewUser(form: NgForm){
+
+        /*this.form = new FormGroup({
+            email : new FormControl(this.form.email, [
+                Validators.required,
+            ])
+        })*/
+
         const user = new RegisterUser
         (
             form.value.firstName, 
@@ -26,13 +34,14 @@ export class RegisterComponent {
             false, 
             form.value.birthDate, 
             form.value.jmbg,
-            "Pacijent")
+            "Pacijent"
+        )
         this.data.register(user).subscribe(response =>
         {
             ;
         });
+        this.submitted = true;
         
-        this.hiddenForm = true;
     }
 
 }
