@@ -58,7 +58,7 @@ export class DataService {
     }
 
     public GetUserById(id: string): Observable<User[]>{
-        return this.http.get<User[]>(environment.webApiBaseUrl + 'User/GetUser/'+id,  {
+        return this.http.get<User[]>(environment.webApiBaseUrl + 'User/GetUserById/'+id,  {
             responseType: 'json'
         });
     }
