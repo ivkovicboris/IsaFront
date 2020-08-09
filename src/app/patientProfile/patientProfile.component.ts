@@ -29,8 +29,8 @@ export class PatientProfileComponent implements OnInit {
         });
     }
 
-    edit(user) {
-        this.data.UpdateProfile(this.user).subscribe(response => {
+    UpdatePatient(user) {
+        this.data.UpdatePatient(this.user).subscribe(response => {
             location.reload();
         });
     }

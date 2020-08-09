@@ -49,7 +49,7 @@ export class DoctorHomePageComponent implements OnInit {
     }
 
     edit(user) {
-        this.data.UpdateProfile(this.user).subscribe(response => {
+        this.data.UpdateUser(this.user).subscribe(response => {
             location.reload();
         });
     }

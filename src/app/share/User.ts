@@ -3,7 +3,7 @@ export class User
     firstName: string;
     lastName: string;
    // userName: string;
-   jmbg: Int32Array;
+    jmbg: Int32Array;
     email:string;
     password:string;
     //role: string;
