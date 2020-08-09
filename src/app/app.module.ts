@@ -21,6 +21,7 @@ import { AddRoomComponent } from './addRoom/addRoom.component';
 import { AddClinicComponent } from './addClinic/addClinic.component';
 import { AddDoctorComponent } from './addDoctor/addDoctor.component.';
 import { AddClinicAdminComponent } from './addClinicAdmin/addClinicAdmin.component';
+import { AddClinicCenterAdminComponent } from './addClinicCenterAdmin/addClinicCenterAdmin.component';
 import { JwtInterceptor } from './share/interceptor';
 
 
@@ -37,7 +38,7 @@ const route = [
   { path: 'addDoctor', component: AddDoctorComponent},
   { path: 'addClinicAdmin', component: AddClinicAdminComponent},
   { path: 'addClinic', component: AddClinicComponent},
-  
+  { path: 'addClinicCenterAdmin', component: AddClinicCenterAdminComponent }
 ];
 
 
@@ -55,7 +56,8 @@ const route = [
     AddRoomComponent,
     AddDoctorComponent,
     AddClinicAdminComponent,
-    AddClinicComponent
+    AddClinicComponent,
+    AddClinicCenterAdminComponent
    
   ],
   imports: [

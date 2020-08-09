@@ -1,35 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Route } from '@angular/router';
 import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
 
 
 @Component({
-    selector: 'addClinicAdmin-component',
-    templateUrl: 'addClinicAdmin.component.html',
-    styleUrls: ['addClinicAdmin.component.css']
+    selector: 'addClinicCenterAdmin-component',
+    templateUrl: 'addClinicCenterAdmin.component.html',
+    styleUrls: ['addClinicCenterAdmin.component.css']
 })
 
-export class AddClinicAdminComponent {
+export class AddClinicCenterAdminComponent {
       
     public clinicID:string;
     public clinics:any;
     public selectedClinic:any;
-    public id:string;
+    public id: any;
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
-
-        this.data.GetAllClinics().subscribe( response => {
-            this.clinics = response;
-        });
+        
     }
     constructor(private data: DataService, private router: Router) {}
-    NewClinicAdmin(form: NgForm){
+    NewClinicCenterAdmin(form: NgForm){
 
         const user = new RegisterUser
         (
@@ -40,9 +37,9 @@ export class AddClinicAdminComponent {
             false, 
             form.value.birthDate, 
             form.value.jmbg,
-            "ClinicAdmin",
+            "ClinicCenterAdmin",
             "",
-            this.selectedClinic
+            ""
         )
         this.data.Register(user).subscribe(response =>
         {

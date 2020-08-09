@@ -1,8 +1,9 @@
 import { DataService } from '../share/DataService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Clinic } from '../share/Clinic';
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
+import * as jwt_decode from "jwt-decode";
 
 
 @Component({
@@ -13,8 +14,14 @@ import { Component } from '@angular/core';
 export class AddClinicComponent {
   
     public clinicID:string;
+    public id:string;
+    ngOnInit() {
+        const token = localStorage.getItem('token');
+        const decodeToken = jwt_decode(token);
+        this.id = decodeToken.jti;
+    }
    
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    constructor(private data: DataService, private router: Router) {}
     AddClinic(form: NgForm){
 
         const clinic = new Clinic
@@ -26,6 +33,7 @@ export class AddClinicComponent {
         {
             ;
         });
+        this.router.navigate(['/adminClinicCenterHomePage/'+ this.id]);
         
     }
 }
