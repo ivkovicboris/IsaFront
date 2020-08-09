@@ -13,6 +13,7 @@ import { Room } from './Room';
 import {RequestExamination} from './RequestExamination';
 import { NewExamination } from './NewExamination';
 import { Mail } from './Mail';
+import { Clinic } from './Clinic';
 
 
 const httpOptions = {
@@ -24,19 +25,19 @@ const httpOptions = {
 
 @Injectable()
 export class DataService {
-
+      
     public accepted:boolean;
     public vacationRequest:Vacation;
     
     constructor(private http: HttpClient) {
     }
 
-    public register(user: RegisterUser): Observable<any> {
+    public Register(user: RegisterUser): Observable<any> {
         return this.http.post(
          environment.webApiBaseUrl + 'Account/Register', user);
     }
 
-    public login(creds: LoginUser): Observable<any> {
+    public Login(creds: LoginUser): Observable<any> {
         return this.http.post(
           environment.webApiBaseUrl + 'Account/Login', creds);
     }
@@ -46,14 +47,18 @@ export class DataService {
             responseType: 'json'
         });
     }
+    public GetAllClinics(): Observable<Clinic[]> {
+        return this.http.get<Clinic[]>(environment.webApiBaseUrl + 'Clinic/GetAllClinics', {
+            responseType: 'json'
+        });
+    }
 
+    
     public AcceptPatientRegisterRequest(mail: Mail){
-        //const params = new HttpParams()        
         return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
     }
 
     public DenyPatientRegisterRequest(mail: Mail){
-        //const params = new HttpParams()        
         return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
     }
 
@@ -69,29 +74,27 @@ export class DataService {
         });
     }
 
-    public SendVacationRequest(vacationRequest: Vacation){
-        return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
+    public AddClinic(clinic: Clinic) {
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic',clinic);
     }
 
-    public RequestExaminations(request: RequestExamination): Observable<Examination[]> {
-        let result: any;
-        return this.http.post(environment.webApiBaseUrl + 'Examination/GetExamination/', request) as Observable<Examination[]>;
+    public GetClinicByAdminId(adminId: string): Observable<Clinic[]>{
+        return this.http.get<Clinic[]>(environment.webApiBaseUrl + 'Clinic/GetClinicByAdminId/'+adminId,  {
+            responseType: 'json'
+        });
+    }
+
+    //****************STARE METODE***********************
+    public SendVacationRequest(vacationRequest: Vacation){
+        return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
     }
 
     public AddRoom(room:Room){
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoom',room).subscribe();
     }
 
-    public AddDoctor(doctor:RegisterUser){
-        return this.http.post(environment.webApiBaseUrl + 'Account/RegisterDoctor',doctor).subscribe();
-    }
-
     public UpdateProfile(user: User) {
         return this.http.post(environment.webApiBaseUrl + 'User/UpdateProfile', user);
-    }
-
-    public AddClinicAdmin(clinicAdmin:RegisterUser){
-        return this.http.post(environment.webApiBaseUrl + 'Account/RegisterClinicAdmin',clinicAdmin).subscribe();
     }
 
     public GetExaminationRequests(clinicId:string): Observable<User[]> {
@@ -103,4 +106,10 @@ export class DataService {
     public AddNewExamination(examination: NewExamination){
         this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination).subscribe();
     }
+
+    public RequestExaminations(request: RequestExamination): Observable<Examination[]> {
+        let result: any;
+        return this.http.post(environment.webApiBaseUrl + 'Examination/GetExamination/', request) as Observable<Examination[]>;
+}
+    
 }

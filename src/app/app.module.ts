@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -19,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MaterialModule } from './material.module';
 import { ExaminationComponent } from './examinations/examination.component';
 import { AddRoomComponent } from './addRoom/addRoom.component';
+import { AddClinicComponent } from './addClinic/addClinic.component';
 import { AddDoctorComponent } from './addDoctor/addDoctor.component.';
 import { AddClinicAdminComponent } from './addClinicAdmin/addClinicAdmin.component';
 import { JwtInterceptor } from './share/interceptor';
@@ -28,14 +28,15 @@ const route = [
   { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'adminKCHomePage', component: AdminKCHomePageComponent},
-  { path: 'adminClinicHomePage', component: AdminClinicHomePageComponent},
+  { path: 'adminKCHomePage/:id', component: AdminKCHomePageComponent},
+  { path: 'adminClinicHomePage/:id', component: AdminClinicHomePageComponent},
   { path: 'doctorHomePage/:id', component: DoctorHomePageComponent},
   { path: 'patientProfile/:id', component: PatientProfileComponent},
   { path: 'Examinations', component: ExaminationComponent},
   { path: 'addRoom', component: AddRoomComponent},
   { path: 'addDoctor', component: AddDoctorComponent},
-  {path: 'addClinicAdmin', component: AddClinicAdminComponent},
+  { path: 'addClinicAdmin', component: AddClinicAdminComponent},
+  { path: 'addClinic', component: AddClinicComponent},
   
 ];
 
@@ -53,7 +54,8 @@ const route = [
     ExaminationComponent,
     AddRoomComponent,
     AddDoctorComponent,
-    AddClinicAdminComponent
+    AddClinicAdminComponent,
+    AddClinicComponent
    
   ],
   imports: [

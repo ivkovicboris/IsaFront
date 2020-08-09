@@ -9,6 +9,7 @@ export class RegisterUser
     emailConfirmed: boolean;
     userRole: string;
     specialization:string;
+    clinicId:string;
    
     constructor
     (
@@ -21,6 +22,7 @@ export class RegisterUser
         jmbg: number,
         userRole: string,
         specialization:string,
+        clinicId:string
     ){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +33,7 @@ export class RegisterUser
         this.jmbg = jmbg;
         this.userRole = userRole;
         this.specialization = specialization;
+        this.clinicId = clinicId;
         
     }
 }
