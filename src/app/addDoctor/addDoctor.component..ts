@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
@@ -14,12 +15,24 @@ import { RegisterUser } from '../share/RegisterUser';
 })
 export class AddDoctorComponent {
     
-    
-    public clinicID:string;
-   
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
-    NewUser(form: NgForm){
+    public id:string;
+    public clinicId:string;
+    public clinic:any;
+    public succseed: any;
 
+    ngOnInit() {
+        const token = localStorage.getItem('token');
+        const decodeToken = jwt_decode(token);
+        this.id = decodeToken.jti;
+        //this.id = this.arouter.snapshot.paramMap.get('id');
+        //this.id='b4d714ea-5536-46a0-8fe4-90b9a222b573';
+        this.data.GetClinicByAdminId(this.id).subscribe( response => {
+            this.clinic = response;
+        });
+    }
+    constructor(private data: DataService, private router: Router) {}
+    
+    NewUser(form: NgForm){
         const user = new RegisterUser
         (
             form.value.firstName, 
@@ -30,12 +43,13 @@ export class AddDoctorComponent {
             form.value.birthDate, 
             form.value.jmbg,
             "Doctor",
-            form.value.specialization
+            form.value.specialization,
+            this.clinic[0].clinicId
         )
-        this.data.register(user).subscribe(response =>
+        this.data.Register(user).subscribe(response =>
         {
-            ;
+            this.succseed = response;
         });
-        
+            this.router.navigate(['/adminClinicHomePage/'+ this.id]);
     }
 }

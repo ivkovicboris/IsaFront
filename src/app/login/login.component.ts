@@ -24,7 +24,7 @@ export class LoginComponent {
 
     onLogin(form: NgForm){
         const user = new LoginUser(form.value.email, form.value.password)
-        this.data.login(user).subscribe(token => {
+        this.data.Login(user).subscribe(token => {
             this.token = token;
             
             if (this.token !== null) {
@@ -38,11 +38,11 @@ export class LoginComponent {
             //const newtoken = localStorage.getItem('token');
             const tokenPayload = jwt_decode(this.token.token);
             this.id=tokenPayload.jti;
-            if(tokenPayload.Role=='AdministratorCentra') { this.router.navigate(['/adminKCHomePage/']);} 
-              else if (tokenPayload.Role=='AdministratorKlinike'){ this.router.navigate(['/adminClinicHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Doktor'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Sestra'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Pacijent'){ this.router.navigate(['/patientProfile/'+ this.id]);}    
+            if(tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'+this.id]);} 
+              else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/'+ this.id]);}
+              else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
+              else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
+              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientProfile/'+ this.id]);}    
           });
           
     }

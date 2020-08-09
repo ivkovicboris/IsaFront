@@ -7,7 +7,7 @@
         <img src="../../assets/images/hospital.svg" width="50" height="50" id="icon" alt="User Icon" /> 
       </div>
   
-      <form (ngSubmit)="NewUser(form)" #form="ngForm">
+      <form (ngSubmit)="NewClinicAdmin(form)" #form="ngForm">
           <br><p>Please fill in the following information for new Clinic Admin</p>
           <div class="form-group"> <!--email-->
               <input  type="text" id="login" class="fadeIn second" name="email" ngModel #email="ngModel" placeholder="email@example.com" >
@@ -33,6 +33,18 @@
           </div>
           <div class="form-group">
             <input type="text"  name="lastName" ngModel #lastName="ngModel" placeholder="Last Name">
+          </div>
+          <div class="form-group">
+              <mat-form-field appearance="fill">
+                <mat-label>Select Clinic</mat-label>
+                <mat-select [(value)]="selectedClinic" name="clinic">
+                  
+                  <mat-option *ngFor="let clinic of clinics" [value]="clinic.clinicId">
+                      {{clinic.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
           </div>
          
           <input type="submit" class="fadeIn fourth" value="Register"> <!--[disabled]="!ngForm.form.valid"-->
