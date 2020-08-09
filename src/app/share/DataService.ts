@@ -33,13 +33,11 @@ export class DataService {
     }
 
     public Register(user: RegisterUser): Observable<any> {
-        return this.http.post(
-         environment.webApiBaseUrl + 'Account/Register', user);
+        return this.http.post(environment.webApiBaseUrl + 'Account/Register', user);
     }
 
     public Login(creds: LoginUser): Observable<any> {
-        return this.http.post(
-          environment.webApiBaseUrl + 'Account/Login', creds);
+        return this.http.post(environment.webApiBaseUrl + 'Account/Login', creds);
     }
 
     public GetRegisterRequests(): Observable<User[]> {
@@ -84,6 +82,14 @@ export class DataService {
         });
     }
 
+    public UpdatePatient(user: RegisterUser) {
+        return this.http.post(environment.webApiBaseUrl + 'User/UpdatePatient', user);
+    }
+
+    public UpdateEmployee(user: RegisterUser){
+        return this.http.post(environment.webApiBaseUrl + 'User/UpdateEmployee', user);
+    }
+
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
         return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
@@ -93,9 +99,7 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoom',room).subscribe();
     }
 
-    public UpdateProfile(user: User) {
-        return this.http.post(environment.webApiBaseUrl + 'User/UpdateProfile', user);
-    }
+    
 
     public GetExaminationRequests(clinicId:string): Observable<User[]> {
         return this.http.get<User[]>(environment.webApiBaseUrl + 'Account/GetRegisterRequests'+clinicId, {
