@@ -33,7 +33,7 @@ export class AddClinicComponent {
         {
             ;
         });
-        this.router.navigate(['/adminClinicCenterHomePage/'+ this.id]);
+        this.router.navigate(['/adminKCHomePage/'+ this.id]);
         
     }
 }

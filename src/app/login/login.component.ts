@@ -42,7 +42,7 @@ export class LoginComponent {
               else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/'+ this.id]);}
               else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
               else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientProfile/'+ this.id]);}    
+              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/'+ this.id]);}    
           });
           
     }

@@ -48,6 +48,6 @@ export class AddClinicAdminComponent {
         {
             ;
         });
-        this.router.navigate(['/adminClinicCenterHomePage/'+ this.id]);
+        this.router.navigate(['/adminKCHomePage/'+ this.id]);
     }
 }

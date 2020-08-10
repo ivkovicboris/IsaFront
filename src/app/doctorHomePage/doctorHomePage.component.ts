@@ -48,8 +48,8 @@ export class DoctorHomePageComponent implements OnInit {
         //}
     }
 
-    edit(user) {
-        this.data.UpdateUser(this.user).subscribe(response => {
+    UpdateDoctor(user) {
+        this.data.UpdateEmployee(this.user).subscribe(response => {
             location.reload();
         });
     }

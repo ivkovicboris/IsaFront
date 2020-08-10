@@ -1,0 +1,19 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        
+        <th scope="col">Naziv Klinike</th>
+        
+        <th scope="col">Address</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let clinic of clinics; let i =index">
+          <td scope="row">{{i+1}}</td>
+          <td class="vertical-center">{{clinic.name}}</td>
+          <td class="vertical-center">{{clinic.address}}</td>
+        </tr>
+
+    </tbody>
+  </table>

@@ -12,17 +12,36 @@ import * as jwt_decode from "jwt-decode";
     styleUrls: ['addRoom.component.css']
 })
 export class AddRoomComponent {
-    public name:string;
-    public number:string;
-    public clinicId:string;
-   
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
-    addRoom(form:NgForm){
+    public clinicId:string;
+    public clinic:any;
+    public id:string;
+    public succseed: any;
+   
+    ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        //ISCITATI ID KLINIKE 
-        const room = new Room(form.value.name, form.value.number, decodeToken.clinicId);
-        this.data.AddRoom(room);
+        this.id = decodeToken.jti;
+        
+        this.data.GetClinicByAdminId(this.id).subscribe( response => {
+            this.clinic = response;
+        });
     }
+
+    constructor(private data: DataService, private router: Router) {}
+
+    AddRoom(form:NgForm){
+        const room = new Room
+        (
+            form.value.name, 
+            form.value.number, 
+            this.clinic[0].clinicId
+        )
+        this.data.AddRoom(room).subscribe(response =>
+        {
+            this.succseed = response;
+        });
+            this.router.navigate(['/adminClinicHomePage/'+ this.id]);
+    }
+    
 }
