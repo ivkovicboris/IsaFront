@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterPatientComponent } from './registerPatient/registerPatient.component';
 import { DataService } from './share/DataService';
 import { FormsModule } from '@angular/forms';
 import { AdminKCHomePageComponent } from './adminKCHomePage/adminKCHomePage.component';
@@ -30,7 +31,7 @@ import { SearchClinicsComponent } from './searchClinics/searchClinics.component'
 const route = [
   { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
+  { path: 'registerPatient', component: RegisterPatientComponent},
 
   { path: 'addRoom', component: AddRoomComponent},
   { path: 'addDoctor', component: AddDoctorComponent},
@@ -56,7 +57,7 @@ const route = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterPatientComponent,
     AddRoomComponent,
     AddDoctorComponent,
     AddClinicAdminComponent,
@@ -68,7 +69,8 @@ const route = [
     PatientHomePageComponent,
     PatientProfileComponent,
     ExaminationComponent,
-    SearchClinicsComponent
+    SearchClinicsComponent,
+
    
   ],
   imports: [
@@ -81,7 +83,8 @@ const route = [
     ),
     BrowserAnimationsModule,
     MaterialModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [
     DataService,

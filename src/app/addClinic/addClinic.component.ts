@@ -15,6 +15,7 @@ export class AddClinicComponent {
   
     public clinicID:string;
     public id:string;
+    result: Object;
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
@@ -31,8 +32,13 @@ export class AddClinicComponent {
         )
         this.data.AddClinic(clinic).subscribe(response =>
         {
-            ;
+            this.result = response;
         });
+        if(this.result) {
+            alert('New Clinic named:' + form.value.name + 'added successfully');
+        } else {
+            alert(this.result);
+        }
         this.router.navigate(['/adminKCHomePage/'+ this.id]);
         
     }
