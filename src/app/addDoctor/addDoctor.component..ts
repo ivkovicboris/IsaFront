@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
+import { MustMatch } from '../must-match.validator';
 
 
 @Component({
@@ -13,41 +14,72 @@ import { RegisterUser } from '../share/RegisterUser';
     styleUrls: ['addDoctor.component.css']
 })
 export class AddDoctorComponent {
-    
-    public id:string;
+    public registerForm: FormGroup; 
     public clinicId:string;
     public clinic:any;
-    public succseed: any;
+    public selectedClinic:any;
+    public id:string;
+    public submitted: boolean;
 
+    constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
+    
     ngOnInit() {
+        this.registerForm = this.formBuilder.group({
+            firstName: [''],
+            lastName: [''],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
+            confirmPassword: ['', Validators.required],
+            jmbg: [''],
+            address: [''],
+            city: [''],
+            state: [''],
+            clinicID: ['']
+        },{
+            validator: MustMatch('password', 'confirmPassword') 
+        });
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
-        
+
         this.data.GetClinicByAdminId(this.id).subscribe( response => {
             this.clinic = response;
         });
     }
-    constructor(private data: DataService, private router: Router) {}
     
-    NewUser(form: NgForm){
+    get f() { return this.registerForm.controls; }
+    
+    onSubmit(){
+        this.submitted = true;
+        
+        if (this.registerForm.invalid) {
+            return;
+        }
         const user = new RegisterUser
         (
-            form.value.firstName, 
-            form.value.lastName, 
-            form.value.email, 
-            form.value.password, 
+            this.registerForm.value.firstName, 
+            this.registerForm.value.lastName, 
+            this.registerForm.value.email, 
+            this.registerForm.value.password, 
             false, 
-            form.value.birthDate, 
-            form.value.jmbg,
+            this.registerForm.value.jmbg,
+            this.registerForm.value.address,
+            this.registerForm.value.city,
+            this.registerForm.value.country,
             "Doctor",
-            form.value.specialization,
-            this.clinic[0].clinicId
+            "",
+            this.clinic.clinicId
         )
         this.data.Register(user).subscribe(response =>
         {
-            this.succseed = response;
+            ;
         });
-            this.router.navigate(['/adminClinicHomePage/'+ this.id]);
+        alert('Doctor succsessfully added');
+        this.router.navigate(['/adminClinicHomePage/'+ this.id]);
     }
+    onReset() {
+        this.submitted = false;
+        this.registerForm.reset();
+    }
+    
 }

@@ -4,12 +4,15 @@ export class RegisterUser
     password:string;
     firstName: string;
     lastName: string;
-    birthDate: Date;
     jmbg: number;
     emailConfirmed: boolean;
+    address: string;
+    city: string;
+    state: string;
     userRole: string;
     specialization:string;
     clinicId:string;
+    
    
     constructor
     (
@@ -18,8 +21,10 @@ export class RegisterUser
         email: string,
         password: string,
         emailConfirmed: boolean,
-        birthDate: Date,
         jmbg: number,
+        address:string,
+        city:string,
+        state:string,
         userRole: string,
         specialization:string,
         clinicId:string
@@ -29,8 +34,10 @@ export class RegisterUser
         this.email = email;
         this.password = password;
         this.emailConfirmed = emailConfirmed;
-        this.birthDate = birthDate;
         this.jmbg = jmbg;
+        this.address = address;
+        this.city = city;
+        this.state = state;
         this.userRole = userRole;
         this.specialization = specialization;
         this.clinicId = clinicId;

@@ -35,7 +35,7 @@ export class AddRoomComponent {
         (
             form.value.name, 
             form.value.number, 
-            this.clinic[0].clinicId
+            this.clinic.clinicId
         )
         this.data.AddRoom(room).subscribe(response =>
         {
