@@ -23,22 +23,31 @@ import { AddDoctorComponent } from './addDoctor/addDoctor.component.';
 import { AddClinicAdminComponent } from './addClinicAdmin/addClinicAdmin.component';
 import { AddClinicCenterAdminComponent } from './addClinicCenterAdmin/addClinicCenterAdmin.component';
 import { JwtInterceptor } from './share/interceptor';
+import { PatientHomePageComponent } from './patientHomePage/patientHomePage.component';
+import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
 
 
 const route = [
   { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'adminKCHomePage/:id', component: AdminKCHomePageComponent},
-  { path: 'adminClinicHomePage/:id', component: AdminClinicHomePageComponent},
-  { path: 'doctorHomePage/:id', component: DoctorHomePageComponent},
-  { path: 'patientProfile/:id', component: PatientProfileComponent},
-  { path: 'Examinations', component: ExaminationComponent},
+
   { path: 'addRoom', component: AddRoomComponent},
   { path: 'addDoctor', component: AddDoctorComponent},
   { path: 'addClinicAdmin', component: AddClinicAdminComponent},
   { path: 'addClinic', component: AddClinicComponent},
-  { path: 'addClinicCenterAdmin', component: AddClinicCenterAdminComponent }
+  { path: 'addClinicCenterAdmin', component: AddClinicCenterAdminComponent },
+
+  { path: 'adminKCHomePage/:id', component: AdminKCHomePageComponent},
+  { path: 'adminClinicHomePage/:id', component: AdminClinicHomePageComponent},
+  { path: 'doctorHomePage/:id', component: DoctorHomePageComponent},
+  { path: 'patientHomePage/:id', component: PatientHomePageComponent },
+
+  { path: 'patientProfile/:id', component: PatientProfileComponent},
+  { path: 'Examinations', component: ExaminationComponent},
+  
+  { path: 'searchClinics', component: SearchClinicsComponent }
+  
 ];
 
 
@@ -48,16 +57,18 @@ const route = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AdminKCHomePageComponent,
-    AdminClinicHomePageComponent,
-    DoctorHomePageComponent,
-    PatientProfileComponent,
-    ExaminationComponent,
     AddRoomComponent,
     AddDoctorComponent,
     AddClinicAdminComponent,
     AddClinicComponent,
-    AddClinicCenterAdminComponent
+    AddClinicCenterAdminComponent,
+    AdminKCHomePageComponent,
+    AdminClinicHomePageComponent,
+    DoctorHomePageComponent,
+    PatientHomePageComponent,
+    PatientProfileComponent,
+    ExaminationComponent,
+    SearchClinicsComponent
    
   ],
   imports: [

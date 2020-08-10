@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
@@ -24,8 +23,7 @@ export class AddDoctorComponent {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
-        //this.id = this.arouter.snapshot.paramMap.get('id');
-        //this.id='b4d714ea-5536-46a0-8fe4-90b9a222b573';
+        
         this.data.GetClinicByAdminId(this.id).subscribe( response => {
             this.clinic = response;
         });
