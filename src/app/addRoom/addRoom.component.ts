@@ -41,7 +41,7 @@ export class AddRoomComponent {
         {
             this.succseed = response;
         });
-            this.router.navigate(['/adminClinicHomePage/'+ this.id]);
+            this.router.navigate(['/adminClinicHomePage/']);
     }
     
 }

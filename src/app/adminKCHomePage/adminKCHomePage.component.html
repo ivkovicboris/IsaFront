@@ -1,5 +1,5 @@
 <button routerLink="/addClinicCenterAdmin">Add Clinic Center Admin</button>
-<button routerLink="/addClinicAdmin" >Add Clinic Admin</button>
+<button routerLink="/addClinicAdmin" (click)="checkClinics()">Add Clinic Admin</button>
 <button routerLink="/addClinic" >Add Clinic</button>
 
 
@@ -7,22 +7,17 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      
-      <th scope="col">email</th>
-      
-      <th scope="col">Zahtev</th>
+      <th scope="col">Email Address</th>
+      <th scope="col">Respond</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of users; let i =index">
+    <tr *ngFor="let user of users; let i =index">
         <td scope="row">{{i+1}}</td>
-        <td class="vertical-center">{{a.email}}</td>
-        <td class="vertical-center">
-          <button type="button" class="btn btn-success" (click)="Accept(a.email)">Accept</button>
-          <button type="button" class="btn btn-danger" (click)="Deny(a.email)">Deny</button>
+        <td class="vertical-center">{{user.email}}</td>
+          <button initial class="btn btn-success" (click)="Accept(user.email)">Accept</button>
+          <button initial class="btn btn-danger" (click)="Deny(user.email)">Deny</button>
     </tr>
 
-    <button type="button" class="btn btn-secondary" (click)="GetUsers()">SVI USERI</button>
-   
   </tbody>
 </table>

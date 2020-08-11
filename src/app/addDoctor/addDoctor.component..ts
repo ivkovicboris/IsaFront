@@ -20,6 +20,9 @@ export class AddDoctorComponent {
     public selectedClinic:any;
     public id:string;
     public submitted: boolean;
+    public specializations:any;
+    public selectedSpecialization: string;
+    spec: string;
 
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
     
@@ -34,7 +37,8 @@ export class AddDoctorComponent {
             address: [''],
             city: [''],
             state: [''],
-            clinicID: ['']
+            clinicID: [''],
+            
         },{
             validator: MustMatch('password', 'confirmPassword') 
         });
@@ -45,6 +49,10 @@ export class AddDoctorComponent {
         this.data.GetClinicByAdminId(this.id).subscribe( response => {
             this.clinic = response;
         });
+        this.data.GetAllSpecializations().subscribe( response => {
+            this.specializations = response;
+        })
+        var s = this.specializations;
     }
     
     get f() { return this.registerForm.controls; }
@@ -65,9 +73,9 @@ export class AddDoctorComponent {
             this.registerForm.value.jmbg,
             this.registerForm.value.address,
             this.registerForm.value.city,
-            this.registerForm.value.country,
+            this.registerForm.value.state,
             "Doctor",
-            "",
+            this.selectedSpecialization,
             this.clinic.clinicId
         )
         this.data.Register(user).subscribe(response =>

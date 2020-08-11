@@ -4,6 +4,7 @@ import { Clinic } from '../share/Clinic';
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 import * as jwt_decode from "jwt-decode";
+import { ok } from 'assert';
 
 
 @Component({
@@ -32,14 +33,14 @@ export class AddClinicComponent {
         )
         this.data.AddClinic(clinic).subscribe(response =>
         {
-            this.result = response;
+            if(response) {
+                alert('New Clinic named:' + form.value.name + 'added successfully');
+            } else {
+                alert('error');
+            }
+            this.router.navigate(['/adminKCHomePage/']);;
         });
-        if(this.result) {
-            alert('New Clinic named:' + form.value.name + 'added successfully');
-        } else {
-            alert(this.result);
-        }
-        this.router.navigate(['/adminKCHomePage/'+ this.id]);
+        
         
     }
 }
