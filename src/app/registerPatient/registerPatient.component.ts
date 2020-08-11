@@ -62,15 +62,14 @@ export class RegisterPatientComponent implements OnInit{
         )
         this.data.Register(user).subscribe(response =>
         {
-            this.result = response ;
-        });
-        if(this.result)
-        {
-            alert('Your registration request has been recieved. Please check your email:\n' + this.registerForm.value.email + '\nfor confirmation link\n');
-        } else {
-            alert(this.result);
-        }
+            if(response) {
+                alert('Your registration request has been recieved. Please check your email:\n' + this.registerForm.value.email + ' for confirmation link\n');
+            } else {
+                alert('error');
+            }
         this.router.navigate(['/login']);
+        });
+        
     }
 
     onReset() {

@@ -75,15 +75,14 @@ export class AddClinicCenterAdminComponent {
         )
         this.data.Register(user).subscribe(response =>
         {
-            this.result = response ;
-        });
-        if(this.result)
-        {
-            alert('New Clinic Center Admin succsessfully added');
-        } else {
-            alert(this.result);
+            if(response) {
+                alert('New Clinic Center Admin succsessfully added');
+             } else {
+                alert('error');
         }
         this.router.navigate(['/adminKCHomePage/'+ this.id]);
+        });
+        
     }
     onReset() {
         this.submitted = false;

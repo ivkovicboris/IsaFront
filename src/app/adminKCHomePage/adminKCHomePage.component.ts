@@ -4,6 +4,7 @@ import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterUser } from '../share/RegisterUser';
 import { Mail } from "../share/Mail";
+import { empty } from 'rxjs';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class AdminKCHomePageComponent {
     public users:any;
     public mail:any;
     public accepted:boolean;
+    clinics: import("d:/FAKS/ISA/2020/IsaFront/src/app/share/Clinic").Clinic[];
 
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
@@ -27,6 +29,14 @@ export class AdminKCHomePageComponent {
         this.data.GetRegisterRequests().subscribe( response => {
             this.users = response;
         });
+
+    }
+
+    checkClinics(){
+        this.data.GetAllClinics().subscribe( response =>{
+            this.clinics=response;
+            if(this.clinics==null) alert('There are no clinics in the system. Add at least one clinic to proceed!')
+        })
     }
 
     Accept(email: any){
@@ -36,9 +46,14 @@ export class AdminKCHomePageComponent {
             "HOSPITAL ISA - registration ACCEPTED",
             "",
             email,
-            "Your registration request has been accepted. Activate your account on this link:" + "http://localhost:4200/"
+            "Your registration request has been accepted. Activate your account by visiting this link:" + "http://localhost:4200/"
         );
         this.data.AcceptPatientRegisterRequest(mail).subscribe( response => {
+            if(response){
+                alert('Patient request has been accepted. Mail notification has been sent to: ' + mail.receiver);
+            }else {
+                alert('Something went wrong :(');
+            }
             this.ngOnInit();
         });   
     }
@@ -55,6 +70,11 @@ export class AdminKCHomePageComponent {
             
         );
         this.data.DenyPatientRegisterRequest(mail).subscribe( response => {
+            if(response){
+                alert('Patient request has been denied. Mail notification has been sent to: ' + mail.receiver);
+            }else {
+                alert('Something went wrong :(');
+            }
             this.ngOnInit();
         });
     }

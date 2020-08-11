@@ -72,22 +72,24 @@ export class UpdateProfileComponent implements OnInit{
         )
         
         if(this.userRole == "Patient"){
-            this.data.UpdatePatient(userUpdate).subscribe(response =>
-                {
-            this.result = response ;
+            this.data.UpdatePatient(userUpdate).subscribe(response => {
+                if(response) {
+                    alert(this.registerForm.value.firstName + ', your profile has been updated');
+                } else {
+                    alert(this.result);
+                }
             });
         } else {
-            this.data.UpdateEmployee(userUpdate).subscribe(response =>
-                {
-            this.result = response ;
+            this.data.UpdateEmployee(userUpdate).subscribe(response => {
+                if(response) {
+                    alert(this.registerForm.value.firstName + ', your profile has been updated');
+                } else {
+                    alert(this.result);
+                }
             });
         }
-        if(this.result)
-        {
-            alert(this.registerForm.value.firstName + ', your profile has been updated');
-        } else {
-            alert(this.result);
-        }
+        this.router.navigate(["/userProfile"])
+        
         
     }
 
@@ -96,10 +98,5 @@ export class UpdateProfileComponent implements OnInit{
         this.router.navigate(["/userProfile"]);
     }
 
-    email(){
-        alert("Email cannot be changed!");
-    }
-    jmbg(){
-        alert('JMBG cannot be changed!')
-    }
+    
 }

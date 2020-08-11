@@ -30,11 +30,6 @@ export class LoginComponent {
             if (this.token !== null) {
               localStorage.setItem('token', this.token.token);
               localStorage.setItem('expires_in', this.token.expiration);
-                   
-            } else {
-              //this.resetForm(form);
-              this.error = false;
-            }
             //const newtoken = localStorage.getItem('token');
             const tokenPayload = jwt_decode(this.token.token);
             this.id=tokenPayload.jti;
@@ -43,7 +38,8 @@ export class LoginComponent {
               else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
               else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
               else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/']);}    
-          });
+            }
+      });
           
     }
     

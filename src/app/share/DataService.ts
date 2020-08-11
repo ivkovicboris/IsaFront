@@ -93,6 +93,12 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoomToClinic',room);
     }
 
+    public GetAllSpecializations(): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'User/GetAllSpecializations', {
+            
+        });
+    }
+
 
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
