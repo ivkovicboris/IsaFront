@@ -66,9 +66,9 @@
                       </div>
                   </div>
                   <div class="form-group col-6">
-                      <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" placeholder="Country"/>
-                      <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                          <div *ngIf="f.city.country.required">Country is required</div>
+                      <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" placeholder="State"/>
+                      <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                          <div *ngIf="f.state.errors.required">Country is required</div>
                       </div>
                   </div>
                 </div>

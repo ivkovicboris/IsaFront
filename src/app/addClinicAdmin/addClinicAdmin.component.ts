@@ -94,7 +94,7 @@ export class AddClinicAdminComponent {
     onReset() {
         this.submitted = false;
         this.registerForm.reset();
-        this.router.navigate(['/adminKCHomePage/'+ this.id]);
+        this.router.navigate(['/adminKCHomePage/']);
     
     }
     

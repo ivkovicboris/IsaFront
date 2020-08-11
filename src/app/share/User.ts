@@ -6,9 +6,13 @@ export class User
     jmbg: Int32Array;
     email:string;
     password:string;
-    //role: string;
+    userRole: string;
     emailConfirmed: boolean;
     birthDate: any;
+    address:string;
+    city:string;
+    state:string;
+    specialization:string;
 
     constructor
     (
@@ -19,8 +23,12 @@ export class User
         email: string,
         password: string,
         birthDate:any,
-       // role:string,
+        userRole: string,
         emailConfirmed: boolean,
+        address:string,
+        city:string,
+        state:string,
+        specialization:string,
 
     ){
         this.firstName = firstName;
@@ -30,6 +38,11 @@ export class User
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
-        //this.role = role;
+        this.userRole = userRole;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.specialization = specialization;
+
     }
 }

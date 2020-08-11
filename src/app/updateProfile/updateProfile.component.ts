@@ -3,19 +3,23 @@ import { RegisterUser } from '../share/RegisterUser';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router } from '@angular/router';
+import * as jwt_decode from "jwt-decode";
 
 import { MustMatch } from '../must-match.validator';
 
 @Component({
-    selector: 'registerPatient-component',
-    templateUrl: 'registerPatient.component.html',
-    styleUrls: ['registerPatient.component.css']
+    selector: 'updateProfile-component',
+    templateUrl: 'updateProfile.component.html',
+    styleUrls: ['updateProfile.component.css']
 })
-export class RegisterPatientComponent implements OnInit{
+export class UpdateProfileComponent implements OnInit{
     registerForm: FormGroup;
     public error:boolean = true;
     public submitted = false;
+    public userRole:any;
     result: any;
+    public id: any;
+    public user: any;
  
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
     
@@ -24,14 +28,21 @@ export class RegisterPatientComponent implements OnInit{
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
-            confirmPassword: ['', Validators.required],
+            password: [''],
+            confirmPassword: [''],
             jmbg: ['',Validators.required],
             address: ['', Validators.required],
             city: ['', Validators.required],
             state: ['', Validators.required]
-        }, {
-            validator: MustMatch('password', 'confirmPassword')
+        });
+        const token = localStorage.getItem('token');
+        const decodeToken = jwt_decode(token);
+        this.id = decodeToken.jti;
+        this.userRole=decodeToken.Role;
+        //this.id = this.arouter.snapshot.paramMap.get('id');
+        //this.id='b4d714ea-5536-46a0-8fe4-90b9a222b573';
+        this.data.GetUserById(this.id).subscribe( response => {
+            this.user = response;
         });
     }
 
@@ -44,37 +55,51 @@ export class RegisterPatientComponent implements OnInit{
             return;
         }
         
-
-        const user = new RegisterUser
+        const userUpdate = new RegisterUser
         (
             this.registerForm.value.firstName, 
             this.registerForm.value.lastName, 
             this.registerForm.value.email, 
             this.registerForm.value.password, 
-            false, 
+            this.user.emailConfirmed, 
             this.registerForm.value.jmbg,
             this.registerForm.value.address,
             this.registerForm.value.city,
             this.registerForm.value.state,
-            "Patient",
-            "",
-            ""
+            this.user.userRole,
+            this.user.clinicId,
+            this.user.specialization
         )
-        this.data.Register(user).subscribe(response =>
-        {
+        
+        if(this.userRole == "Patient"){
+            this.data.UpdatePatient(userUpdate).subscribe(response =>
+                {
             this.result = response ;
-        });
+            });
+        } else {
+            this.data.UpdateEmployee(userUpdate).subscribe(response =>
+                {
+            this.result = response ;
+            });
+        }
         if(this.result)
         {
-            alert('Your registration request has been recieved. Please check your email:\n' + this.registerForm.value.email + '\nfor confirmation link\n');
+            alert(this.registerForm.value.firstName + ', your profile has been updated');
         } else {
             alert(this.result);
         }
-        this.router.navigate(['/login']);
+        
     }
 
     onReset() {
         this.submitted = false;
-        this.registerForm.reset();
+        this.router.navigate(["/userProfile"]);
+    }
+
+    email(){
+        alert("Email cannot be changed!");
+    }
+    jmbg(){
+        alert('JMBG cannot be changed!')
     }
 }

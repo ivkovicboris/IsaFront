@@ -1,0 +1,66 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2>Update Profile</h2>
+        <!-- Icon -->
+        
+        <!-- Register Form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class='form-row' style="align-items: center">
+                    <div class="form-group col">
+                        <label>First Name</label><br>
+                        <input type="text" formControlName="firstName" class="form-control" [(ngModel)]="user.firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col ">
+                        <label>Last Name</label><br>
+                        <input type="text" formControlName="lastName" class="form-control" [(ngModel)]="user.lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label><br>
+                   <input type="text" readonly formControlName="email"   title='Email cannot be changed' [(ngModel)]="user.email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                </div>
+                <div class="form-group">
+                    <label>JMBG</label><br>
+                    <input type="text" readonly formControlName="jmbg"   class="form-control" title='JMBG cannot be changed' [(ngModel)]="user.jmbg" [ngClass]="{ 'is-invalid': submitted && f.jmbg.errors }" />
+                </div>
+                <div class="form-group">
+                    <label>Address</label> <br>
+                    <input type="text" formControlName="address" class="form-control" [(ngModel)]="user.address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Address is required</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label>City</label><br>
+                        <input type="text" formControlName="city" class="form-control" [(ngModel)]="user.city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                            <div *ngIf="f.city.errors.required">City is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>State</label><br>
+                        <input type="text" formControlName="state" class="form-control" [(ngModel)]="user.state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+                        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                            <div *ngIf="f.state.errors.required">State is required</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1">Update</button>
+                    <button class="btn btn-secondary"  (click)="onReset()">Cancel</button>
+                </div><br>
+            </form>
+    </div>
+</div>

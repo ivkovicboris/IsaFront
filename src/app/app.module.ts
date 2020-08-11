@@ -11,10 +11,11 @@ import { FormsModule } from '@angular/forms';
 import { AdminKCHomePageComponent } from './adminKCHomePage/adminKCHomePage.component';
 import { AdminClinicHomePageComponent } from './adminClinicHomePage/adminClinicHomePage.component';
 import { DoctorHomePageComponent } from './doctorHomePage/doctorHomePage.component';
-import { PatientProfileComponent } from './patientProfile/patientProfile.component';
+import { UpdateProfileComponent } from './updateProfile/updateProfile.component';
+import { UserProfileComponent } from './userProfile/userProfile.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatDatepicker } from '@angular/material/datepicker'
+
 import {MatSelectModule} from '@angular/material/select';
 import { MaterialModule } from './material.module';
 import { ExaminationComponent } from './examinations/examination.component';
@@ -39,12 +40,13 @@ const route = [
   { path: 'addClinic', component: AddClinicComponent},
   { path: 'addClinicCenterAdmin', component: AddClinicCenterAdminComponent },
 
-  { path: 'adminKCHomePage/:id', component: AdminKCHomePageComponent},
-  { path: 'adminClinicHomePage/:id', component: AdminClinicHomePageComponent},
-  { path: 'doctorHomePage/:id', component: DoctorHomePageComponent},
-  { path: 'patientHomePage/:id', component: PatientHomePageComponent },
+  { path: 'adminKCHomePage', component: AdminKCHomePageComponent},
+  { path: 'adminClinicHomePage', component: AdminClinicHomePageComponent},
+  { path: 'doctorHomePage', component: DoctorHomePageComponent},
+  { path: 'patientHomePage', component: PatientHomePageComponent },
 
-  { path: 'patientProfile/:id', component: PatientProfileComponent},
+  { path: 'updateProfile', component: UpdateProfileComponent},
+  { path: 'userProfile', component: UserProfileComponent},
   { path: 'Examinations', component: ExaminationComponent},
   
   { path: 'searchClinics', component: SearchClinicsComponent }
@@ -67,9 +69,10 @@ const route = [
     AdminClinicHomePageComponent,
     DoctorHomePageComponent,
     PatientHomePageComponent,
-    PatientProfileComponent,
+    UpdateProfileComponent,
     ExaminationComponent,
     SearchClinicsComponent,
+    UserProfileComponent,
 
    
   ],

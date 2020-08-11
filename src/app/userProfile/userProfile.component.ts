@@ -3,35 +3,34 @@ import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../share/User';
+
 import * as jwt_decode from "jwt-decode";
 
 @Component({
-    selector: 'patientProfile-component',
-    templateUrl: 'patientProfile.component.html',
-    styleUrls: ['patientProfile.component.css']
+    selector: 'userProfile-component',
+    templateUrl: 'userProfile.component.html',
+    styleUrls: ['userProfile.component.css']
 })
-export class PatientProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
 
     public id: any;
     public error = true;
     public user: any;
-
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    
+    constructor(private data: DataService, private router: Router) {}
 
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
-        //this.id = this.arouter.snapshot.paramMap.get('id');
-        //this.id='b4d714ea-5536-46a0-8fe4-90b9a222b573';
         this.data.GetUserById(this.id).subscribe( response => {
             this.user = response;
         });
+    
     }
-
-    UpdatePatient(user) {
-        this.data.UpdatePatient(this.user).subscribe(response => {
-            location.reload();
-        });
-    }
+    
+        EditInformation(form) {
+            this.router.navigate(["/updateProfile"]);
+        }
+    
 }

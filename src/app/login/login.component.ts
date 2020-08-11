@@ -38,11 +38,11 @@ export class LoginComponent {
             //const newtoken = localStorage.getItem('token');
             const tokenPayload = jwt_decode(this.token.token);
             this.id=tokenPayload.jti;
-            if(tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'+this.id]);} 
-              else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/'+ this.id]);}
-              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/'+ this.id]);}    
+            if(tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])} 
+              else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
+              else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
+              else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
+              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/']);}    
           });
           
     }

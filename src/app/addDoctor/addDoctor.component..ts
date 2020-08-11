@@ -75,7 +75,7 @@ export class AddDoctorComponent {
             ;
         });
         alert('Doctor succsessfully added');
-        this.router.navigate(['/adminClinicHomePage/'+ this.id]);
+        this.router.navigate(['/adminClinicHomePage/']);
     }
     onReset() {
         this.submitted = false;
