@@ -20,7 +20,7 @@ export class AdminKCHomePageComponent {
     public users:any;
     public mail:any;
     public accepted:boolean;
-    clinics: import("d:/FAKS/ISA/2020/IsaFront/src/app/share/Clinic").Clinic[];
+    public clinics:any;
 
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
@@ -83,7 +83,7 @@ export class AdminKCHomePageComponent {
         })
     }
     sortAsc(colName:any){
-        this.clinics.sort((a, b) => {
+        this.users.sort((a, b) => {
             if(a[colName] > b[colName]) {
               return 1;
             } else if(a[colName] < b[colName]) {
@@ -94,7 +94,7 @@ export class AdminKCHomePageComponent {
           });
     }
     sortDesc(colName){
-        this.clinics.sort((a, b) => {
+        this.users.sort((a, b) => {
             if(a[colName] > b[colName]) {
               return -1;
             } else if(a[colName] < b[colName]) {
