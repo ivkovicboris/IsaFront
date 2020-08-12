@@ -3,9 +3,8 @@
       <tr>
         <th scope="col">#</th>
         
-        <th scope="col">Naziv Klinike</th>
-        
-        <th scope="col">Address</th>
+        <th scope="col">Clinic Name<i id="arrow" (click)="sortAsc('name')">▼</i><span id="arrow" (click)="sortDesc('name')">▲</span></th>
+        <th scope="col">Address<i id="arrow" (click)="sortAsc('address')">▼</i><span id="arrow" (click)="sortDesc('address')">▲</span></th>
       </tr>
     </thead>
     <tbody>

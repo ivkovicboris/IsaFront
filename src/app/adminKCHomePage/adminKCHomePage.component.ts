@@ -27,9 +27,8 @@ export class AdminKCHomePageComponent {
     ngOnInit(){
        // this.id = this.arouter.snapshot.paramMap.get('id');
         this.data.GetRegisterRequests().subscribe( response => {
-            this.users = response;
+            this.users = response.sort();
         });
-
     }
 
     checkClinics(){
@@ -50,7 +49,7 @@ export class AdminKCHomePageComponent {
         );
         this.data.AcceptPatientRegisterRequest(mail).subscribe( response => {
             if(response){
-                alert('Patient request has been accepted. Mail notification has been sent to: ' + mail.receiver);
+                alert('Patient request has been ACCEPTED. Mail notification has been sent to: ' + mail.receiver);
             }else {
                 alert('Something went wrong :(');
             }
@@ -71,7 +70,7 @@ export class AdminKCHomePageComponent {
         );
         this.data.DenyPatientRegisterRequest(mail).subscribe( response => {
             if(response){
-                alert('Patient request has been denied. Mail notification has been sent to: ' + mail.receiver);
+                alert('Patient request has been DENIED. Mail notification has been sent to: ' + mail.receiver);
             }else {
                 alert('Something went wrong :(');
             }
@@ -83,4 +82,27 @@ export class AdminKCHomePageComponent {
             ;
         })
     }
+    sortAsc(colName:any){
+        this.clinics.sort((a, b) => {
+            if(a[colName] > b[colName]) {
+              return 1;
+            } else if(a[colName] < b[colName]) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+    }
+    sortDesc(colName){
+        this.clinics.sort((a, b) => {
+            if(a[colName] > b[colName]) {
+              return -1;
+            } else if(a[colName] < b[colName]) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+    }
+
 }

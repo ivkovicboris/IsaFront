@@ -293,3 +293,11 @@ html {
     font-size: 13;
     color: #8a1a16b0;
   }
+
+#arrow {
+  
+  text-transform: uppercase;
+  padding: 5px;
+  color: green;
+  font-size: 24;
+}
