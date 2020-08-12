@@ -11,7 +11,7 @@ import { Router, Route } from '@angular/router';
     styleUrls: ['searchClinics.component.css']
 })
 export class SearchClinicsComponent implements OnInit {
-
+    public parameter:any;
     public clinics:any;
 
     constructor(private data: DataService, private router: Router ) {}
@@ -20,6 +20,29 @@ export class SearchClinicsComponent implements OnInit {
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
         });
+    }
+
+    sortAsc(colName:any){
+        this.clinics.sort((a, b) => {
+            if(a[colName] > b[colName]) {
+              return 1;
+            } else if(a[colName] < b[colName]) {
+              return -1;
+            } else {
+              return 0;
+            }
+          });
+    }
+    sortDesc(colName){
+        this.clinics.sort((a, b) => {
+            if(a[colName] > b[colName]) {
+              return -1;
+            } else if(a[colName] < b[colName]) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
     }
 
 }

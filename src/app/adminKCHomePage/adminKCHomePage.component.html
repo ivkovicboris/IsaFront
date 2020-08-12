@@ -1,13 +1,15 @@
+
+
 <button routerLink="/addClinicCenterAdmin">Add Clinic Center Admin</button>
 <button routerLink="/addClinicAdmin" (click)="checkClinics()">Add Clinic Admin</button>
 <button routerLink="/addClinic" >Add Clinic</button>
 
 
-<table class="table table-hover">
+<table class="table table-hover sortable">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Email Address</th>
+      <th scope="col" >Email Address<i id="arrow" (click)="sortAsc('email')">▼</i><span id="arrow" (click)="sortDesc('email')">▲</span></th>
       <th scope="col">Respond</th>
     </tr>
   </thead>

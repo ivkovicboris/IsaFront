@@ -57,7 +57,7 @@ export class DataService {
     }
 
     public DenyPatientRegisterRequest(mail: Mail){
-        return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
+        return this.http.post(environment.webApiBaseUrl + 'Account/DenyPatientRegisterRequest', mail);
     }
 
     public GetUsers(): Observable<User[]>{
