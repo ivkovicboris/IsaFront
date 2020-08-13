@@ -37,7 +37,8 @@ export class LoginComponent {
               else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
               else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
               else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
-              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/']);}    
+              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/']);}
+              else alert('Invalid Email or Password!');     
             }
       });
           
