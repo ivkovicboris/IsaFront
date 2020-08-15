@@ -2,16 +2,19 @@ import { User } from './User';
 
 export class NewExamination{
     dateTime : Date;
-    doctors : Array<User>;
+    doctor : User;
+    patientId: string;
     type: string;
 
     constructor(
         dateTime: Date,
-        doctors : Array<User>,
+        doctor : User,
+        patientId: string,
         type : string
     ){
         this.dateTime = dateTime;
-        this.doctors = doctors;
+        this.doctor = doctor;
+        this.patientId = patientId;
         this.type = type;
     }
 }

@@ -1,7 +1,6 @@
-import { User } from '../share/User';
-import { Clinic } from './Clinic';
+import { User } from './User';
 
-export class Examination
+export class DoctorsFreeExaminations
 {
     doctor: User;
     freeExaminations: Array<Date>;

@@ -28,6 +28,7 @@ export class AddClinicComponent {
 
         const clinic = new Clinic
         (
+            '00000000-0000-0000-0000-000000000000',
             form.value.name, 
             form.value.address
         )

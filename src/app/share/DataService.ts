@@ -106,7 +106,10 @@ export class DataService {
     }
 
    
-    
+    public GetFreeExaminationAndDoctorByClinic(request: RequestExamination): Observable<any[]> {
+        let result: any;
+        return this.http.post(environment.webApiBaseUrl + 'Examination/GetFreeExaminationAndDoctorByClinic/', request) as Observable<any[]>;
+    }
 
     public GetExaminationRequests(clinicId:string): Observable<User[]> {
         return this.http.get<User[]>(environment.webApiBaseUrl + 'Account/GetRegisterRequests'+clinicId, {
@@ -114,13 +117,13 @@ export class DataService {
         });
     }
 
-    public AddNewExamination(examination: NewExamination){
+    public AddExamination(examination: NewExamination){
         this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination).subscribe();
     }
 
-    public RequestExaminations(request: RequestExamination): Observable<Examination[]> {
-        let result: any;
-        return this.http.post(environment.webApiBaseUrl + 'Examination/GetExamination/', request) as Observable<Examination[]>;
+    public GetClinicByTypeDateExamination(request: RequestExamination): Observable<Clinic[]> {
+         let result: any;
+        return this.http.post(environment.webApiBaseUrl + 'Examination/GetClinicByTypeDateExamination/', request) as Observable<Clinic[]>;
 }
     
 }

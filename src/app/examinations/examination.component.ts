@@ -22,26 +22,33 @@ export class ExaminationComponent
     public selectedType: string;
 
     public types: string[] = [
-        'dermatologija',
-        'onkologija',
-        'oftalmologija',
-        'ginekologija'
+        "Psychiatrist", 
+                "Cardiologist",
+                "Dermatologist",
+                "Endocrinologist",
+                "Gastroenterologist",
+                "Ophthalmologist",
+                "Otolaryngologist",
+                "Pulmonologist",
+                "Neurologist",
+                "Oncologist",
+                "Anesthesiologist"
       ];
     constructor(private dataService: DataService) {}
 
    
 
     public  examinationRequest(form: NgForm){
-        const requestExamination = new RequestExamination(this.selectedType, form.value.examinationDate);
-        this.dataService.RequestExaminations(requestExamination).subscribe(response => { 
-                this.items = response
+        const requestExamination = new RequestExamination(this.selectedType, form.value.examinationDate, null);
+        this.dataService.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
+  //              this.items = response
         });
     }
 
     public NewExamination(date: Date, doctor: User){
         let doctors: User[] = [];
         doctors.push(doctor);
-        const examination = new NewExamination(date, doctors, this.selectedType);
-        this.dataService.AddNewExamination(examination);
+  //      const examination = new NewExamination(date, doctors, this.selectedType);
+   //     this.dataService.AddNewExamination(examination);
     }
 }

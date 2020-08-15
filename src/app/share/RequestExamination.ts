@@ -1,10 +1,13 @@
 export class RequestExamination {
-    type:string;
+    clinicId:string;
     dateTime:Date;
+    type:string;
     
-    constructor (type:string, dateTime:Date) {
+    
+    constructor (clinicId:string, dateTime:Date, type:string ) {
         this.type= type;
         this.dateTime = dateTime;
+        this.clinicId=clinicId;
         
     }
 }

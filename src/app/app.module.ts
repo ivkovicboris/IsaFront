@@ -47,7 +47,7 @@ const route = [
 
   { path: 'updateProfile', component: UpdateProfileComponent},
   { path: 'userProfile', component: UserProfileComponent},
-  { path: 'Examinations', component: ExaminationComponent},
+  { path: 'examinations', component: ExaminationComponent},
   
   { path: 'searchClinics', component: SearchClinicsComponent }
   
