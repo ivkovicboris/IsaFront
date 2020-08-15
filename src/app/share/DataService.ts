@@ -15,6 +15,7 @@ import { NewExamination } from './NewExamination';
 import { Mail } from './Mail';
 import { Clinic } from './Clinic';
 import { PriceList } from './PriceList';
+import { ChangePassword } from './ChangePassword';
 
 
 const httpOptions = {
@@ -106,10 +107,15 @@ export class DataService {
         });
     }
 
-    public ChangePassword(userId:string): Observable<any> {
-        return this.http.get<any>(environment.webApiBaseUrl + 'Account/ChangePassword/' + userId, {
-            
-        });
+    public ChangePassword(changePassword: ChangePassword) {
+        return this.http.post(environment.webApiBaseUrl + 'Account/ChangePassword/', changePassword);
+    }
+    public CheckIfSignedBefore(userId: string) : Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Account/CheckIfSignedBefore/' + userId);
+    }
+    
+    public SendMail(mail: Mail){
+        return this.http.post(environment.webApiBaseUrl + 'Account/SendMail', mail);
     }
 
     //****************STARE METODE***********************

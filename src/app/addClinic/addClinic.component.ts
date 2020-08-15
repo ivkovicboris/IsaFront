@@ -19,6 +19,7 @@ export class AddClinicComponent {
     result: Object;
     clinicForm: any;
     submitted: boolean;
+    
     ngOnInit() {
         this.clinicForm = this.formBuilder.group({
             name: ['', [Validators.required]],
@@ -42,24 +43,22 @@ export class AddClinicComponent {
         }
         const clinic = new Clinic
         (
-            "",
+            "00000000-0000-0000-0000-000000000000",
             this.clinicForm.value.name, 
             this.clinicForm.value.address, 
             this.clinicForm.value.about, 
         )
-    
         this.data.AddClinic(clinic).subscribe(response =>
             {
                 if(response) {
-                    alert('New Clinic named:' + this.clinicForm.value.name + ' added successfully');
+                    alert('New Clinic named: ' + this.clinicForm.value.name + ' added successfully');
                 } else {
                     alert('error');
                 }
                 this.router.navigate(['/adminKCHomePage/']);
             }); 
-        
-        
     }
+
      onReset() {
             this.submitted = false;
             this.router.navigate(['/adminKCHomePage/']);
