@@ -6,6 +6,8 @@ import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
 import { MustMatch } from '../must-match.validator';
+import { Mail } from '../share/Mail';
+import { GeneratePassword } from '../password-generator';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class AddClinicCenterAdminComponent {
     public id:string;
     public submitted: boolean;
     result: any;
+    randomPassword: string;
 
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
     
@@ -31,15 +34,11 @@ export class AddClinicCenterAdminComponent {
             firstName: [''],
             lastName: [''],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
-            confirmPassword: ['', Validators.required],
             jmbg: [''],
             address: [''],
             city: [''],
             state: [''],
             clinicID: ['']
-        },{
-            validator: MustMatch('password', 'confirmPassword') 
         });
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
@@ -58,12 +57,13 @@ export class AddClinicCenterAdminComponent {
         if (this.registerForm.invalid) {
             return;
         }
+        this.randomPassword = GeneratePassword(8);
         const user = new RegisterUser
         (
             this.registerForm.value.firstName, 
             this.registerForm.value.lastName, 
             this.registerForm.value.email, 
-            this.registerForm.value.password, 
+            this.randomPassword,
             false, 
             this.registerForm.value.jmbg,
             this.registerForm.value.address,
@@ -75,19 +75,35 @@ export class AddClinicCenterAdminComponent {
         )
         this.data.Register(user).subscribe(response =>
         {
-            if(response) {
+            if(response){
                 alert('New Clinic Center Admin succsessfully added');
-             } else {
-                alert('error');
-        }
-        this.router.navigate(['/adminKCHomePage/'+ this.id]);
+                
+            } else {
+                alert('There is already registered user with email: ' + this.registerForm.value.email);
+            }
+            
+            
         });
+        const mail = new Mail (
+            "HOSPITAL ISA - Account created",
+            "",
+            this.registerForm.value.email,
+            //body:
+            "Hi, " + this.registerForm.value.firstName + ",\n"
+            + "You have been added to HOSPITAL ISA as Clinic Center Admin for clinic: "
+            + "Activate your account by visiting this link:" + "http://localhost:4200/ \n"
+            + "Your predefined password is: "+ this.randomPassword + "\n" //ubaciti generator passworda 
+            + "Feel free to contact us!\n\nSincerely,\n Hospital Isa Team. "
+            //end body
+        )
+            // this.data.SendMail(mail);
+             this.router.navigate(['/adminKCHomePage/']);
         
     }
     onReset() {
         this.submitted = false;
         this.registerForm.reset();
-        this.router.navigate(['/adminKCHomePage/'+ this.id]);
+        this.router.navigate(['/adminKCHomePage/']);
     
     }
     

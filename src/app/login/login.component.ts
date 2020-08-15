@@ -24,22 +24,31 @@ export class LoginComponent {
 
     onLogin(form: NgForm){
         const user = new LoginUser(form.value.email, form.value.password)
+        
         this.data.Login(user).subscribe(token => {
             this.token = token;
             
-            if (this.token !== null) {
+            if (this.token == null) { 
+              alert('Invalid Email or Password!\n Make sure to check your email for confirmation link if you have not so far!'); 
+            } else {
               localStorage.setItem('token', this.token.token);
               localStorage.setItem('expires_in', this.token.expiration);
-            //const newtoken = localStorage.getItem('token');
-            const tokenPayload = jwt_decode(this.token.token);
-            this.id=tokenPayload.jti;
-            if(tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])} 
-              else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
-              else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
-              else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
-              else if (tokenPayload.Role=='Patient'){ this.router.navigate(['/patientHomePage/']);}
-              else alert('Invalid Email or Password!');     
-            }
+              const tokenPayload = jwt_decode(this.token.token);
+              this.id = tokenPayload.jti;
+              if (tokenPayload.Role=='Patient') { this.router.navigate(['/patientHomePage/']);
+                } else {
+                      this.data.CheckIfSignedBefore(this.id).subscribe (response =>{
+                        if (!response){
+                          alert('Please change your predefined password before proceeding.')
+                          this.router.navigate(['/changePassword']);
+                        }
+                      });
+                      if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
+                      else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
+                      else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
+                      else if (tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}
+                  }
+          } 
       });
           
     }

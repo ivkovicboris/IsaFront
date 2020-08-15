@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RegisterUser } from '../share/RegisterUser';
 import { Mail } from "../share/Mail";
 import { empty } from 'rxjs';
+import { Clinic } from '../share/Clinic';
 
 
 @Component({
@@ -21,21 +22,15 @@ export class AdminKCHomePageComponent {
     public mail:any;
     public accepted:boolean;
     public clinics:any;
+    public clinic: Clinic
 
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    constructor(private data: DataService, private router: Router) {}
 
     ngOnInit(){
        // this.id = this.arouter.snapshot.paramMap.get('id');
         this.data.GetRegisterRequests().subscribe( response => {
             this.users = response.sort();
         });
-    }
-
-    checkClinics(){
-        this.data.GetAllClinics().subscribe( response =>{
-            this.clinics=response;
-            if(this.clinics==null) alert('There are no clinics in the system. Add at least one clinic to proceed!')
-        })
     }
 
     Accept(email: any){

@@ -24,7 +24,11 @@ export class RegisterPatientComponent implements OnInit{
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
+            password: ['', [Validators.required, 
+                Validators.minLength(8),
+                Validators.pattern(/^(?=.*[!@#$%^&*(),.?":<>])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)
+                ]
+           ],
             confirmPassword: ['', Validators.required],
             jmbg: ['',Validators.required],
             address: ['', Validators.required],

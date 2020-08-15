@@ -6,6 +6,8 @@ import { Room } from '../share/Room';
 import * as jwt_decode from "jwt-decode";
 import { RegisterUser } from '../share/RegisterUser';
 import { MustMatch } from '../must-match.validator';
+import { Mail } from '../share/Mail';
+import { GeneratePassword } from '../password-generator';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class AddClinicAdminComponent {
     public id:string;
     public submitted: boolean;
     result: any;
+    randomPassword: string;
 
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
     
@@ -36,24 +39,19 @@ export class AddClinicAdminComponent {
             firstName: [''],
             lastName: [''],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
-            confirmPassword: ['', Validators.required],
             jmbg: [''],
             address: [''],
             city: [''],
             state: [''],
             clinicID: ['']
-        },{
-            validator: MustMatch('password', 'confirmPassword') 
         });
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
         });
-        // if(this.clinics==null){
-        //     alert('Please add clinic first');
-        //     this.router.navigate(['/adminKCHomePage/'+ this.id]);
+        // if(!this.clinics) {
+        //     alert('There are no clinics in the system. Add at least one clinic to proceed!')
+        //     this.router.navigate(['/adminKCHomePage/']);
         // }
-
     }
     
     get f() { return this.registerForm.controls; }
@@ -64,12 +62,13 @@ export class AddClinicAdminComponent {
         if (this.registerForm.invalid) {
             return;
         }
+        this.randomPassword = GeneratePassword(8);
         const user = new RegisterUser
         (
             this.registerForm.value.firstName, 
             this.registerForm.value.lastName, 
             this.registerForm.value.email, 
-            this.registerForm.value.password, 
+            this.randomPassword,
             false, 
             this.registerForm.value.jmbg,
             this.registerForm.value.address,
@@ -82,9 +81,23 @@ export class AddClinicAdminComponent {
         this.data.Register(user).subscribe(response =>
             {
                 if(response){
-                    alert('New Clinic Center Admin succsessfully added');
+                    alert('New Clinic Admin succsessfully added');
+                    const mail = new Mail (
+                        "HOSPITAL ISA - Account created",
+                        "",
+                        this.registerForm.value.email,
+                        //body:
+                        "Hi, " + this.registerForm.value.firstName + ",\n"
+                        + "You have been added to HOSPITAL ISA as Clinic Admin for clinic: "
+                        + this.clinics.name + ".\n"
+                        + "Activate your account by visiting this link:" + "http://localhost:4200/ \n"
+                        + "Your predefined password is: " + this.randomPassword + "\n" 
+                        + "Feel free to contact us!\n\nSincerely,\n Hospital Isa Team. "
+                        //end body
+                    )
+                    this.data.SendMail(mail);
                 } else {
-                    alert('error');
+                    alert('There is already registered user with email: ' + this.registerForm.value.email);
                 }
             this.router.navigate(['/adminKCHomePage/']);
             });
