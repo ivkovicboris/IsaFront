@@ -87,7 +87,7 @@ export class AddDoctorComponent {
     }
     onReset() {
         this.submitted = false;
-        this.registerForm.reset();
+        this.router.navigate(['/adminClinicHomePage/']);
     }
     
 }

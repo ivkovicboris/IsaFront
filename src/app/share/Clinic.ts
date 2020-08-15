@@ -1,17 +1,20 @@
 export class Clinic
 {
-    clinicId: string;
+    clinicId:string;
     name:string;
-    address:string
-
+    address:string;
+    about:string
+    
     constructor
     (
-      id:string,
+      clinicId:string,
       name:string,
       address:string,
+      about:string
     ){
-      this.clinicId = id;
+      this.clinicId = clinicId;
       this.name = name;
       this.address = address;
+      this.about = about;
     }
 }

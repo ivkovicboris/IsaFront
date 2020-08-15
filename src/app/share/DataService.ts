@@ -14,6 +14,7 @@ import {RequestExamination} from './RequestExamination';
 import { NewExamination } from './NewExamination';
 import { Mail } from './Mail';
 import { Clinic } from './Clinic';
+import { PriceList } from './PriceList';
 
 
 const httpOptions = {
@@ -67,7 +68,7 @@ export class DataService {
     }
 
     public AddClinic(clinic: Clinic) {
-        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic',clinic);
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', clinic);
     }
 
     public GetUserById(id: string): Observable<User[]>{
@@ -90,7 +91,7 @@ export class DataService {
     }
 
     public AddRoom(room:Room){
-        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoomToClinic',room);
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoomTClinic',room);
     }
 
     public GetAllSpecializations(): Observable<any> {
@@ -99,6 +100,17 @@ export class DataService {
         });
     }
 
+    public GetPriceList(adminId:string): Observable<PriceList[]>{
+        return this.http.get<PriceList[]>(environment.webApiBaseUrl + 'Clinic/GetPriceList/'+adminId, {
+            responseType: 'json'
+        });
+    }
+
+    public ChangePassword(userId:string): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Account/ChangePassword/' + userId, {
+            
+        });
+    }
 
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){

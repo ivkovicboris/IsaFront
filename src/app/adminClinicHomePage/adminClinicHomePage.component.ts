@@ -16,20 +16,25 @@ export class AdminClinicHomePageComponent {
     public id:any;
     public error:boolean = true;
     public examination:any;
-    public clinicID:string;
+    public clinicId:string;
+    public priceList: any;
+    public specializations: any;
+    public clinic:any;
 
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
 
-   
-
     ngOninit() {
-
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
+        this.id = decodeToken.jti;
 
-        this.data.GetExaminationRequests(decodeToken.clinicID).subscribe( response => {
-            this.examination = response;
+        this.data.GetAllSpecializations().subscribe( response => {
+            this.specializations = response;
+        })
+        this.data.GetClinicByAdminId(this.id).subscribe( response => {
+            this.clinic = response;
         });
+        
     }
    
 

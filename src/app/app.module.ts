@@ -27,7 +27,10 @@ import { AddClinicCenterAdminComponent } from './addClinicCenterAdmin/addClinicC
 import { JwtInterceptor } from './share/interceptor';
 import { PatientHomePageComponent } from './patientHomePage/patientHomePage.component';
 import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
-
+import { PriceList } from './share/PriceList';
+import { PriceListComponent } from './priceList/priceList.component';
+import { MatDialogModule } from '@angular/material';
+import { ChangePasswordComponent } from './changePassword/changePassword.component'
 
 const route = [
   { path: '', component: LoginComponent},
@@ -49,8 +52,9 @@ const route = [
   { path: 'userProfile', component: UserProfileComponent},
   { path: 'examinations', component: ExaminationComponent},
   
-  { path: 'searchClinics', component: SearchClinicsComponent }
-  
+  { path: 'searchClinics', component: SearchClinicsComponent },
+  {path: 'priceList', component: PriceListComponent },
+  {path: 'changePassword', component: ChangePasswordComponent}
 ];
 
 
@@ -73,6 +77,8 @@ const route = [
     ExaminationComponent,
     SearchClinicsComponent,
     UserProfileComponent,
+    PriceListComponent,
+    ChangePasswordComponent,
 
    
   ],
@@ -87,7 +93,8 @@ const route = [
     BrowserAnimationsModule,
     MaterialModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     DataService,
