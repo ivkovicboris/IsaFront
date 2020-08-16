@@ -48,10 +48,6 @@ export class AddClinicAdminComponent {
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
         });
-        // if(!this.clinics) {
-        //     alert('There are no clinics in the system. Add at least one clinic to proceed!')
-        //     this.router.navigate(['/adminKCHomePage/']);
-        // }
     }
     
     get f() { return this.registerForm.controls; }
@@ -78,9 +74,13 @@ export class AddClinicAdminComponent {
             "",
             this.selectedClinic
         )
+        
+
         this.data.Register(user).subscribe(response =>
             {
-                if(response){
+                if(!response){
+                    alert('There is already registered user with email: ' + this.registerForm.value.email);
+                } else {
                     alert('New Clinic Admin succsessfully added');
                     const mail = new Mail (
                         "HOSPITAL ISA - Account created",
@@ -89,19 +89,25 @@ export class AddClinicAdminComponent {
                         //body:
                         "Hi, " + this.registerForm.value.firstName + ",\n"
                         + "You have been added to HOSPITAL ISA as Clinic Admin for clinic: "
-                        + this.clinics.name + ".\n"
+                        + this.clinics[0].name + ".\n"
                         + "Activate your account by visiting this link:" + "http://localhost:4200/ \n"
                         + "Your predefined password is: " + this.randomPassword + "\n" 
                         + "Feel free to contact us!\n\nSincerely,\n Hospital Isa Team. "
                         //end body
                     )
-                    this.data.SendMail(mail);
-                } else {
-                    alert('There is already registered user with email: ' + this.registerForm.value.email);
+                    this.data.SendMail(mail).subscribe(response =>
+                        {
+                            if(!response){
+                                alert('Mail not sent!')
+                                return; 
+                            }
+                        });
+                    this.router.navigate(['/adminKCHomePage/']);
                 }
-            this.router.navigate(['/adminKCHomePage/']);
+            
             });
             
+           
         }
     onReset() {
         this.submitted = false;

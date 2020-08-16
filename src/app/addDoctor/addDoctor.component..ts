@@ -78,9 +78,13 @@ export class AddDoctorComponent {
             this.selectedSpecialization,
             this.clinic.clinicId
         )
+       
+        
         this.data.Register(user).subscribe(response =>
         {
-            if(response){
+            if(!response){
+                alert('There is already user registered with email: ' + this.registerForm.value.email);
+            } else {
                 alert('New Doctor succsessfully added');
                 const mail = new Mail (
                     "HOSPITAL ISA - Account created",
@@ -88,19 +92,23 @@ export class AddDoctorComponent {
                     this.registerForm.value.email,
                     //body:
                     "Hi, " + this.registerForm.value.firstName + ",\n"
-                    + "You have been added to clinic: " + this.clinic.name + ".\n"
+                    + "You have been added to clinic: " + this.clinic[0].name + ".\n"
                     + "Activate your account by visiting this link:" + "http://localhost:4200/ \n"
                     + "Your predefined password is: "+ this.randomPassword + "\n" 
-                    + "Feel free to contact us!\n\nSincerely," + this.clinic.name + "\n Team. "
+                    + "Feel free to contact us!\n\nSincerely," + this.clinic[0].name + "\n Team. "
                     //end body
                 )
-                this.data.SendMail(mail);
-            } else {
-                alert('error');
+                this.data.SendMail(mail).subscribe(response =>
+                    {
+                        if(!response){
+                            alert('Mail not sent!')
+                            return; 
+                        }
+                    });
+                    this.router.navigate(['/adminClinicHomePage/']);
             }
         });
-        alert('Doctor succsessfully added');
-        this.router.navigate(['/adminClinicHomePage/']);
+        
     }
     onReset() {
         this.submitted = false;
