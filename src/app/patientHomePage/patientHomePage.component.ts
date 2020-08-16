@@ -36,6 +36,7 @@ export class PatientHomePageComponent implements OnInit {
                 "Oncologist",
                 "Anesthesiologist"
       ];
+    
 
     constructor(private data: DataService, private arouter: ActivatedRoute) {}
     
@@ -72,7 +73,7 @@ export class PatientHomePageComponent implements OnInit {
         
     }
 
-    public NewExamination(date: Date, doctor: User){
+    public NewExamination(date: Date, doctor: any){
         const examination = new NewExamination(date, doctor, this.id, this.selectedType);
         this.data.AddExamination(examination);
     }

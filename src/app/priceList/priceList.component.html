@@ -1,20 +1,30 @@
-<table class="table table-hover sortable">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Examination Type<i id="arrow" (click)="sortAsc('examinationType')">▼</i><span id="arrow" (click)="sortDesc('examinationType')">▲</span></th>
-        <th scope="col">Price<i id="arrow" (click)="sortAsc('price')">▼</i><span id="arrow" (click)="sortDesc('price')">▲</span></th>
-        <th scope="col">Discount<i id="arrow" (click)="sortAsc('discount')">▼</i><span id="arrow" (click)="sortDesc('discount')">▲</span></th>
-        <th scope="col">Discounted price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of priceList; let i = index">
-          <td scope="row">{{i+1}}</td>
-          <td class="vertical-center">{{item.examinationType}}</td>
-          <td class="vertical-center">{{item.price}}</td>
-          <td class="vertical-center">{{item.discount}}</td>
-          <td class="vertical-center">{{f(item.price , item.discount)}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2>PRICE LIST</h2><br>
+        <label>Click on price to edit</label>
+      <table class="table table-hover sortable" >
+        
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Examination Type<i id="arrow" (click)="sortAsc('examinationType')">▼</i><span id="arrow" (click)="sortDesc('examinationType')">▲</span></th>
+              <th scope="col">Price<i id="arrow" (click)="sortAsc('priceValue')">▼</i><span id="arrow" (click)="sortDesc('priceValue')">▲</span></th>
+              <th scope="col">Discount<i id="arrow" (click)="sortAsc('discount')">▼</i><span id="arrow" (click)="sortDesc('discount')">▲</span></th>
+              <th scope="col">Discounted price<i id="arrow" (click)="sortAsc('discountedPrice')">▼</i><span id="arrow" (click)="sortDesc('discountedPrice')">▲</span></th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of priceList; let i = index" (click)="EditPrice(item)">
+                <td scope="row" >{{i+1}}</td>
+                <td class="vertical-center">{{item.examinationType}}</td>
+                <td class="vertical-center">{{item.priceValue}} rsd</td>
+                <td class="vertical-center">{{item.discount}} %</td>
+                <td class="vertical-center">{{item.discountedPrice}} rsd</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+        

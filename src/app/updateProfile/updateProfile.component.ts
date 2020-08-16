@@ -7,6 +7,7 @@ import * as jwt_decode from "jwt-decode";
 
 import { MustMatch } from '../must-match.validator';
 
+
 @Component({
     selector: 'updateProfile-component',
     templateUrl: 'updateProfile.component.html',
@@ -14,7 +15,7 @@ import { MustMatch } from '../must-match.validator';
 })
 export class UpdateProfileComponent implements OnInit{
     registerForm: FormGroup;
-    public error:boolean = true;
+    
     public submitted = false;
     public userRole:any;
     result: any;
@@ -88,9 +89,13 @@ export class UpdateProfileComponent implements OnInit{
                 }
             });
         }
-        this.router.navigate(["/userProfile"])
-        
-        
+
+        if (this.userRole=='Patient') { this.router.navigate(['/patientHomePage/']);} 
+            else if (this.userRole=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
+            else if (this.userRole=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
+            else if (this.userRole=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
+            else if (this.userRole=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}  
+       
     }
 
     onReset() {

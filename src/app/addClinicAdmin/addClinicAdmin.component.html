@@ -25,7 +25,10 @@
                   </div>
               </div>
                 <div class="form-group">
-                    <input type="text" formControlName="jmbg" class="form-control"  placeholder="JMBG"/>
+                    <input type="text" formControlName="jmbg" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.jmbg.errors }" placeholder="JMBG"/>
+                    <div *ngIf="submitted && f.jmbg.errors" class="invalid-feedback">
+                        <div *ngIf="f.jmbg.errors.required">JMBG is required</div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="text" formControlName="address" class="form-control"  placeholder="Adress"/>

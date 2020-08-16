@@ -6,6 +6,7 @@ import * as jwt_decode from "jwt-decode";
 import { RequestExamination } from "../share/RequestExamination";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { Clinic } from '../share/Clinic';
+import { Price } from '../share/Price';
 
 
 @Component({
@@ -51,12 +52,17 @@ export class PriceListComponent implements OnInit {
         var s = this.specializations;
 
     }
-    f(price:number,discount:number) {
-      return Math.floor(price - ((discount / price) * 100))
+    calculateDiscount(price:number,discount:number) {
+      return Math.floor(price - ((price/ 100*discount)))
     }
 
-    UpdatePriceList(){
- 
+    EditPrice(priceToEdit: Price){
+      localStorage.setItem('priceId',priceToEdit.priceId)
+      localStorage.setItem('examinationType', priceToEdit.examinationType);
+      localStorage.setItem('priceValue', priceToEdit.priceValue);
+      localStorage.setItem('discount', priceToEdit.discount);
+      localStorage.setItem('discountPrice', priceToEdit.discountedPrice);
+      this.router.navigate(["/priceEdit"])
     }
     onReset() {
         this.submitted = false;
@@ -83,5 +89,8 @@ export class PriceListComponent implements OnInit {
               return 0;
             }
           });
+    }
+    addPrice(){
+
     }
 }

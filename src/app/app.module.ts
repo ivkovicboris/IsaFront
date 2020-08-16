@@ -27,10 +27,11 @@ import { AddClinicCenterAdminComponent } from './addClinicCenterAdmin/addClinicC
 import { JwtInterceptor } from './share/interceptor';
 import { PatientHomePageComponent } from './patientHomePage/patientHomePage.component';
 import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
-import { PriceList } from './share/PriceList';
+import { Price } from './share/Price';
 import { PriceListComponent } from './priceList/priceList.component';
 import { MatDialogModule } from '@angular/material';
-import { ChangePasswordComponent } from './changePassword/changePassword.component'
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
+import { PriceEditComponent } from './priceEdit/priceEdit.component';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -54,6 +55,7 @@ const route = [
   
   { path: 'searchClinics', component: SearchClinicsComponent },
   {path: 'priceList', component: PriceListComponent },
+  { path: 'priceEdit', component: PriceEditComponent},
   {path: 'changePassword', component: ChangePasswordComponent}
 ];
 
@@ -79,6 +81,7 @@ const route = [
     UserProfileComponent,
     PriceListComponent,
     ChangePasswordComponent,
+    PriceEditComponent,
 
    
   ],
