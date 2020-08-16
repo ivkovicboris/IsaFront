@@ -58,7 +58,7 @@ export class ChangePasswordComponent {
             
             this.data.ChangePassword(changePassword).subscribe(response => {
                 if(response){
-                    alert('Password successfully changed!')
+                    alert('Password successfully changed! \n Please log in with new password')
                 }else {
                     alert('Invalid old password')
                 }
