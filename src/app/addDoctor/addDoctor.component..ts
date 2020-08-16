@@ -34,7 +34,7 @@ export class AddDoctorComponent {
             firstName: [''],
             lastName: [''],
             email: ['', [Validators.required, Validators.email]],
-            jmbg: [''],
+            jmbg: ['', [Validators.required]],
             address: [''],
             city: [''],
             state: [''],

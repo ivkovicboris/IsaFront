@@ -14,7 +14,7 @@ import {RequestExamination} from './RequestExamination';
 import { NewExamination } from './NewExamination';
 import { Mail } from './Mail';
 import { Clinic } from './Clinic';
-import { PriceList } from './PriceList';
+import { Price } from './Price';
 import { ChangePassword } from './ChangePassword';
 
 
@@ -100,9 +100,12 @@ export class DataService {
             
         });
     }
+    public UpdatePrice(price :Price) {
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/UpdatePrice', price);
+    }
 
-    public GetPriceList(adminId:string): Observable<PriceList[]>{
-        return this.http.get<PriceList[]>(environment.webApiBaseUrl + 'Clinic/GetPriceList/'+adminId, {
+    public GetPriceList(adminId:string): Observable<Price[]>{
+        return this.http.get<Price[]>(environment.webApiBaseUrl + 'Clinic/GetPriceList/'+adminId, {
             responseType: 'json'
         });
     }
@@ -115,7 +118,7 @@ export class DataService {
     }
     
     public SendMail(mail: Mail){
-        return this.http.post(environment.webApiBaseUrl + 'Account/SendMail', mail);
+        return this.http.post(environment.webApiBaseUrl + 'Account/SendMail/', mail);
     }
 
     //****************STARE METODE***********************
