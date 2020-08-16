@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Room } from '../share/Room';
@@ -17,6 +17,10 @@ export class AddRoomComponent {
     public clinic:any;
     public id:string;
     public succseed: any;
+    roomForm: any;
+    submitted: boolean;
+    constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
+
    
     ngOnInit() {
         const token = localStorage.getItem('token');
@@ -26,22 +30,41 @@ export class AddRoomComponent {
         this.data.GetClinicByAdminId(this.id).subscribe( response => {
             this.clinic = response;
         });
+
+        this.roomForm = this.formBuilder.group({
+            number: ['', [Validators.required,
+                            Validators.min(0)]],
+            name: ['', [Validators.required]]
+        });
     }
 
-    constructor(private data: DataService, private router: Router) {}
+    get f() { return this.roomForm.controls; }
 
-    AddRoom(form:NgForm){
+    onSubmit(){
+        this.submitted = true;
+
+        if (this.roomForm.invalid) {
+            return;
+        }
         const room = new Room
         (
-            form.value.name, 
-            form.value.number, 
+            this.roomForm.value.name, 
+            this.roomForm.value.number, 
             this.clinic.clinicId
         )
         this.data.AddRoom(room).subscribe(response =>
         {
-            this.succseed = response;
-        });
-            this.router.navigate(['/adminClinicHomePage/']);
+            if(response){
+                alert("New room \n" + this.roomForm.value.name + "successfully added!");
+                this.router.navigate(['/adminClinicHomePage/']);
+            }
+        });      
     }
+
+    onCancel() {
+        this.submitted = false;
+        this.router.navigate(["/adminClinicHomePage"]);
+    }
+    
     
 }
