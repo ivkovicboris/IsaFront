@@ -92,7 +92,7 @@ export class DataService {
     }
 
     public AddRoom(room:Room){
-        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoomTClinic',room);
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddRoomToClinic',room);
     }
 
     public GetAllSpecializations(): Observable<any> {
@@ -121,11 +121,27 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Account/SendMail/', mail);
     }
 
+    public GetAllRoomsFromClinicByAdminId(adminId: string): Observable<Room[]>{
+        return this.http.get<Room[]>(environment.webApiBaseUrl + 'Clinic/GetAllRooms/' + adminId);
+   
+    }
+
+    public DeleteRoom(room: Room){
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/DeleteRoom',room);
+    }
+
+    public UpdateRoom(room: Room){
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/UpdateRoom',room);
+    }
+
+
+
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
         return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
     }
 
+    
    
     public GetFreeExaminationAndDoctorByClinic(request: RequestExamination): Observable<any[]> {
         let result: any;

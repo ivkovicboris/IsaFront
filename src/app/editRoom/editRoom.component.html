@@ -1,0 +1,33 @@
+<div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2>Edit room information</h2>
+          <!-- Icon -->
+          <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+                  <br><div class="form-group col">
+                      <label>Room Number</label>
+                      <input type="text" formControlName="number" class="form-control" [(ngModel)]="this.number" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" placeholder="Room Number"/>
+                      <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                          <div *ngIf="f.number.errors.required">Please enter room number</div>
+                          <div *ngIf="f.number.errors.min">Room number cannot be negative</div>
+                      </div>
+                  </div> <br>
+                  <div class="form-group" >
+                          <mat-form-field appearance="fill" style="width: 85%">
+                              <mat-label>Select Room for Examination Type</mat-label>
+                              <mat-select  [(value)]="selectedName" name="specialization" placeholder="{{this.name}}">
+                                  <mat-option *ngFor="let spec of specializations" [value]="spec">
+                                      {{spec}}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                              
+                      </div>
+                 
+                  <div class="text-center">
+                        <button class="btn btn-primary mr-1">Save</button>
+                        <button class="btn btn-secondary"  (click)="onCancel()">Cancel</button>
+                </div><br>
+              </form>
+        </div>      
+      </div>

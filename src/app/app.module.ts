@@ -5,18 +5,18 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { RegisterPatientComponent } from './registerPatient/registerPatient.component';
 import { DataService } from './share/DataService';
 import { FormsModule } from '@angular/forms';
 import { AdminKCHomePageComponent } from './adminKCHomePage/adminKCHomePage.component';
 import { AdminClinicHomePageComponent } from './adminClinicHomePage/adminClinicHomePage.component';
 import { DoctorHomePageComponent } from './doctorHomePage/doctorHomePage.component';
+import { PatientHomePageComponent } from './patientHomePage/patientHomePage.component';
 import { UpdateProfileComponent } from './updateProfile/updateProfile.component';
 import { UserProfileComponent } from './userProfile/userProfile.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MaterialModule } from './material.module';
 import { ExaminationComponent } from './examinations/examination.component';
 import { AddRoomComponent } from './addRoom/addRoom.component';
@@ -25,13 +25,14 @@ import { AddDoctorComponent } from './addDoctor/addDoctor.component.';
 import { AddClinicAdminComponent } from './addClinicAdmin/addClinicAdmin.component';
 import { AddClinicCenterAdminComponent } from './addClinicCenterAdmin/addClinicCenterAdmin.component';
 import { JwtInterceptor } from './share/interceptor';
-import { PatientHomePageComponent } from './patientHomePage/patientHomePage.component';
+
 import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
-import { Price } from './share/Price';
+import { SearchRoomsComponent } from './searchRooms/searchRooms.component';
+import { EditRoomComponent } from './editRoom/editRoom.component';
 import { PriceListComponent } from './priceList/priceList.component';
-import { MatDialogModule } from '@angular/material';
-import { ChangePasswordComponent } from './changePassword/changePassword.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
+
+import { MatDialogModule } from '@angular/material';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -54,7 +55,10 @@ const route = [
   { path: 'examinations', component: ExaminationComponent},
   
   { path: 'searchClinics', component: SearchClinicsComponent },
-  {path: 'priceList', component: PriceListComponent },
+  {path: 'searchRooms', component: SearchRoomsComponent},
+  { path: 'editRoom', component: EditRoomComponent},
+
+  { path: 'priceList', component: PriceListComponent },
   { path: 'priceEdit', component: PriceEditComponent},
   {path: 'changePassword', component: ChangePasswordComponent}
 ];
@@ -82,7 +86,8 @@ const route = [
     PriceListComponent,
     ChangePasswordComponent,
     PriceEditComponent,
-
+    SearchRoomsComponent,
+    EditRoomComponent,
    
   ],
   imports: [
