@@ -16,6 +16,7 @@ import { Mail } from './Mail';
 import { Clinic } from './Clinic';
 import { Price } from './Price';
 import { ChangePassword } from './ChangePassword';
+import { RoomDate } from './RoomDate';
 
 
 const httpOptions = {
@@ -134,7 +135,13 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/UpdateRoom',room);
     }
 
+    public FirstAvailableByDate(roomDate: RoomDate): Observable<any> {
+        return this.http.post(environment.webApiBaseUrl + 'Examination/FirstAvailableByDate',roomDate)
+    }
 
+    public GetOccupancyForRoomByDate(roomDate: RoomDate): Observable<any> {
+        return this.http.post(environment.webApiBaseUrl + 'Examination/GetOccupancyForRoomByDate',roomDate)
+    }
 
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
@@ -142,7 +149,6 @@ export class DataService {
     }
 
     
-   
     public GetFreeExaminationAndDoctorByClinic(request: RequestExamination): Observable<any[]> {
         let result: any;
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetFreeExaminationAndDoctorByClinic/', request) as Observable<any[]>;
@@ -155,12 +161,11 @@ export class DataService {
     }
 
     public AddExamination(examination: NewExamination){
-        this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination).subscribe();
+        return this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination);
     }
 
     public GetClinicByTypeDateExamination(request: RequestExamination): Observable<Clinic[]> {
          let result: any;
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetClinicByTypeDateExamination/', request) as Observable<Clinic[]>;
-}
-    
+    }
 }

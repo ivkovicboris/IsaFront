@@ -2,6 +2,9 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <h2>PRICE LIST</h2><br>
+        <div style="position: absolute; left: 10px; top: 70px;">
+          <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+        </div>
         <label>Click on price to edit</label>
       <table class="table table-hover sortable" >
         
@@ -16,7 +19,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of priceList; let i = index" (click)="EditPrice(item)">
+            <tr *ngFor="let item of priceList  | filter:term; let i = index" (click)="EditPrice(item)">
                 <td scope="row" >{{i+1}}</td>
                 <td class="vertical-center">{{item.examinationType}}</td>
                 <td class="vertical-center">{{item.priceValue}} rsd</td>

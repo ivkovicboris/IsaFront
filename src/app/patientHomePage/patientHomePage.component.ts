@@ -36,9 +36,8 @@ export class PatientHomePageComponent implements OnInit {
                 "Oncologist",
                 "Anesthesiologist"
       ];
-    
 
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    constructor(private data: DataService,  private router: Router) {}
     
     ngOnInit() {
         const token = localStorage.getItem('token');
@@ -51,13 +50,11 @@ export class PatientHomePageComponent implements OnInit {
     }
 
     public  examinationRequest(form: NgForm){
-        const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',form.value.examinationDate, this.selectedType, );
+        this.examinationDate = form.value.examinationDate;
+        this.selectedType = form.value.selectedType;
+        const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
         this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
                 this.clinics = response
-                this.examinationDate= form.value.examinationDate;
-                this.selectedType = form.value.selectedType;
-                localStorage.setItem('date', this.examinationDate.toString());
-                localStorage.setItem('type', this.selectedType);
         });
     }
 
@@ -65,16 +62,23 @@ export class PatientHomePageComponent implements OnInit {
         const requestExamination = new RequestExamination(clinic.clinicId, this.examinationDate, this.selectedType);
         this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
                 this.DoctorsFreeExaminations = response
-            response.forEach(element => {
-                    var a = element.doctor
-                    var b = element.freeExamination
-                });
         });
         
     }
 
-    public NewExamination(date: Date, doctor: any){
-        const examination = new NewExamination(date, doctor, this.id, this.selectedType);
-        this.data.AddExamination(examination);
+    public NewExamination(doctor: User, date:Date){
+        var userId = doctor.employeeId;
+        var d = new Date(localStorage.getItem('date'));
+        const examination = new NewExamination(date, userId, this.id, this.selectedType);
+        this.data.AddExamination(examination).subscribe( response =>{
+            if(response) {
+                alert('Your examination request has been recieved. Please check your email');
+                window.location.reload();
+            } else {
+                alert('error');
+            }
+            
+        });
+        
     }
 }

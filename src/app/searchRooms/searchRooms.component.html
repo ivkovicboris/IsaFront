@@ -2,6 +2,10 @@
 <div class="wrapper fadeInDown">
         <div id="formContent">
             <h2>ALL ROOMS</h2>
+            <div style="position: absolute; left: 10px; top: 70px;">
+                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+                
+              </div>
             <button type="button" class="btn btn-success mr-3" style="position: absolute; right: 10px; top: 70px;" routerLink="/addRoom">New Room</button>
           <table class="table table-hover sortable"  >
               <thead>
@@ -10,15 +14,17 @@
                   <th scope="col">Room Number<i id="arrow" (click)="sortAsc('number')">▼</i><span id="arrow" (click)="sortDesc('number')">▲</span></th>
                   <th scope="col">Room Name<i id="arrow" (click)="sortAsc('name')">▼</i><span id="arrow" (click)="sortDesc('name')">▲</span></th>
                   <th scope="col">Occupied</th>
+                  <th scope="col">First Available Date</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let room of rooms; let i = index" >
+                <tr *ngFor="let room of rooms | filter:term; let i = index " >
                     <td scope="row" >{{i+1}}</td>
                     <td class="vertical-center">{{room.number}}</td>
                     <td class="vertical-center">{{room.name}}</td>
-                    <td class="vertical-center">LISTA ZAUZETIH TERMINA</td>
+                    <td class="vertical-center">{{GetOccupancyForRoomByDate(room.roomId)}}</td>
+                    <td class="vertical-center"></td>
                     <td class="vertical-center">
                         <button class="btn btn-secondary mr-3" (click)="EditRoom(room)">Edit</button>
                         <button class="btn btn-danger mr-3"(click)="DeleteRoom(room)">Delete</button>

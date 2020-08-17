@@ -38,7 +38,7 @@ export class AddRoomComponent {
         this.roomForm = this.formBuilder.group({
             number: ['', [Validators.required,
                             Validators.min(0)]],
-            name: ['']
+            name: ['', [Validators.required]]
         });
     }
 

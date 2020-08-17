@@ -13,6 +13,7 @@ export class User
     city:string;
     state:string;
     specialization:string;
+    employeeId:string;
 
     constructor
     (
@@ -29,6 +30,7 @@ export class User
         city:string,
         state:string,
         specialization:string,
+        employeeId:string,
 
     ){
         this.firstName = firstName;
@@ -43,6 +45,7 @@ export class User
         this.city = city;
         this.state = state;
         this.specialization = specialization;
+        this.employeeId = employeeId;
 
     }
 }

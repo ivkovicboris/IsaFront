@@ -65,8 +65,8 @@ export class ChangePasswordComponent {
             });
             this.router.navigate(['/login'])
         }
-        onReset() {
+        onCancel() {
             this.submitted = false;
-
+            this.router.navigate(['/userProfile'])
         }
 }

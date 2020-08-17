@@ -2,13 +2,13 @@
 <button routerLink="/searchClinics">Search Clinics</button>
 <div>
     <form (ngSubmit)="examinationRequest(form)" #form="ngForm">
-<mat-form-field>
+<mat-form-field appearance="fill">
     <mat-label>Odaberi tip pregleda</mat-label>
-    <mat-select [(value)]="selectedType">
-        <mat-option *ngFor="let type of types" value={{type}}>
-            {{type}}
+    <mat-select [(ngModel)]="selectedType" name="selectedType">
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
         </mat-option>
-    </mat-select>
+      </mat-select>
 </mat-form-field>
 <mat-form-field>
     <input matInput [matDatepicker]="examinationDate" name="examinationDate" ngModel #examinationDate="ngModel" placeholder="Datum pregleda">
@@ -59,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let date of item.freeExaminations; let j = index">
-                                        <td>{{date}} <button type="button" class="btn btn-primary" (click)="NewExamination(date, item.doctor)">Primary</button>
+                                        <td>{{date}} <button type="button" class="btn btn-primary" (click)="NewExamination(item.doctor, date)">Book</button>
                                         </td>
                                     </tr>
                                 </tbody>

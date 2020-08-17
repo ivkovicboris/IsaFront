@@ -33,6 +33,7 @@ import { PriceListComponent } from './priceList/priceList.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
 
 import { MatDialogModule } from '@angular/material';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -102,7 +103,8 @@ const route = [
     MaterialModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    Ng2SearchPipeModule 
   ],
   providers: [
     DataService,

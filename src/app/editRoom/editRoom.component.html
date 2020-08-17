@@ -15,12 +15,16 @@
                   <div class="form-group" >
                           <mat-form-field appearance="fill" style="width: 85%">
                               <mat-label>Select Room for Examination Type</mat-label>
-                              <mat-select  [(value)]="selectedName" name="specialization" placeholder="{{this.name}}">
+                              <mat-select formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" [(value)]="selectedName" name="specialization" placeholder="{{this.name}}">
                                   <mat-option *ngFor="let spec of specializations" [value]="spec">
                                       {{spec}}
                                   </mat-option>
                               </mat-select>
+                              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Please enter room name</div>
+                            </div>
                           </mat-form-field>
+                          
                               
                       </div>
                  

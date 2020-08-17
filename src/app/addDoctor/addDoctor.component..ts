@@ -39,6 +39,7 @@ export class AddDoctorComponent {
             city: [''],
             state: [''],
             clinicID: [''],
+            specialization: ['', [Validators.required]]
             
         });
         const token = localStorage.getItem('token');
@@ -86,16 +87,17 @@ export class AddDoctorComponent {
                 alert('There is already user registered with email: ' + this.registerForm.value.email);
             } else {
                 alert('New Doctor succsessfully added');
+                
                 const mail = new Mail (
                     "HOSPITAL ISA - Account created",
                     "",
                     this.registerForm.value.email,
                     //body:
                     "Hi, " + this.registerForm.value.firstName + ",\n"
-                    + "You have been added to clinic: " + this.clinic[0].name + ".\n"
+                    + "You have been added to clinic: " + this.clinic.name + ".\n"
                     + "Activate your account by visiting this link:" + "http://localhost:4200/ \n"
                     + "Your predefined password is: "+ this.randomPassword + "\n" 
-                    + "Feel free to contact us!\n\nSincerely," + this.clinic[0].name + "\n Team. "
+                    + "Feel free to contact us!\n\nSincerely," + this.clinic.name + "\n Team. "
                     //end body
                 )
                 this.data.SendMail(mail).subscribe(response =>
@@ -105,7 +107,7 @@ export class AddDoctorComponent {
                             return; 
                         }
                     });
-                    this.router.navigate(['/adminClinicHomePage/']);
+                this.router.navigate(['/adminClinicHomePage/']);
             }
         });
         
