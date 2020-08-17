@@ -7,11 +7,11 @@ import * as jwt_decode from "jwt-decode";
 
 
 @Component({
-    selector: 'addRoom-component',
-    templateUrl: 'addRoom.component.html',
-    styleUrls: ['addRoom.component.css']
+    selector: 'editRoom-component',
+    templateUrl: 'editRoom.component.html',
+    styleUrls: ['editRoom.component.css']
 })
-export class AddRoomComponent {
+export class EditRoomComponent {
 
     public clinicId:string;
     public clinic:any;
@@ -21,6 +21,9 @@ export class AddRoomComponent {
     submitted: boolean;
     specializations: any;
     selectedName: string;
+    roomId: string;
+    name: string;
+    number: string;
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
 
    
@@ -31,9 +34,12 @@ export class AddRoomComponent {
         this.data.GetAllSpecializations().subscribe( response => {
             this.specializations = response;
         })
-        this.data.GetClinicByAdminId(this.id).subscribe( response => {
-            this.clinic = response;
-        });
+    
+
+        
+        this.name = localStorage.getItem('roomName');
+        this.number = localStorage.getItem('roomNumber');
+        this.clinicId = localStorage.getItem('clinicId');
 
         this.roomForm = this.formBuilder.group({
             number: ['', [Validators.required,
@@ -52,23 +58,26 @@ export class AddRoomComponent {
         }
         const room = new Room
         (
-            "00000000-0000-0000-0000-000000000000",
+            localStorage.getItem("roomId"),
             this.selectedName, 
             this.roomForm.value.number, 
-            this.clinic.clinicId
+            this.clinicId
         )
-        this.data.AddRoom(room).subscribe(response =>
+        this.data.UpdateRoom(room).subscribe(response =>
         {
             if(response){
-                alert("New room for " + this.selectedName + "  successfully added!");
+                alert("New room for " + this.selectedName + "  successfully updated!");
                 this.router.navigate(['/searchRooms/']);
+            }else {
+                alert("You cannot change the room that is already booked for examination! \n"
+                        + "Move examination to different room and try again!");
             }
         });      
     }
 
     onCancel() {
         this.submitted = false;
-        this.router.navigate(["/searchRooms"]);
+        this.router.navigate(["/searchRooms/"]);
     }
     
     
