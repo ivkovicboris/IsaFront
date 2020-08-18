@@ -1,18 +1,57 @@
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        
-        <th scope="col">Clinic Name<i id="arrow" (click)="sortAsc('name')">▼</i><span id="arrow" (click)="sortDesc('name')">▲</span></th>
-        <th scope="col">Address<i id="arrow" (click)="sortAsc('address')">▼</i><span id="arrow" (click)="sortDesc('address')">▲</span></th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let clinic of clinics; let i =index">
-          <td scope="row">{{i+1}}</td>
-          <td class="vertical-center">{{clinic.name}}</td>
-          <td class="vertical-center">{{clinic.address}}</td>
-        </tr>
 
-    </tbody>
-  </table>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+      <h2>CLINICS</h2>
+        <div class="form-group">
+          <form (ngSubmit)="examinationRequest(form)" #form="ngForm">
+            <label style="font-size: 20px">Book Examination</label>
+            <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px">
+                <mat-label>Examination type</mat-label>
+                <mat-select [(ngModel)]="selectedType" name="selectedType">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                    {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="margin: 0px 0px 0px 20px" appearance="fill">
+                <input matInput [matDatepicker]="examinationDate" name="examinationDate" ngModel #examinationDate="ngModel" placeholder="Choose date">
+                <mat-datepicker-toggle matSuffix [for]="examinationDate"></mat-datepicker-toggle>
+                <mat-datepicker #examinationDate></mat-datepicker>
+            </mat-form-field>
+
+            <input type="submit" value="Search">  
+        </form>
+
+      </div>
+      <div style="margin: 0px 15px 5px 0px; width: 200px;">
+          <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
+      </div>
+      
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              
+              <th scope="col">Clinic Name<i id="arrow" (click)="sortAsc('name')">▼</i><span id="arrow" (click)="sortDesc('name')">▲</span></th>
+              <th scope="col">Address<i id="arrow" (click)="sortAsc('address')">▼</i><span id="arrow" (click)="sortDesc('address')">▲</span></th>
+              <th scope="col">Average Mark</th>
+              <th scope="col">Address</th>
+              <th scope="col">Examination price:</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let clinic of clinics | filter:term; let i =index">
+                <td scope="row">{{i+1}}</td>
+                <td class="vertical-center">{{clinic.name}}</td>
+                <td class="vertical-center">{{clinic.address}}</td>
+                <td class="vertical-center">Clinic Average Mark</td>
+                <td class="vertical-center">{{clinic.address}}</td>
+                <td class="vertical-center">cena jebena</td>
+                <td class="vertical-center">
+                  <button class="btn btn-secondary mr-3" (click)="ShowDoctors(clinic.clinicId)">Show Doctors</button>
+                </td>
+                
+              </tr>
+
+          </tbody>
+        </table>

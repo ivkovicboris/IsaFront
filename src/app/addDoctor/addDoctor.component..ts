@@ -114,7 +114,7 @@ export class AddDoctorComponent {
     }
     onReset() {
         this.submitted = false;
-        this.router.navigate(['/adminClinicHomePage/']);
+        this.router.navigate(['/searchDoctors/']);
     }
     
 }

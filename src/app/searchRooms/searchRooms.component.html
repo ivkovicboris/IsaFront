@@ -2,11 +2,11 @@
 <div class="wrapper fadeInDown">
         <div id="formContent">
             <h2>ALL ROOMS</h2>
-            <div style="position: absolute; left: 10px; top: 70px;">
-                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
-                
-              </div>
-            <button type="button" class="btn btn-success mr-3" style="position: absolute; right: 10px; top: 70px;" routerLink="/addRoom">New Room</button>
+            <div style="margin: 0px 15px 5px 0px; width: 200px;">
+                <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
+                <button type="button" id="addButton" class="btn btn-success mr-3" style="position: absolute; right: 10px; " routerLink="/addRoom">New Room</button>
+            </div>
+            
           <table class="table table-hover sortable"  >
               <thead>
                 <tr>

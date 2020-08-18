@@ -72,6 +72,9 @@ export class DataService {
     public AddClinic(clinic: Clinic) {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', clinic);
     }
+    public DeleteDoctor(doctorId: string) {
+        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', doctorId);
+    }
 
     public GetUserById(id: string): Observable<User[]>{
         return this.http.get<User[]>(environment.webApiBaseUrl + 'User/GetUserById/'+id,  {
@@ -143,6 +146,12 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetOccupancyForRoomByDate',roomDate)
     }
 
+    public GetAllDoctorsFromClinic(clinicId: string): Observable<User[]> {
+        return this.http.get<User[]>(environment.webApiBaseUrl + 'Clinic/GetAllDoctorsFromClinic/' + clinicId, {
+            responseType: 'json'
+        });        
+    }
+    
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
         return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();

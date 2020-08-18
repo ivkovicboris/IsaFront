@@ -28,12 +28,14 @@ import { JwtInterceptor } from './share/interceptor';
 
 import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
 import { SearchRoomsComponent } from './searchRooms/searchRooms.component';
+import { SearchDoctorsComponent } from './searchDoctors/searchDoctors.component';
 import { EditRoomComponent } from './editRoom/editRoom.component';
 import { PriceListComponent } from './priceList/priceList.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
 
 import { MatDialogModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DatePipe } from '@angular/common';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -57,6 +59,7 @@ const route = [
   
   { path: 'searchClinics', component: SearchClinicsComponent },
   {path: 'searchRooms', component: SearchRoomsComponent},
+  {path: 'searchDoctors', component: SearchDoctorsComponent},
   { path: 'editRoom', component: EditRoomComponent},
 
   { path: 'priceList', component: PriceListComponent },
@@ -89,6 +92,7 @@ const route = [
     PriceEditComponent,
     SearchRoomsComponent,
     EditRoomComponent,
+    SearchDoctorsComponent,
    
   ],
   imports: [
@@ -106,7 +110,7 @@ const route = [
     MatDialogModule,
     Ng2SearchPipeModule 
   ],
-  providers: [
+  providers: [DatePipe,
     DataService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -114,6 +118,7 @@ const route = [
       multi: true
     }
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

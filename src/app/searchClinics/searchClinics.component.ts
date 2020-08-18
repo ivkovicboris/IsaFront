@@ -3,6 +3,9 @@ import { RegisterUser } from '../share/RegisterUser';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, Route } from '@angular/router';
+import { RequestExamination } from '../share/RequestExamination';
+import { Price } from '../share/Price';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -13,14 +16,46 @@ import { Router, Route } from '@angular/router';
 export class SearchClinicsComponent implements OnInit {
     public parameter:any;
     public clinics:any;
+    public types: string[] = [
+      "Psychiatrist", 
+              "Cardiologist",
+              "Dermatologist",
+              "Endocrinologist",
+              "Gastroenterologist",
+              "Ophthalmologist",
+              "Otolaryngologist",
+              "Pulmonologist",
+              "Neurologist",
+              "Oncologist",
+              "Anesthesiologist"
+    ];
+  examinationDate: Date = new Date();
+  selectedType: string = "";
+  examinationPrice: any;
+  priceList: Price;
 
-    constructor(private data: DataService, private router: Router ) {}
+    constructor(private data: DataService, private router: Router, public datepipe: DatePipe ) {}
 
     ngOnInit() {
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
         });
     }
+    public  examinationRequest(form: NgForm){
+        this.examinationDate = form.value.examinationDate;
+        this.selectedType = form.value.selectedType;
+        const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
+        this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
+                this.clinics = response
+        });
+    }
+    
+  public getExaminationPriceBylinic(clinicId: string){
+    this.data.GetPriceList(clinicId).subscribe ( response => {
+     // this.priceList = response
+    });
+    this.examinationPrice=this.priceList["examinationType"];
+  }
 
     sortAsc(colName:any){
         this.clinics.sort((a, b) => {
@@ -43,6 +78,13 @@ export class SearchClinicsComponent implements OnInit {
               return 0;
             }
           });
+    }
+
+    ShowDoctors(clinicId:string){
+      localStorage.setItem('clinicId', clinicId);
+      localStorage.setItem('examinationType',this.selectedType);
+      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddT00:00:00'));
+      this.router.navigate(["/searchDoctors"])
     }
 
 }

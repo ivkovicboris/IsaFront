@@ -1,38 +1,30 @@
 <button routerLink="/userProfile" >My profile</button>
 <button routerLink="/searchClinics">Search Clinics</button>
-<div>
-    <form (ngSubmit)="examinationRequest(form)" #form="ngForm">
-<mat-form-field appearance="fill">
-    <mat-label>Odaberi tip pregleda</mat-label>
-    <mat-select [(ngModel)]="selectedType" name="selectedType">
-        <mat-option *ngFor="let type of types" [value]="type">
-          {{type}}
-        </mat-option>
-      </mat-select>
-</mat-form-field>
-<mat-form-field>
-    <input matInput [matDatepicker]="examinationDate" name="examinationDate" ngModel #examinationDate="ngModel" placeholder="Datum pregleda">
-    <mat-datepicker-toggle matSuffix [for]="examinationDate"></mat-datepicker-toggle>
-    <mat-datepicker #examinationDate></mat-datepicker>
-</mat-form-field>
 
-<div>
-    <input type="submit" class="fadeIn fourth" value="Pretrazi">
+<div class="wrapper fadeInDown">
+        <div id="formContent">
+            <form (ngSubmit)="examinationRequest(form)" #form="ngForm">
+                <h2>Book Examination</h2><br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose examination type</mat-label>
+                    <mat-select [(ngModel)]="selectedType" name="selectedType">
+                        <mat-option *ngFor="let type of types" [value]="type">
+                        {{type}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin: 0px 0px 10px 20px">
+                    <input matInput [matDatepicker]="examinationDate" name="examinationDate" ngModel #examinationDate="ngModel" placeholder="Datum pregleda">
+                    <mat-datepicker-toggle matSuffix [for]="examinationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #examinationDate></mat-datepicker>
+                </mat-form-field>
+
+                <div>
+                    <input type="submit" value="Pretrazi">
+                </div>
+            </form>
+        </div>
 </div>
-</form>
-</div>
-
-<table class="table table-hover">
-    <tbody>
-        <tr *ngFor="let clinic of clinics; let i =index">
-          <td scope="row">{{i+1}}</td>
-          <td class="vertical-center">{{clinic.name}}</td>
-          <td class="vertical-center">{{clinic.address}}</td>
-          <button type="button" class="btn btn-primary" (click)="examinationRequestForClinic(clinic,examinationDate, selectedType)">View free examination</button>
-        </tr>
-
-    </tbody>
-  </table>
 
   <div>
     <table class="table">

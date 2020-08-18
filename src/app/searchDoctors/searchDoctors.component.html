@@ -1,0 +1,59 @@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2>Doctors </h2>
+        <div class="form-group">
+            <form (ngSubmit)="examinationRequestForClinic(selectedType,examinationDate)" #form="ngForm" [hidden]="adminClinicVisible">
+              <label style="font-size: 20px">Book Examination</label>
+              <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px">
+                  <mat-label>Examination Type</mat-label>
+                  <mat-select [(ngModel)]="selectedType" name="selectedType">
+                      <mat-option *ngFor="let type of types" [value]="type">
+                      {{type}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin: 0px 0px 0px 20px" appearance="fill" >
+                  <mat-label>Examination Date</mat-label>
+                  <input [formControl]="dateControl"  matInput [matDatepicker]="examinationDate"  name="examinationDate" placeholder="Select Date" [value]="dateControl.value" >
+                    <mat-datepicker-toggle matSuffix [for]="examinationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #examinationDate></mat-datepicker>
+              </mat-form-field>
+            
+              <input type="submit" value="Search">  
+          </form>
+  
+        </div>
+        <div style="margin: 0px 15px 5px 0px; width: 200px;">
+            <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
+            <button type="button" id="addButton" class="btn btn-success mr-3" style="position: absolute; right: 10px; " routerLink="/addDoctor" [hidden]="!adminClinicVisible">New Doctor</button>
+        </div>
+
+        
+        
+        <table class="table table-hover sortable"  >
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Doctor Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
+              <th scope="col">Specialization<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
+              <th scope="col">Average Mark<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
+              <th scope="col" [hidden]="!adminClinicVisible"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doctor of doctors | filter:term; let i = index " >
+                <td scope="row" >{{i+1}}</td>
+                <td class="vertical-center">{{doctor.firstName}}  {{doctor.lastName}}</td>
+                <td class="vertical-center">{{doctor.specialization}}</td>
+                <td class="vertical-center">doctor.Averagemark</td>
+                <td class="vertical-center" [hidden]="!adminClinicVisible">
+                    <button class="btn btn-secondary mr-3" (click)="RemoveDoctor(doctor)">Remove</button>
+                </td>
+                
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+        
