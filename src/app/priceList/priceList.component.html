@@ -2,10 +2,11 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <h2>PRICE LIST</h2><br>
-        <div style="position: absolute; left: 10px; top: 70px;">
-          <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
-        </div>
-        <label>Click on price to edit</label>
+        <div style="margin: 0px 15px 5px 0px; width: 200px;">
+            <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
+            <label style="position: absolute; right: 10px; ">Click on price to edit</label>
+          </div>
+       
       <table class="table table-hover sortable" >
         
           <thead>
@@ -15,18 +16,19 @@
               <th scope="col">Price<i id="arrow" (click)="sortAsc('priceValue')">▼</i><span id="arrow" (click)="sortDesc('priceValue')">▲</span></th>
               <th scope="col">Discount<i id="arrow" (click)="sortAsc('discount')">▼</i><span id="arrow" (click)="sortDesc('discount')">▲</span></th>
               <th scope="col">Discounted price<i id="arrow" (click)="sortAsc('discountedPrice')">▼</i><span id="arrow" (click)="sortDesc('discountedPrice')">▲</span></th>
-              
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of priceList  | filter:term; let i = index" (click)="EditPrice(item)">
-                <td scope="row" >{{i+1}}</td>
+                <td scope="row" >{{i+1}} </td>
                 <td class="vertical-center">{{item.examinationType}}</td>
                 <td class="vertical-center">{{item.priceValue}} rsd</td>
                 <td class="vertical-center">{{item.discount}} %</td>
                 <td class="vertical-center">{{item.discountedPrice}} rsd</td>
+
             </tr>
-          </tbody>
+          </tbody>  
         </table>
     </div>
 </div>

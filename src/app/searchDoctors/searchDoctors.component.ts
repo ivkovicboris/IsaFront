@@ -10,6 +10,7 @@ import { User } from '../share/User';
 import { RequestExamination } from '../share/RequestExamination';
 import { DoctorsFreeExaminations } from '../share/DoctorsFreeExaminations';
 import { NewExamination } from '../share/NewExamination';
+import { convertUTCDateToLocalDate } from '../dateConvertUTC';
 
 @Component({
     selector: 'searchDoctors-component',
@@ -74,34 +75,22 @@ export class SearchDoctorsComponent implements OnInit {
         } else { //PATIENT
             this.selectedType = localStorage.getItem('examinationType');
             this.examinationDate = new Date(localStorage.getItem('examinationDate'));
+            //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
             this.clinicId=localStorage.getItem('clinicId');
             this.dateControl = new FormControl(this.examinationDate);
-            if(this.selectedType!=""){
                 const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
                 this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
                         this.doctors = response;   
                 });
-            } else {
-              this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
-                this.drs=response["result"];
-                this.doctors = new Array<DoctorsFreeExaminations>();
-                this.drs.forEach(x => {
-                  this.doctorToAdd = new DoctorsFreeExaminations(
-                    this.doctor = x,
-                    this.freeExaminations = [], 
-                  )
-                  this.doctors.push(this.doctorToAdd);
-                })
-                
-              })
+            
             }   
         }       
-    }
+    
 
     public BookExamination(doctor: User, date:string){
         this.doctorId = doctor.employeeId;
-        this.examinationDate = new Date(date);
-        const examination = new NewExamination(this.examinationDate, this.doctorId, this.userId, this.selectedType);
+        //this.examinationDate = convertUTCDateToLocalDate(date);
+        const examination = new NewExamination(this.examinationDate.toUTCString(), this.doctorId, this.userId, this.selectedType);
         this.data.AddExamination(examination).subscribe( response =>{
             if(response) {
                 alert('Your examination request has been recieved. Please check your email');
@@ -114,7 +103,8 @@ export class SearchDoctorsComponent implements OnInit {
     }
 
     public  examinationRequestForClinic(type: string,date:Date,){
-        const requestExamination = new RequestExamination(this.clinicId, date, this.selectedType);
+      //this.examinationDate = convertUTCDateToLocalDate(date);
+        const requestExamination = new RequestExamination(this.clinicId, this.examinationDate.toUTCString(), this.selectedType);
         this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
                 this.DoctorsFreeExaminations = response
         });

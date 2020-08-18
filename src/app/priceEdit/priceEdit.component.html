@@ -5,7 +5,7 @@
                 <label>Edit examination price details</label><br>
                 <div class="form-row">
                     <div class="form-group col">
-                    <label>Price</label><br>
+                    <label>Price (rsd)</label><br>
                         <input type="text" formControlName="priceValue" class="form-control" [(ngModel)]="this.priceValue" (change)="calculate()" [ngClass]="{ 'is-invalid': submitted && f.priceValue.errors }"/>
                         <div *ngIf="submitted && f.priceValue.errors" class="invalid-feedback">
                             <div *ngIf="f.priceValue.errors.required">Please enter examination price</div>
@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="form-group col">
-                        <label>Discount </label><br>
+                        <label>Discount (%)</label><br>
                         <input type="text" formControlName="discount" class="form-control" [(ngModel)]="this.discount" (change)="calculate()" [ngClass]="{ 'is-invalid': submitted && f.discount.errors }" />
                         <div *ngIf="submitted && f.discount.errors" class="invalid-feedback">
                             <div *ngIf="f.discount.errors.required">Please enter examination discount</div>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                     <div class="form-group col">
-                            <label>Discounted price</label><br>
+                            <label>Discounted price (rsd)</label><br>
                             <input type="text" readonly formControlName="discountedPrice" class="form-control" [(ngModel)]="this.discountedPrice" />
                         </div>
                     

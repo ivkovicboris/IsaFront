@@ -6,6 +6,7 @@ import { Router, Route } from '@angular/router';
 import { RequestExamination } from '../share/RequestExamination';
 import { Price } from '../share/Price';
 import { DatePipe } from '@angular/common';
+import { convertUTCDateToLocalDate } from '../dateConvertUTC';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class SearchClinicsComponent implements OnInit {
     }
     public  examinationRequest(form: NgForm){
         this.examinationDate = form.value.examinationDate;
+        //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
         this.selectedType = form.value.selectedType;
         const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
         this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
@@ -53,7 +55,13 @@ export class SearchClinicsComponent implements OnInit {
   public getExaminationPriceBylinic(clinicId: string){
     this.data.GetPriceList(clinicId).subscribe ( response => {
      // this.priceList = response
+      response.forEach(price => {
+        if(price.examinationType==this.selectedType){
+          this.examinationPrice=price;
+        }
+      })
     });
+    
     this.examinationPrice=this.priceList["examinationType"];
   }
 
@@ -83,6 +91,7 @@ export class SearchClinicsComponent implements OnInit {
     ShowDoctors(clinicId:string){
       localStorage.setItem('clinicId', clinicId);
       localStorage.setItem('examinationType',this.selectedType);
+      //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
       localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddT00:00:00'));
       this.router.navigate(["/searchDoctors"])
     }

@@ -53,7 +53,7 @@
                         <mat-label>Select Examination</mat-label>
                         <mat-select [(ngModel)]="freeExamination" name="freeExamination">
                             <mat-option *ngFor="let date of doctor.freeExaminations; let j = index" [value]="date">
-                            {{date}}
+                            {{date | date:'medium'}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
