@@ -14,6 +14,7 @@ export class User
     state:string;
     specialization:string;
     employeeId:string;
+    examinations:any
 
     constructor
     (
@@ -31,6 +32,7 @@ export class User
         state:string,
         specialization:string,
         employeeId:string,
+        examinations:any[]
 
     ){
         this.firstName = firstName;

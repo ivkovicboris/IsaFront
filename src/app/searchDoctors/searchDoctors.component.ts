@@ -8,6 +8,8 @@ import { Room } from '../share/Room';
 import { RoomDate } from '../share/RoomDate';
 import { User } from '../share/User';
 import { RequestExamination } from '../share/RequestExamination';
+import { DoctorsFreeExaminations } from '../share/DoctorsFreeExaminations';
+import { NewExamination } from '../share/NewExamination';
 
 @Component({
     selector: 'searchDoctors-component',
@@ -15,7 +17,7 @@ import { RequestExamination } from '../share/RequestExamination';
     styleUrls: ['searchDoctors.component.css']
 })
 export class SearchDoctorsComponent implements OnInit {
-    doctors: any;
+    doctors: Array<DoctorsFreeExaminations>;
     userRole: any;
     public adminClinicVisible = false;
   examinationType: string;
@@ -41,6 +43,12 @@ export class SearchDoctorsComponent implements OnInit {
   dateControl = new FormControl(new Date());
   adminId: any;
   clinicOfAdmin: any;
+  freeExaminations: any;
+  drs: any;
+  doctor: any;
+  doctorToAdd: DoctorsFreeExaminations;
+  userId: any;
+  doctorId: string;
 
     constructor(private data: DataService, private router: Router ) {}
 
@@ -48,32 +56,61 @@ export class SearchDoctorsComponent implements OnInit {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.userRole = decodeToken.Role;
-        this.adminId = decodeToken.jti;
+        this.userId = decodeToken.jti;
         if (this.userRole=="ClinicAdmin"){
           this.clinicId=localStorage.getItem('clinicId');
           this.adminClinicVisible=true;
           this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
-            this.doctors=response["result"];
-          })
-        } else {
-
-          this.selectedType = localStorage.getItem('examinationType');
-          this.examinationDate = new Date(localStorage.getItem('examinationDate'));
-          this.clinicId=localStorage.getItem('clinicId');
-          this.dateControl = new FormControl(this.examinationDate);
-          if(this.selectedType!=""){
-              const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
-              this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
-                      this.doctors = response
-              });
-          } else {
-            this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
-              this.doctors=response["result"];
+            this.drs=response["result"];
+            this.drs.forEach(x => {
+              this.doctorToAdd = new DoctorsFreeExaminations(
+                this.doctor = x,
+                this.freeExaminations = [], 
+              )
+              this.doctors.push(this.doctorToAdd);
             })
-          }   
-        }
-        
-             
+            
+          })
+        } else { //PATIENT
+            this.selectedType = localStorage.getItem('examinationType');
+            this.examinationDate = new Date(localStorage.getItem('examinationDate'));
+            this.clinicId=localStorage.getItem('clinicId');
+            this.dateControl = new FormControl(this.examinationDate);
+            if(this.selectedType!=""){
+                const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
+                this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
+                        this.doctors = response;   
+                });
+            } else {
+              this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
+                this.drs=response["result"];
+                this.doctors = new Array<DoctorsFreeExaminations>();
+                this.drs.forEach(x => {
+                  this.doctorToAdd = new DoctorsFreeExaminations(
+                    this.doctor = x,
+                    this.freeExaminations = [], 
+                  )
+                  this.doctors.push(this.doctorToAdd);
+                })
+                
+              })
+            }   
+        }       
+    }
+
+    public BookExamination(doctor: User, date:string){
+        this.doctorId = doctor.employeeId;
+        this.examinationDate = new Date(date);
+        const examination = new NewExamination(this.examinationDate, this.doctorId, this.userId, this.selectedType);
+        this.data.AddExamination(examination).subscribe( response =>{
+            if(response) {
+                alert('Your examination request has been recieved. Please check your email');
+                this.router.navigate(['/searchClinics']);
+            } else {
+                alert('error');
+            }
+            
+        });  
     }
 
     public  examinationRequestForClinic(type: string,date:Date,){

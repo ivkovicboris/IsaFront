@@ -146,8 +146,8 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetOccupancyForRoomByDate',roomDate)
     }
 
-    public GetAllDoctorsFromClinic(clinicId: string): Observable<User[]> {
-        return this.http.get<User[]>(environment.webApiBaseUrl + 'Clinic/GetAllDoctorsFromClinic/' + clinicId, {
+    public GetAllDoctorsFromClinic(clinicId: string): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Clinic/GetAllDoctorsFromClinic/' + clinicId, {
             responseType: 'json'
         });        
     }

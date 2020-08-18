@@ -38,17 +38,29 @@
               <th scope="col">Doctor Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
               <th scope="col">Specialization<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
               <th scope="col">Average Mark<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
-              <th scope="col" [hidden]="!adminClinicVisible"></th>
+              <th scope="col">Free Examinations</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let doctor of doctors | filter:term; let i = index " >
                 <td scope="row" >{{i+1}}</td>
-                <td class="vertical-center">{{doctor.firstName}}  {{doctor.lastName}}</td>
-                <td class="vertical-center">{{doctor.specialization}}</td>
+                <td class="vertical-center">{{doctor.doctor.firstName}}  {{doctor.doctor.lastName}}</td>
+                <td class="vertical-center">{{doctor.doctor.specialization}}</td>
                 <td class="vertical-center">doctor.Averagemark</td>
-                <td class="vertical-center" [hidden]="!adminClinicVisible">
-                    <button class="btn btn-secondary mr-3" (click)="RemoveDoctor(doctor)">Remove</button>
+                <td class="vertical-center" >
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Examination</mat-label>
+                        <mat-select [(ngModel)]="freeExamination" name="freeExamination">
+                            <mat-option *ngFor="let date of doctor.freeExaminations; let j = index" [value]="date">
+                            {{date}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td class="horizontal-center">
+                    <button  [hidden]="!adminClinicVisible" class="btn btn-secondary mr-3" (click)="RemoveDoctor(doctor.doctor)">Remove</button>
+                    <button  [hidden]="adminClinicVisible" class="btn btn-secondary mr-3" (click)="BookExamination(doctor.doctor, freeExamination)">Book</button>
                 </td>
                 
             </tr>
