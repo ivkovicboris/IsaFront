@@ -51,29 +51,29 @@ export class SearchDoctorsComponent implements OnInit {
         this.adminId = decodeToken.jti;
         if (this.userRole=="ClinicAdmin"){
           this.clinicId=localStorage.getItem('clinicId');
-        // this.data.GetClinicByAdminId(this.adminId).subscribe ( response => {
-        //   this.clinicOfAdmin=response;
-        // })
-        // this.clinicId = this.clinicOfAdmin.clinicId;
           this.adminClinicVisible=true;
           this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
             this.doctors=response["result"];
           })
+        } else {
+
+          this.selectedType = localStorage.getItem('examinationType');
+          this.examinationDate = new Date(localStorage.getItem('examinationDate'));
+          this.clinicId=localStorage.getItem('clinicId');
+          this.dateControl = new FormControl(this.examinationDate);
+          if(this.selectedType!=""){
+              const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
+              this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
+                      this.doctors = response
+              });
+          } else {
+            this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
+              this.doctors=response["result"];
+            })
+          }   
         }
         
-        this.selectedType = localStorage.getItem('examinationType');
-        this.examinationDate = new Date(localStorage.getItem('examinationDate'));
-        this.dateControl = new FormControl(this.examinationDate);
-        if(this.selectedType!=""){
-            const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
-            this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
-                    this.DoctorsFreeExaminations = response
-            });
-        } else {
-          this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
-            this.doctors=response["result"];
-          })
-        }        
+             
     }
 
     public  examinationRequestForClinic(type: string,date:Date,){
@@ -119,7 +119,7 @@ export class SearchDoctorsComponent implements OnInit {
     }
 
     RemoveDoctor(doctor: User){
-        this.data.DeleteDoctor(doctor.employeeId).subscribe (response => {
+        this.data.DeleteEmployee(doctor.employeeId).subscribe (response => {
           if(response){
             alert("Doctor successfully removed from clinic!")
           } else {

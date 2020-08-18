@@ -72,8 +72,8 @@ export class DataService {
     public AddClinic(clinic: Clinic) {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', clinic);
     }
-    public DeleteDoctor(doctorId: string) {
-        return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', doctorId);
+    public DeleteEmployee(doctorId: string) {
+        return this.http.post(environment.webApiBaseUrl + 'User/DeleteEmployee', doctorId);
     }
 
     public GetUserById(id: string): Observable<User[]>{
@@ -83,7 +83,7 @@ export class DataService {
     }
     public GetClinicByAdminId(adminId: string): Observable<Clinic[]>{
         return this.http.get<Clinic[]>(environment.webApiBaseUrl + 'Clinic/GetClinicByAdminId/'+adminId, {
-            responseType: 'json'
+            
         });
     }
 

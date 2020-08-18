@@ -21,20 +21,30 @@ export class AdminClinicHomePageComponent {
     public specializations: any;
     public clinic:any;
 
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    constructor(private data: DataService, private router: Router) {}
 
-    ngOninit() {
+    ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
 
+        this.data.GetClinicByAdminId(this.id).subscribe( response => {
+            this.clinic = response;
+            localStorage.setItem('clinicId', this.clinic.clinicId)
+        });
+
+
         this.data.GetAllSpecializations().subscribe( response => {
             this.specializations = response;
         })
-        this.data.GetClinicByAdminId(this.id).subscribe( response => {
-            this.clinic = response;
-        });
+       
         
+        
+    }
+
+    ShowDoctors(){
+        localStorage.setItem('clinicId', this.clinic.clinicId);
+        this.router.navigate(["/searchDoctors"]);
     }
    
 
