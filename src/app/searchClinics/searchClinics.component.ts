@@ -6,7 +6,7 @@ import { Router, Route } from '@angular/router';
 import { RequestExamination } from '../share/RequestExamination';
 import { Price } from '../share/Price';
 import { DatePipe } from '@angular/common';
-import { convertUTCDateToLocalDate } from '../dateConvertUTC';
+
 
 
 @Component({
@@ -92,7 +92,7 @@ export class SearchClinicsComponent implements OnInit {
       localStorage.setItem('clinicId', clinicId);
       localStorage.setItem('examinationType',this.selectedType);
       //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
-      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddT00:00:00'));
+      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddTHH:mm:ss'));
       this.router.navigate(["/searchDoctors"])
     }
 

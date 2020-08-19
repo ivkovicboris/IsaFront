@@ -17,6 +17,7 @@ import { Clinic } from './Clinic';
 import { Price } from './Price';
 import { ChangePassword } from './ChangePassword';
 import { RoomDate } from './RoomDate';
+import { RoomExamination } from './RoomExamination';
 
 
 const httpOptions = {
@@ -163,8 +164,12 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetFreeExaminationAndDoctorByClinic/', request) as Observable<any[]>;
     }
 
-    public GetExaminationRequests(clinicId:string): Observable<User[]> {
-        return this.http.get<User[]>(environment.webApiBaseUrl + 'Account/GetRegisterRequests'+clinicId, {
+    public AcceptExaminationRequest(bookroom: RoomExamination){
+        return this.http.post(environment.webApiBaseUrl + 'Examination/AcceptExaminationRequest', bookroom);
+    }
+
+    public GetExaminationRequests(clinicId:string): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Examination/GetExaminationRequests/' + clinicId, {
             responseType: 'json'
         });
     }

@@ -5,4 +5,28 @@
 <button routerLink="/searchRooms">All Rooms</button><br>
 <button routerLink="/priceList">Edit Price List</button>
 
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <h2>Examination requests</h2>
+      <table class="table table-hover sortable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Examination Date</th>
+            <th scope="col">Respond</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let examination of examinationRequests; let i =index">
+              <td scope="row">{{i+1}}</td>
+              <td class="vertical-center">{{examination.dateTime}}</td>
+                <button initial class="btn btn-success" (click)="searchRooms(examination.dateTime,examination.id)">Book Room</button>
+                <button initial class="btn btn-danger" (click)="Deny()">Deny</button>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+</div>
+
 
