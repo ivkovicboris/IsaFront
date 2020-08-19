@@ -151,7 +151,18 @@ export class DataService {
             responseType: 'json'
         });        
     }
-    
+
+    public GetPatientsByClinicId(clinicId: string): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Clinic/GetPatientsByClinicId/' + clinicId, {
+            responseType: 'json'
+        });  
+    }
+
+    public GetPatientsByDoctorId(doctorId: string): Observable<any> {
+        return this.http.get<any>(environment.webApiBaseUrl + 'Clinic/GetPatientsByDoctorId/' + doctorId, {
+            responseType: 'json'
+        });  
+    }
     //****************STARE METODE***********************
     public SendVacationRequest(vacationRequest: Vacation){
         return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();

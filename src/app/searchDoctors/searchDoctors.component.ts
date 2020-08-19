@@ -75,7 +75,7 @@ export class SearchDoctorsComponent implements OnInit {
         } else { //PATIENT
             this.selectedType = localStorage.getItem('examinationType');
             this.examinationDate = new Date(localStorage.getItem('examinationDate'));
-            //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
+           //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
             this.clinicId=localStorage.getItem('clinicId');
             this.dateControl = new FormControl(this.examinationDate);
                 const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
