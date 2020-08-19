@@ -75,7 +75,7 @@ export class SearchDoctorsComponent implements OnInit {
         } else { //PATIENT
             this.selectedType = localStorage.getItem('examinationType');
             this.examinationDate = new Date(localStorage.getItem('examinationDate'));
-            //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
+           //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
             this.clinicId=localStorage.getItem('clinicId');
             this.dateControl = new FormControl(this.examinationDate);
                 const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
@@ -87,10 +87,10 @@ export class SearchDoctorsComponent implements OnInit {
         }       
     
 
-    public BookExamination(doctor: User, date:string){
+    public BookExamination(doctor: User, date:Date){
         this.doctorId = doctor.employeeId;
         //this.examinationDate = convertUTCDateToLocalDate(date);
-        const examination = new NewExamination(this.examinationDate.toUTCString(), this.doctorId, this.userId, this.selectedType);
+        const examination = new NewExamination(date, this.doctorId, this.userId, this.selectedType);
         this.data.AddExamination(examination).subscribe( response =>{
             if(response) {
                 alert('Your examination request has been recieved. Please check your email');

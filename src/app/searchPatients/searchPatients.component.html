@@ -1,0 +1,41 @@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2>Patients</h2>
+          <div class="form-group">
+            
+        </div>
+        <div style="margin: 0px 15px 5px 0px; width: 200px;">
+            <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
+            <span style="position: absolute; right: 10px;">
+                <button class="btn btn-secondary mr-3"  (click)="MyPatients()">My Patients</button>
+                <button class="btn btn-secondary mr-3" (click)="AllPatients()">All Patients</button>
+            </span>
+            
+        </div>
+    
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                
+                <th scope="col">Patient Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
+                <th scope="col">JMBG<i id="arrow" (click)="sortAsc('jmbg')">▼</i><span id="arrow" (click)="sortDesc('jmbg')">▲</span></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let patient of patientsInClinic | filter:term; let i =index">
+                  <td scope="row">{{i+1}}</td>
+                  <td class="vertical-center">{{patient.firstName}} {{patient.LastName}}</td>
+                  <td class="vertical-center">{{patient.jmbg}}</td>
+                  
+                  <td class="vertical-center">
+                    <button class="btn btn-secondary mr-3" (click)="IsMyPatient(patient.jmbg)">Show Medical Record</button>
+                    <button class="btn btn-secondary mr-3" >Start Examination</button>
+                  </td>
+                  
+                </tr>
+  
+            </tbody>
+          </table>

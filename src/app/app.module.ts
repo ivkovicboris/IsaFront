@@ -29,6 +29,7 @@ import { JwtInterceptor } from './share/interceptor';
 import { SearchClinicsComponent } from './searchClinics/searchClinics.component';
 import { SearchRoomsComponent } from './searchRooms/searchRooms.component';
 import { SearchDoctorsComponent } from './searchDoctors/searchDoctors.component';
+import { SearchPatientsComponent} from './searchPatients/searchPatients.component';
 import { EditRoomComponent } from './editRoom/editRoom.component';
 import { PriceListComponent } from './priceList/priceList.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
@@ -60,6 +61,7 @@ const route = [
   { path: 'searchClinics', component: SearchClinicsComponent },
   {path: 'searchRooms', component: SearchRoomsComponent},
   {path: 'searchDoctors', component: SearchDoctorsComponent},
+  { path: 'searchPatients', component: SearchPatientsComponent},
   { path: 'editRoom', component: EditRoomComponent},
 
   { path: 'priceList', component: PriceListComponent },
@@ -93,7 +95,7 @@ const route = [
     SearchRoomsComponent,
     EditRoomComponent,
     SearchDoctorsComponent,
-   
+    SearchPatientsComponent,
   ],
   imports: [
     BrowserModule,
