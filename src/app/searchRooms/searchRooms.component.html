@@ -23,11 +23,21 @@
                     <td scope="row" >{{i+1}}</td>
                     <td class="vertical-center">{{room.number}}</td>
                     <td class="vertical-center">{{room.name}}</td>
-                    <td class="vertical-center">{{GetOccupancyForRoomByDate(room.roomId)}}</td>
-                    <td class="vertical-center"></td>
-                    <td class="vertical-center">
+                    <td class="vertical-center" >
+                      <mat-form-field appearance="fill">
+                          <mat-label>Occupancy time</mat-label>
+                          <mat-select >
+                              <mat-option *ngFor="let date of datesByRoom | filter:term; let i = index " [value]="date">
+                              {{date | date:'medium'}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </td>
+                    <td class="vertical-center">{{dateByRoom | date:'medium'}} </td>
+                    <td>
                         <button class="btn btn-secondary mr-3" (click)="EditRoom(room)">Edit</button>
                         <button class="btn btn-danger mr-3"(click)="DeleteRoom(room)">Delete</button>
+                        <button class="btn btn-danger mr-3"(click)="BookRoom(room)">Book</button>
                     </td>
                     
                 </tr>

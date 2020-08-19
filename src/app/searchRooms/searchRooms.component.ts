@@ -6,6 +6,8 @@ import { Router, Route } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 import { Room } from '../share/Room';
 import { RoomDate } from '../share/RoomDate';
+import { RoomExamination } from '../share/RoomExamination';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
     selector: 'searchRooms-component',
@@ -15,9 +17,9 @@ import { RoomDate } from '../share/RoomDate';
 export class SearchRoomsComponent implements OnInit {
     rooms: any;
     adminId: any;
-  dates: any;
-  datesByRoom: any;
-    date1: any;
+    dates: any;
+    datesByRoom: any;
+    dateByRoom: any;
 
     constructor(private data: DataService, private router: Router ) {}
 
@@ -28,8 +30,41 @@ export class SearchRoomsComponent implements OnInit {
         
         this.data.GetAllRoomsFromClinicByAdminId(this.adminId).subscribe(response => {
             this.rooms=response;
-        })
-        this.date1 =new Date();
+            this.rooms.forEach(element => {
+              const roomDate = new RoomDate (
+                element.roomId,
+                new Date(localStorage.getItem('examinationDate')),
+              )
+              this.data.FirstAvailableByDate(roomDate).subscribe ( response => {
+                this.dateByRoom=response;
+                if(new Date(this.dateByRoom).getTime() < new Date(localStorage.getItem('examinationDate')).getTime()){
+                  this.dateByRoom=localStorage.getItem('examinationDate');
+                }
+              })
+            })
+              this.rooms.forEach(element => {
+                const roomDate = new RoomDate (
+                  element.roomId,
+                  new Date(localStorage.getItem('examinationDate')),
+                )
+                this.data.GetOccupancyForRoomByDate(roomDate).subscribe ( response => {
+                  this.datesByRoom=response;
+                })
+            })
+          });
+        }
+    
+    BookRoom(room: Room){
+      var exId= localStorage.getItem('examinationId'); 
+      var bookroom = new RoomExamination(room.roomId, exId);
+      this.data.AcceptExaminationRequest(bookroom).subscribe(response =>{
+        if(response) {
+          alert('Room' + room.name + 'booked for examnation');
+          this.router.navigate(["/searchRooms"]);
+      } else {
+          alert('error');
+      }
+      })
     }
 
     EditRoom(room: Room){
@@ -73,25 +108,7 @@ export class SearchRoomsComponent implements OnInit {
             }
           });
     }
-    FirstAvailableByDate(roomId:string, date:Date){
-        const roomDate = new RoomDate (
-          roomId,
-          date,
-        )
-        this.data.FirstAvailableByDate(roomDate).subscribe ( response => {
-          this.datesByRoom=response;
-        })
-        return this.datesByRoom;
-    }
+    
 
-    GetOccupancyForRoomByDate(roomId:string){
-        const roomDate = new RoomDate (
-          roomId,
-          this.date1,
-        )
-        this.data.GetOccupancyForRoomByDate(roomDate).subscribe ( response => {
-          this.datesByRoom=response;
-        })
-        return this.datesByRoom;
-    }
+    
 }

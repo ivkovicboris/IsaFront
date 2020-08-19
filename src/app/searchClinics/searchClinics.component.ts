@@ -6,7 +6,7 @@ import { Router, Route } from '@angular/router';
 import { RequestExamination } from '../share/RequestExamination';
 import { Price } from '../share/Price';
 import { DatePipe } from '@angular/common';
-import { convertUTCDateToLocalDate } from '../dateConvertUTC';
+
 
 
 @Component({
