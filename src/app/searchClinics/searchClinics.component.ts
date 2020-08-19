@@ -51,7 +51,9 @@ export class SearchClinicsComponent implements OnInit {
         this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
                 this.clinics = response;
                 this.clinics.forEach(clinic => {
+                  
                   this.priceList = clinic.prices;
+                  
                   this.priceList.forEach(price => {
                     if(price.examinationType==this.selectedType){
                       this.examinationPrice=price.discountedPrice;
@@ -108,7 +110,7 @@ export class SearchClinicsComponent implements OnInit {
       localStorage.setItem('clinicId', clinicId);
       localStorage.setItem('examinationType',this.selectedType);
       //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
-      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddT00:00:00'));
+      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddTHH:mm:ss'));
       this.router.navigate(["/searchDoctors"])
     }
 
