@@ -1,0 +1,33 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2>Confirm Examination Details</h2>
+        <!-- Icon -->
+       
+            <div class="form-group">
+                <h4 >Examination</h4><br>
+                <label>Date and Time: </label> {{examinationDate | date:'medium'}}<br>
+                <label>Type: </label> {{examinationType}}<br>
+            </div>
+            <div class="form-group" >
+                <h4>Doctor Info</h4><br>
+                <label>Name: </label> {{doctor.firstName}} {{doctor.LastName}}<br>
+                <label>Email: </label>  {{doctor.email}}<br>
+                <label>Average Mark:</label> {{doctor.averageMark}}<br>
+            </div>
+            <div class="form-group" >
+                <h4>Your Info</h4><br>
+                <label>Your Name: </label> {{patient.firstName}} {{patient.LastName}}<br>
+                <label>Email: </label> {{patient.email}}<br>
+                
+            </div>
+
+        <div class="text-center" style="margin: 0px 0px 20px 0px;">
+            <button style="margin: 0px 10px 20px 0px;" class="btn btn-success mr-6" (click)="BookExamination()">Confirm</button>
+            <button style="margin: 0px 0px 20px 10px;"class="btn btn-danger mr-6" (click)=Cancel()>Canel</button>
+        </div>
+    </div>
+</div>

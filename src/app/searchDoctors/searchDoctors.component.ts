@@ -11,6 +11,7 @@ import { RequestExamination } from '../share/RequestExamination';
 import { DoctorsFreeExaminations } from '../share/DoctorsFreeExaminations';
 import { NewExamination } from '../share/NewExamination';
 import { convertUTCDateToLocalDate } from '../dateConvertUTC';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'searchDoctors-component',
@@ -51,7 +52,7 @@ export class SearchDoctorsComponent implements OnInit {
   userId: any;
   doctorId: string;
 
-    constructor(private data: DataService, private router: Router ) {}
+    constructor(private data: DataService, private router: Router,public datepipe: DatePipe ) {}
 
     ngOnInit() {
         const token = localStorage.getItem('token');
@@ -89,17 +90,11 @@ export class SearchDoctorsComponent implements OnInit {
 
     public BookExamination(doctor: User, date:Date){
         this.doctorId = doctor.employeeId;
-        //this.examinationDate = convertUTCDateToLocalDate(date);
-        const examination = new NewExamination(date, this.doctorId, this.userId, this.selectedType);
-        this.data.AddExamination(examination).subscribe( response =>{
-            if(response) {
-                alert('Your examination request has been recieved. Please check your email');
-                this.router.navigate(['/searchClinics']);
-            } else {
-                alert('error');
-            }
-            
-        });  
+        
+        localStorage.setItem('doctorId', this.doctorId);
+        localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:mm:ss'));
+        localStorage.setItem('examinationType', doctor.specialization);
+        this.router.navigate(["/bookExaminationPage"]);
     }
 
     public  examinationRequestForClinic(type: string,date:Date,){
