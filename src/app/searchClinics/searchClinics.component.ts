@@ -33,13 +33,14 @@ export class SearchClinicsComponent implements OnInit {
   examinationDate: Date = new Date();
   selectedType: string = "";
   examinationPrice: any;
-  priceList: Price;
+  priceList: any;
 
     constructor(private data: DataService, private router: Router, public datepipe: DatePipe ) {}
 
     ngOnInit() {
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
+            this.examinationPrice="Select Examination Type"
         });
     }
     public  examinationRequest(form: NgForm){
@@ -48,21 +49,38 @@ export class SearchClinicsComponent implements OnInit {
         this.selectedType = form.value.selectedType;
         const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
         this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
-                this.clinics = response
-        });
+                this.clinics = response;
+                this.clinics.forEach(clinic => {
+                  
+                  this.priceList = clinic.prices;
+                  
+                  this.priceList.forEach(price => {
+                    if(price.examinationType==this.selectedType){
+                      this.examinationPrice=price.discountedPrice;
+                    }
+                  });
+                  
+                })
+        })
+        
     }
     
-  public getExaminationPriceBylinic(clinicId: string){
+    GetExaminationPriceByClinic(clinicId: string){
+      if(this.selectedType==""){
+        this.examinationPrice = "Choose Examination Type"
+        return this.examinationPrice;
+      } 
     this.data.GetPriceList(clinicId).subscribe ( response => {
      // this.priceList = response
-      response.forEach(price => {
+     
+     response.forEach(price => {
         if(price.examinationType==this.selectedType){
           this.examinationPrice=price;
         }
       })
     });
-    
     this.examinationPrice=this.priceList["examinationType"];
+    return this.examinationPrice;
   }
 
     sortAsc(colName:any){
@@ -92,7 +110,7 @@ export class SearchClinicsComponent implements OnInit {
       localStorage.setItem('clinicId', clinicId);
       localStorage.setItem('examinationType',this.selectedType);
       //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
-      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddT00:00:00'));
+      localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddTHH:mm:ss'));
       this.router.navigate(["/searchDoctors"])
     }
 

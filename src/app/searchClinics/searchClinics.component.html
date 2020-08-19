@@ -29,14 +29,13 @@
       
       <table class="table table-hover">
           <thead>
-            <tr>
+            <tr style="position: sticky">
               <th scope="col">#</th>
               
               <th scope="col">Clinic Name<i id="arrow" (click)="sortAsc('name')">▼</i><span id="arrow" (click)="sortDesc('name')">▲</span></th>
               <th scope="col">Address<i id="arrow" (click)="sortAsc('address')">▼</i><span id="arrow" (click)="sortDesc('address')">▲</span></th>
               <th scope="col">Average Mark</th>
-              <th scope="col">Address</th>
-              <th scope="col">Examination price:</th>
+              <th scope="col">Examination price:<i id="arrow" (click)="sortAsc('examinationPrice')">▼</i><span id="arrow" (click)="sortDesc('examinationPrice')">▲</span></th>
             </tr>
           </thead>
           <tbody>
@@ -45,7 +44,6 @@
                 <td class="vertical-center">{{clinic.name}}</td>
                 <td class="vertical-center">{{clinic.address}}</td>
                 <td class="vertical-center">Clinic Average Mark</td>
-                <td class="vertical-center">{{clinic.address}}</td>
                 <td class="vertical-center">{{examinationPrice}}</td>
                 <td class="vertical-center">
                   <button class="btn btn-secondary mr-3" (click)="ShowDoctors(clinic.clinicId)">Show Doctors</button>
