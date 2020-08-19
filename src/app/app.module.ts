@@ -37,6 +37,7 @@ import { PriceEditComponent } from './priceEdit/priceEdit.component';
 import { MatDialogModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
+import {  BookExaminationPageComponent } from './bookExaminationPage/bookExaminationPage.component';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -66,7 +67,10 @@ const route = [
 
   { path: 'priceList', component: PriceListComponent },
   { path: 'priceEdit', component: PriceEditComponent},
-  {path: 'changePassword', component: ChangePasswordComponent}
+  {path: 'changePassword', component: ChangePasswordComponent},
+
+  {path: 'bookExaminationPage', component: BookExaminationPageComponent}
+
 ];
 
 
@@ -96,6 +100,7 @@ const route = [
     EditRoomComponent,
     SearchDoctorsComponent,
     SearchPatientsComponent,
+    BookExaminationPageComponent,
   ],
   imports: [
     BrowserModule,
