@@ -47,6 +47,7 @@ export class AddClinicComponent {
             this.clinicForm.value.name, 
             this.clinicForm.value.address, 
             this.clinicForm.value.about, 
+            []
         )
         this.data.AddClinic(clinic).subscribe(response =>
             {
