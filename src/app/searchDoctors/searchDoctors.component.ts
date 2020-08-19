@@ -38,7 +38,7 @@ export class SearchDoctorsComponent implements OnInit {
   ];
 
   selectedType: string;
-  clinics: import("d:/FAKS/ISA/2020/IsaFront/src/app/share/Clinic").Clinic[];
+  clinics: any;
   DoctorsFreeExaminations: any[];
   clinicId: string;
   dateControl = new FormControl(new Date());
@@ -87,10 +87,10 @@ export class SearchDoctorsComponent implements OnInit {
         }       
     
 
-    public BookExamination(doctor: User, date:string){
+    public BookExamination(doctor: User, date:Date){
         this.doctorId = doctor.employeeId;
         //this.examinationDate = convertUTCDateToLocalDate(date);
-        const examination = new NewExamination(this.examinationDate.toUTCString(), this.doctorId, this.userId, this.selectedType);
+        const examination = new NewExamination(date, this.doctorId, this.userId, this.selectedType);
         this.data.AddExamination(examination).subscribe( response =>{
             if(response) {
                 alert('Your examination request has been recieved. Please check your email');
