@@ -101,7 +101,8 @@ export class SearchDoctorsComponent implements OnInit {
       //this.examinationDate = convertUTCDateToLocalDate(date);
         const requestExamination = new RequestExamination(this.clinicId, this.examinationDate, this.selectedType);
         this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
-                this.DoctorsFreeExaminations = response
+                this.doctors = response
+                //this.ngOnInit();
         });
       
     }
