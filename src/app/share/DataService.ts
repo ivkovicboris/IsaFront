@@ -54,7 +54,11 @@ export class DataService {
             responseType: 'json'
         });
     }
-
+    public GetAdminsFromClinic(clinicId: string): Observable<User[]> {
+        return this.http.get<User[]>(environment.webApiBaseUrl + 'Clinic/GetAdminsFromClinic/' + clinicId,  {
+            responseType: 'json'
+        });
+    }
     
     public AcceptPatientRegisterRequest(mail: Mail){
         return this.http.post(environment.webApiBaseUrl + 'Account/AcceptPatientRegisterRequest', mail);
@@ -131,6 +135,12 @@ export class DataService {
    
     }
 
+    public GetExaminationById(examinationId: string): Observable<Examination[]> {
+        return this.http.get<Examination[]>(environment.webApiBaseUrl + 'Examination/GetExaminationById/' + examinationId, {
+            responseType: 'json'
+        });
+    }
+
     public DeleteRoom(room: Room){
         return this.http.post(environment.webApiBaseUrl + 'Clinic/DeleteRoom',room);
     }
@@ -164,7 +174,7 @@ export class DataService {
             responseType: 'json'
         });  
     }
-    //****************STARE METODE***********************
+    
     public SendVacationRequest(vacationRequest: Vacation){
         return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
     }

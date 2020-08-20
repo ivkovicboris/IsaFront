@@ -1,11 +1,20 @@
 
 <div class="wrapper fadeInDown">
         <div id="formContent">
-            <h2>ALL ROOMS</h2>
-            <div style="margin: 0px 15px 5px 0px; width: 200px;">
-                <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
-                <button type="button" id="addButton" class="btn btn-success mr-3" style="position: absolute; right: 10px; " routerLink="/addRoom">New Room</button>
+            <h2 [hidden]="RoomsWhenBooking">ALL ROOMS</h2>
+            <h2 [hidden]="!RoomsWhenBooking" >CHOOSE ROOM FOR EXAMINATION</h2>
+            <div [hidden]="!RoomsWhenBooking" style="position: initial; right: 350px" class="form-group">
+              <h4>Examination Details: </h4>
+              <label>Requested date and time: </label> {{examination.dateTime | date:'medium'}} <br>
+              <label>Patient Name: </label> {{patient.firstName}} {{patient.LastName}}<br>
+              <label>Doctor Name: </label> {{doctor.firstName}} {{doctor.LastName}} <br>
+              <label>Examination type: </label> {{examination.type}}<br>
             </div>
+            <div style="margin: 0px 15px 5px 0px; width: 200px;">
+                <input type="text" class="form-control" placeholder="Filter Rooms: " [(ngModel)]="term"> 
+                <button  type="button" id="addButton" class="btn btn-success mr-3" style="position: absolute; right: 10px; " routerLink="/addRoom">New Room</button>
+            </div>
+            
             
           <table class="table table-hover sortable"  >
               <thead>
@@ -35,11 +44,10 @@
                   </td>
                     <td class="vertical-center">{{dateByRoom | date:'medium'}} </td>
                     <td>
-                        <button class="btn btn-secondary mr-3" (click)="EditRoom(room)">Edit</button>
-                        <button class="btn btn-danger mr-3"(click)="DeleteRoom(room)">Delete</button>
-                        <button class="btn btn-danger mr-3"(click)="BookRoom(room)">Book</button>
+                      <button class="btn btn-success mr-3"(click)="BookRoom(room)" [hidden]="!RoomsWhenBooking" >Book</button>  
+                      <button class="btn btn-secondary mr-3" (click)="EditRoom(room)">Edit</button>
+                      <button class="btn btn-danger mr-3"(click)="DeleteRoom(room)">Delete</button>  
                     </td>
-                    
                 </tr>
               </tbody>
             </table>
