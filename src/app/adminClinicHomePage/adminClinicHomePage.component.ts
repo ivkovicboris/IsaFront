@@ -54,6 +54,15 @@ export class AdminClinicHomePageComponent {
         localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:ss:mm'));
         this.router.navigate(["/searchRooms"])
       }
+      searchRoom(){
+        localStorage.removeItem('examinationType');
+        localStorage.removeItem('examinationId',);
+        //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
+        localStorage.removeItem("examinationDate");
+        this.router.navigate(["/searchRooms"])
+
+      }
+
 
     ShowDoctors(){
         localStorage.setItem('clinicId', this.clinic.clinicId);
