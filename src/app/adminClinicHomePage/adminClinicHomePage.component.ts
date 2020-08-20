@@ -54,6 +54,7 @@ export class AdminClinicHomePageComponent {
         localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:ss:mm'));
         this.router.navigate(["/searchRooms"])
       }
+
       SearchRooms(){
         localStorage.setItem('clinicId', this.clinic.clinicId);
         localStorage.setItem('examinationType',"");

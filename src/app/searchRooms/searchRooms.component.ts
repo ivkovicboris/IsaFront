@@ -41,6 +41,7 @@ export class SearchRoomsComponent implements OnInit {
           this.RoomsWhenBooking=false;
           this.data.GetAllRoomsFromClinicByAdminId(this.adminId).subscribe(response => {
             this.rooms=response;
+
           });
         } else {
             this.data.GetExaminationById(localStorage.getItem('examinationId')).subscribe(response => {
