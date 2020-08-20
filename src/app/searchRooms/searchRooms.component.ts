@@ -37,9 +37,13 @@ export class SearchRoomsComponent implements OnInit {
               )
               this.data.FirstAvailableByDate(roomDate).subscribe ( response => {
                 this.dateByRoom=response;
+                if(localStorage.getItem('examinationDate')===null){
+                  this.dateByRoom=null;
+                }else{
                 if(new Date(this.dateByRoom).getTime() < new Date(localStorage.getItem('examinationDate')).getTime()){
                   this.dateByRoom=localStorage.getItem('examinationDate');
                 }
+              }
               })
             })
               this.rooms.forEach(element => {
