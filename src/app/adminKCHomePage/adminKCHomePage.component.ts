@@ -44,7 +44,7 @@ export class AdminKCHomePageComponent {
         );
         this.data.AcceptPatientRegisterRequest(mail).subscribe( response => {
             if(response){
-                alert('Patient request has been ACCEPTED. Mail notification has been sent to: ' + mail.receiver);
+                alert('Patient request has been ACCEPTED. Mail notification has been sent to: ' + mail.receivers);
             }else {
                 alert('Something went wrong :(');
             }
@@ -65,7 +65,7 @@ export class AdminKCHomePageComponent {
         );
         this.data.DenyPatientRegisterRequest(mail).subscribe( response => {
             if(response){
-                alert('Patient request has been DENIED. Mail notification has been sent to: ' + mail.receiver);
+                alert('Patient request has been DENIED. Mail notification has been sent to: ' + mail.receivers);
             }else {
                 alert('Something went wrong :(');
             }

@@ -47,12 +47,22 @@ export class AdminClinicHomePageComponent {
         
     }
 
-    searchRooms(date: Date, examinationId: string){
+    BookRoom(date: Date, examinationId: string){
         localStorage.setItem('examinationType',this.examinationRequests.examinationType);
         localStorage.setItem('examinationId',examinationId);
         //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
         localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:ss:mm'));
         this.router.navigate(["/searchRooms"])
+      }
+      SearchRooms(){
+        localStorage.setItem('clinicId', this.clinic.clinicId);
+        localStorage.setItem('examinationType',"");
+        localStorage.setItem('examinationId',"");
+        this.router.navigate(["/searchRooms"]);
+      }
+
+      Deny(examinationId: string){
+          //IMPLEMENT 
       }
 
     ShowDoctors(){

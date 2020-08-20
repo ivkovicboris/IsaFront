@@ -38,7 +38,7 @@
               <th scope="col">Doctor Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
               <th scope="col">Specialization<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
               <th scope="col">Average Mark<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
-              <th scope="col">Free Examinations</th>
+              <th scope="col" [hidden]="adminClinicVisible">Free Examinations</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -48,7 +48,7 @@
                 <td class="vertical-center">{{doctor.doctor.firstName}}  {{doctor.doctor.lastName}}</td>
                 <td class="vertical-center">{{doctor.doctor.specialization}}</td>
                 <td class="vertical-center">doctor.Averagemark</td>
-                <td class="vertical-center" >
+                <td class="vertical-center" [hidden]="adminClinicVisible" >
                     <mat-form-field appearance="fill">
                         <mat-label>Select Examination</mat-label>
                         <mat-select [(ngModel)]="freeExamination" name="freeExamination">
