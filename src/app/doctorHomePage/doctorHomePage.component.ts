@@ -36,14 +36,19 @@ export class DoctorHomePageComponent implements OnInit {
         });
     }
 
-    VacationRequest(form: NgForm) {
-            let startDate = form.value.StartDate;            
-            let endDate = form.value.EndDate;
+    VacationRequest(startDate:Date, endDate:Date ) {
         //if(this.endDate>this.startDate || this.endDate.getDay-this.startDate.getDay<15){
             const token = localStorage.getItem('token');
             const decodeToken = jwt_decode(token);
-            const vacationRequest = new Vacation(decodeToken.Id, startDate, endDate);
-            this.data.SendVacationRequest(vacationRequest);
+            const vacationRequest = new Vacation(this.id, startDate, endDate);
+            this.data.VacationRequest(vacationRequest).subscribe(response => {
+                if(response){
+                    alert("Request for vacation sent to admin")
+                  } else {
+                    alert("You have examination on picked time")
+                    window.location.reload();
+                  }
+            })
         //}
     }
 
