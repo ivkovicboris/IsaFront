@@ -18,6 +18,7 @@ import { Price } from './Price';
 import { ChangePassword } from './ChangePassword';
 import { RoomDate } from './RoomDate';
 import { RoomExamination } from './RoomExamination';
+import { Review } from './Review';
 
 
 const httpOptions = {
@@ -194,6 +195,11 @@ export class DataService {
             responseType: 'json'
         });
     }
+    public GetAllExaminationsByUserId(userId: string): Observable<Examination[]> {
+        return this.http.get<Examination[]>(environment.webApiBaseUrl + 'Examination/GetAllExaminationsByUserId/' + userId, {
+            responseType: 'json'
+        });
+    }
 
     public AddExamination(examination: NewExamination){
         return this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination);
@@ -202,5 +208,14 @@ export class DataService {
     public GetClinicByTypeDateExamination(request: RequestExamination): Observable<Clinic[]> {
          let result: any;
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetClinicByTypeDateExamination/', request) as Observable<Clinic[]>;
+    }
+
+    public AddReview(review: Review) {
+        return this.http.post(environment.webApiBaseUrl + 'Examination/AddReview', review);
+    }
+    public CheckIfAlreadyReviewed(patientId: string, reviewedId: string): Observable<any>{
+        return this.http.get<any>(environment.webApiBaseUrl + 'Examination/CheckIfAlreadyReviewed/'+ patientId + "/" + reviewedId, {
+            responseType: 'json'
+        });
     }
 }
