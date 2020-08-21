@@ -37,8 +37,11 @@ import { MatDialogModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import {  BookExaminationPageComponent } from './bookExaminationPage/bookExaminationPage.component';
+
 import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
 import { ExaminationViewComponent }from './examinationView/examinationView.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+
 
 const route = [
   { path: '', component: LoginComponent},
@@ -119,7 +122,8 @@ const route = [
     MatSelectModule,
     ReactiveFormsModule,
     MatDialogModule,
-    Ng2SearchPipeModule 
+    Ng2SearchPipeModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [DatePipe,
     DataService,
