@@ -2,20 +2,20 @@ export class Mail
 {
     subject: string;
     sender: string;
-    receiver:string;
+    receivers:Array<string>;
     body:string;
    
     constructor
     (
         subject: string,
         sender: string,
-        receiver: string,
+        receivers: Array<string>,
         body: string,
         
     ){
         this.subject = subject;
         this.sender = sender;
-        this.receiver = receiver;
+        this.receivers = receivers;
         this.body = body;
     }
 }

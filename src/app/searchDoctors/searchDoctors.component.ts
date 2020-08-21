@@ -19,7 +19,7 @@ import { DatePipe } from '@angular/common';
     styleUrls: ['searchDoctors.component.css']
 })
 export class SearchDoctorsComponent implements OnInit {
-    doctors: Array<DoctorsFreeExaminations>;
+    doctors = new Array<any>();
     userRole: any;
     public adminClinicVisible = false;
   examinationType: string;
@@ -51,6 +51,7 @@ export class SearchDoctorsComponent implements OnInit {
   doctorToAdd: DoctorsFreeExaminations;
   userId: any;
   doctorId: string;
+  
 
     constructor(private data: DataService, private router: Router,public datepipe: DatePipe ) {}
 
@@ -63,7 +64,7 @@ export class SearchDoctorsComponent implements OnInit {
           this.clinicId=localStorage.getItem('clinicId');
           this.adminClinicVisible=true;
           this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(response => {
-            this.drs=response["result"];
+            this.drs=response;
             this.drs.forEach(x => {
               this.doctorToAdd = new DoctorsFreeExaminations(
                 this.doctor = x,
