@@ -1,18 +1,18 @@
 
 export class Vacation
 {
-    doctorID:string;
+    doctorId:string;
     startDate:Date;
     endDate:Date;
      
     constructor
     (
-        doctorID:string,
+        doctorId:string,
         startDate:Date,
         endDate:Date,
       
     ){
-        this.doctorID = doctorID;
+        this.doctorId = doctorId;
         this.startDate = startDate;
         this.endDate = endDate;
        

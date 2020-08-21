@@ -174,11 +174,26 @@ export class DataService {
             responseType: 'json'
         });  
     }
-    
-    public SendVacationRequest(vacationRequest: Vacation){
-        return this.http.post(environment.webApiBaseUrl + 'User/SendVacationRequest/',vacationRequest).subscribe();
+
+    //****************STARE METODE***********************
+    public VacationRequest(vacationRequest: Vacation){
+        return this.http.post(environment.webApiBaseUrl + 'User/VacationRequest', vacationRequest);
+
     }
 
+    public GetVacationRequests(): Observable<Vacation[]> {
+        return this.http.get<Vacation[]>(environment.webApiBaseUrl + 'User/GetVacationRequests', {
+            responseType: 'json'
+        });
+    }
+
+    public AcceptVacationRequests(mail: Mail){
+        return this.http.post(environment.webApiBaseUrl + 'User/AcceptVacationRequests', mail);
+    }
+
+    public DenyVacationRequests(mail: Mail){
+        return this.http.post(environment.webApiBaseUrl + 'User/DenyVacationRequests', mail);
+    }
     
     public GetFreeExaminationAndDoctorByClinic(request: RequestExamination): Observable<any[]> {
         let result: any;

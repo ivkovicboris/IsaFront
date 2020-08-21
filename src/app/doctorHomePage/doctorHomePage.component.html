@@ -1,5 +1,17 @@
 <button routerLink="/userProfile">My Profile</button>
 <button routerLink="/searchPatients">Patients</button>
+<button>Schedule</button>
+<div>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+     Vacation request
+</button>
+<div class="collapse" id="collapseExample">
+<input type="text" placeholder="Pick dayes for vocation"  ngxDaterangepickerMd startKey="StartDate" endKey="EndDate" [(ngModel)]="model" />
+<button class="btn btn-secondary mr-3" (click)="VacationRequest(model.StartDate._d, model.EndDate._d)">Send Request</button>
+</div>
+</div>
+<button>Start examination</button> 
 <button>Schedule ***</button>
 <button>Start examination ***</button>
 <button>Vacation request ***</button> 
+
