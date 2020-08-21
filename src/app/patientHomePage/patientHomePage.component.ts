@@ -49,36 +49,7 @@ export class PatientHomePageComponent implements OnInit {
         
     }
 
-    public  examinationRequest(form: NgForm){
-        this.examinationDate = form.value.examinationDate;
-        this.selectedType = form.value.selectedType;
-        const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
-        this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
-                this.clinics = response
-        });
-    }
-
-    public  examinationRequestForClinic(clinic: Clinic, date:Date, type: string){
-        const requestExamination = new RequestExamination(clinic.clinicId, this.examinationDate, this.selectedType);
-        this.data.GetFreeExaminationAndDoctorByClinic(requestExamination).subscribe(response => { 
-                this.DoctorsFreeExaminations = response
-        });
-        
-    }
-
-    public NewExamination(doctor: User, date:Date){
-        var userId = doctor.employeeId;
-        var d = new Date(localStorage.getItem('date'));
-        const examination = new NewExamination(date, userId, this.id, this.selectedType);
-        this.data.AddExamination(examination).subscribe( response =>{
-            if(response) {
-                alert('Your examination request has been recieved. Please check your email');
-                window.location.reload();
-            } else {
-                alert('error');
-            }
-            
-        });
-        
+    MyExaminations(){
+        this.router.navigate(["/searchExaminations"]);
     }
 }

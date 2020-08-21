@@ -18,7 +18,6 @@ import { UserProfileComponent } from './userProfile/userProfile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MaterialModule } from './material.module';
-import { ExaminationComponent } from './examinations/examination.component';
 import { AddRoomComponent } from './addRoom/addRoom.component';
 import { AddClinicComponent } from './addClinic/addClinic.component';
 import { AddDoctorComponent } from './addDoctor/addDoctor.component.';
@@ -38,7 +37,11 @@ import { MatDialogModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import {  BookExaminationPageComponent } from './bookExaminationPage/bookExaminationPage.component';
+
+import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
+import { ExaminationViewComponent }from './examinationView/examinationView.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+
 
 const route = [
   { path: '', component: LoginComponent},
@@ -58,19 +61,21 @@ const route = [
 
   { path: 'updateProfile', component: UpdateProfileComponent},
   { path: 'userProfile', component: UserProfileComponent},
-  { path: 'examinations', component: ExaminationComponent},
+  
   
   { path: 'searchClinics', component: SearchClinicsComponent },
   {path: 'searchRooms', component: SearchRoomsComponent},
   {path: 'searchDoctors', component: SearchDoctorsComponent},
   { path: 'searchPatients', component: SearchPatientsComponent},
+  { path: 'searchExaminations', component: SearchExaminationsComponent},
   { path: 'editRoom', component: EditRoomComponent},
 
   { path: 'priceList', component: PriceListComponent },
   { path: 'priceEdit', component: PriceEditComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
 
-  {path: 'bookExaminationPage', component: BookExaminationPageComponent}
+  {path: 'bookExaminationPage', component: BookExaminationPageComponent},
+  {path: 'examinationView', component: ExaminationViewComponent}
 
 ];
 
@@ -91,7 +96,6 @@ const route = [
     DoctorHomePageComponent,
     PatientHomePageComponent,
     UpdateProfileComponent,
-    ExaminationComponent,
     SearchClinicsComponent,
     UserProfileComponent,
     PriceListComponent,
@@ -102,6 +106,8 @@ const route = [
     SearchDoctorsComponent,
     SearchPatientsComponent,
     BookExaminationPageComponent,
+    SearchExaminationsComponent,
+    ExaminationViewComponent,
   ],
   imports: [
     BrowserModule,
