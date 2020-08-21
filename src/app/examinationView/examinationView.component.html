@@ -38,8 +38,8 @@
                     <h4>Clinic Info</h4><br>
                     <label>Name: </label> {{clinic.name}}<br>
                     <label>Address: </label> {{clinic.address}}<br>
-                    <!-- <label>Average Mark: </label> {{cilnic.averageMark}}<br>
-                     -->
+                    <label>Average Mark: </label> {{clinic.averageMark}}<br>
+                    
                     <button class="btn btn-primary m-1" [hidden]="!clinicReviewFormHidden" (click)=OpenClinicReviewForm()>Leave Review</button>
                     <form [formGroup]="clinicReviewForm" (ngSubmit)="SubmitClinicReview()" [hidden]=clinicReviewFormHidden>
                             <div class="form-group">

@@ -78,8 +78,8 @@ export class DataService {
     public AddClinic(clinic: Clinic) {
         return this.http.post(environment.webApiBaseUrl + 'Clinic/AddClinic', clinic);
     }
-    public DeleteEmployee(doctorId: string) {
-        return this.http.post(environment.webApiBaseUrl + 'User/DeleteEmployee', doctorId);
+    public DeleteEmployee(employee: User) {
+        return this.http.post(environment.webApiBaseUrl + 'User/DeleteEmployee', employee);
     }
 
     public GetUserById(id: string): Observable<User[]>{
