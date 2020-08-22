@@ -69,7 +69,8 @@ export class UpdateProfileComponent implements OnInit{
             this.registerForm.value.state,
             this.user.userRole,
             this.user.clinicId,
-            this.user.specialization
+            this.user.specialization,
+            0
         )
         
         if(this.userRole == "Patient"){

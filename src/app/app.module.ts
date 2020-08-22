@@ -81,7 +81,7 @@ const route = [
   {path: 'changePassword', component: ChangePasswordComponent},
 
   {path: 'bookExaminationPage', component: BookExaminationPageComponent},
-  {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent}
+  {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
 
   {path: 'examinationView', component: ExaminationViewComponent}
 
@@ -115,7 +115,7 @@ const route = [
     SearchDoctorsComponent,
     SearchPatientsComponent,
     BookExaminationPageComponent,
-    AddPredefinitionExaminationComponent
+    AddPredefinitionExaminationComponent,
     SearchExaminationsComponent,
     ExaminationViewComponent,
 
@@ -138,7 +138,7 @@ const route = [
     Ng2SearchPipeModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule, 
-    NgxMatNativeDateModule
+    NgxMatNativeDateModule,
     Ng2SearchPipeModule,
     NgxDaterangepickerMd.forRoot()
   ],

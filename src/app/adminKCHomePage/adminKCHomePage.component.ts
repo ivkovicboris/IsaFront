@@ -32,6 +32,7 @@ export class AdminKCHomePageComponent {
     public doctorsVacations: Array<VacationRequestShow> = new Array<VacationRequestShow>();
     public v:VacationRequestShow;
     public reasone:string;
+    receivers: string[];
 
     constructor(private data: DataService, private router: Router) {}
 
@@ -54,12 +55,13 @@ export class AdminKCHomePageComponent {
 
 
     Accept(email: any){
-       
+        this.receivers = new Array<string>();
+        this.receivers.push(email);
         const mail = new Mail
         (
             "HOSPITAL ISA - registration ACCEPTED",
             "",
-            email,
+            this.receivers,
             "Your registration request has been accepted. Activate your account by visiting this link:" + "http://localhost:4200/"
         );
         this.data.AcceptPatientRegisterRequest(mail).subscribe( response => {
@@ -73,12 +75,13 @@ export class AdminKCHomePageComponent {
     }
 
     Deny(email: any){
-        
+        this.receivers = new Array<string>();
+        this.receivers.push(email);
         const mail = new Mail
         (
             "HOSPITAL ISA - registration DENIED",
             "",
-            email,
+            this.receivers,
             "Your registration request has been denied!"
             
             
@@ -94,12 +97,13 @@ export class AdminKCHomePageComponent {
     }
 
     AcceptVocation(email: any){
-       
+        this.receivers = new Array<string>();
+        this.receivers.push(email)
         const mail = new Mail
         (
             "HOSPITAL ISA - vocation ACCEPTED",
             "",
-            email,
+            this.receivers,
             "Your vocation request has been accepted."
         );
         this.data.AcceptVacationRequests(mail).subscribe( response => {
@@ -113,12 +117,13 @@ export class AdminKCHomePageComponent {
     }
 
     DenyVocation(email: any){
-        
+        this.receivers = new Array<string>();
+        this.receivers.push(email)
         const mail = new Mail
         (
             "HOSPITAL ISA - vocation DENIED",
             "",
-            email,
+            this.receivers,
             this.reasone
             
             

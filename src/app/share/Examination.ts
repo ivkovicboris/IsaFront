@@ -2,7 +2,7 @@
 export class Examination
 {
     examinationId: string;
-    date:Date;
+    dateTime:Date;
     roomId:string;
     doctorId: string;
     patientId:string;

@@ -39,7 +39,8 @@ export class AddDoctorComponent {
             city: [''],
             state: [''],
             clinicID: [''],
-            specialization: ['', [Validators.required]]
+            specialization: ['', [Validators.required]],
+            shift:['', [Validators.required]]
             
         });
         const token = localStorage.getItem('token');
@@ -77,7 +78,8 @@ export class AddDoctorComponent {
             this.registerForm.value.state,
             "Doctor",
             this.selectedSpecialization,
-            this.clinic.clinicId
+            this.clinic.clinicId,
+            this.registerForm.value.shift
         )
        
         

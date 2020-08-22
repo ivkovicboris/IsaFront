@@ -62,7 +62,8 @@ export class RegisterPatientComponent implements OnInit{
             this.registerForm.value.state,
             "Patient",
             "",
-            ""
+            "",
+            0
         )
         this.data.Register(user).subscribe(response =>
         {

@@ -12,6 +12,7 @@ export class RegisterUser
     userRole: string;
     specialization:string;
     clinicId:string;
+    am:number;
     
    
     constructor
@@ -27,7 +28,8 @@ export class RegisterUser
         state:string,
         userRole: string,
         specialization:string,
-        clinicId:string
+        clinicId:string,
+        am:number
     ){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,6 +43,7 @@ export class RegisterUser
         this.userRole = userRole;
         this.specialization = specialization;
         this.clinicId = clinicId;
+        this.am=am;
         
     }
 }
