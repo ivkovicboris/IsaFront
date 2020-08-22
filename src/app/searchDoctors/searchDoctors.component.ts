@@ -143,7 +143,7 @@ export class SearchDoctorsComponent implements OnInit {
     }
 
     RemoveDoctor(doctor: User){
-        this.data.DeleteEmployee(doctor.employeeId).subscribe (response => {
+        this.data.DeleteEmployee(doctor).subscribe (response => {
           if(response){
             alert("Doctor successfully removed from clinic!")
           } else {

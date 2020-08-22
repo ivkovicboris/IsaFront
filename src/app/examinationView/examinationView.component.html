@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2>Examination Information</h2>
+            <!-- Icon -->
+                <div class="form-group">
+                    <h4 >Examination</h4><br>
+                    <label>Date and Time: </label> {{examination.dateTime | date:'medium'}}<br>
+                    <label>Type: </label> {{examination.type}}<br>
+                    <label>Price: </label> {{examination.price}}
+                </div>
+                <div class="form-group" >
+                    <h4>Doctor Info</h4><br>
+                    <label>Name: </label> {{doctor.firstName}} {{doctor.LastName}}<br>
+                    <label>Email: </label>  {{doctor.email}}<br>
+                    <label>Average Mark:</label> {{doctor.averageMark}}<br>
+                    
+                    <button class="btn btn-primary m-1" [hidden]="!doctorReviewFormHidden" (click)=OpenDoctorReviewForm()>Leave Review</button>
+                    <form [formGroup]="doctorReviewForm" (ngSubmit)="SubmitDoctorReview()" [hidden]=doctorReviewFormHidden>
+                            <div class="form-group">
+                                <div class="rating">
+                                     <input type="radio" class="form-control" name="ratingDoctor" [value]="5" id="5" formControlName="ratingDoctor"><label for="5">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingDoctor" [value]="4" id="4" formControlName="ratingDoctor"><label for="4">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingDoctor" [value]="3" id="3" formControlName="ratingDoctor"><label for="3">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingDoctor" [value]="2" id="2" formControlName="ratingDoctor"><label for="2">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingDoctor" [value]="1" id="1" formControlName="ratingDoctor"><label for="1">☆</label>
+                                </div>
+                                    <textarea  class="form-control" rows="3" placeholder="Leave a comment about doctor" formControlName="commentDoctor"></textarea>
+                            </div>
+                          <div class="text-center">
+                              <button class="btn btn-success mr-1">Submit</button>
+                              <button class="btn btn-secondary" (click)="CancelDoctorReview()">Cancel</button>
+                          </div><br>
+                      </form>
+                </div>
+                <div class="form-group">
+                    <h4>Clinic Info</h4><br>
+                    <label>Name: </label> {{clinic.name}}<br>
+                    <label>Address: </label> {{clinic.address}}<br>
+                    <label>Average Mark: </label> {{clinic.averageMark}}<br>
+                    
+                    <button class="btn btn-primary m-1" [hidden]="!clinicReviewFormHidden" (click)=OpenClinicReviewForm()>Leave Review</button>
+                    <form [formGroup]="clinicReviewForm" (ngSubmit)="SubmitClinicReview()" [hidden]=clinicReviewFormHidden>
+                            <div class="form-group">
+                                <div class="rating">
+                                     <input type="radio" class="form-control" name="ratingClinic" [value]="5" id="c5" formControlName="ratingClinic"><label for="c5">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingClinic" [value]="4" id="c4" formControlName="ratingClinic"><label for="c4">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingClinic" [value]="3" id="c3" formControlName="ratingClinic"><label for="c3">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingClinic" [value]="2" id="c2" formControlName="ratingClinic"><label for="c2">☆</label> 
+                                     <input type="radio" class="form-control" name="ratingClinic" [value]="1" id="c1" formControlName="ratingClinic"><label for="c1">☆</label>
+                                </div>
+                                    <textarea  class="form-control" rows="3" placeholder="How satisfied were you with our clinic?"  formControlName="commentClinic"></textarea>
+                            </div>
+                          <div class="text-center">
+                              <button class="btn btn-success mr-1">Submit</button>
+                              <button class="btn btn-secondary" (click)="CancelClinicReview()">Cancel</button>
+                          </div><br>
+                      </form>
+                </div>
+    </div>
+</div>

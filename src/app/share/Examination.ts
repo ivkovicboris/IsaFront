@@ -1,14 +1,15 @@
+
 export class Examination
 {
     examinationId: string;
-    dateTime:Date;
+    date:Date;
     roomId:string;
     doctorId: string;
     patientId:string;
     //status:string;
     type:string;
     price:number;
-
+    
     constructor(
         examinationId: string,
         date:Date,
@@ -24,7 +25,6 @@ export class Examination
         this.roomId=roomId;
         this.doctorId = doctorId;
         this.patientId = patientId;
-        //this.status = status;
         this.type = type;
         this.price= price;
     }

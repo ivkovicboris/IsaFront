@@ -6,6 +6,9 @@ import { RegisterUser } from '../share/RegisterUser';
 import { Mail } from "../share/Mail";
 import { empty } from 'rxjs';
 import { Clinic } from '../share/Clinic';
+import { Vacation } from '../share/Vacation';
+import { element } from 'protractor';
+import { VacationRequestShow } from '../share/VacatioRequestShow';
 
 
 @Component({
@@ -22,7 +25,13 @@ export class AdminKCHomePageComponent {
     public mail:any;
     public accepted:boolean;
     public clinics:any;
-    public clinic: Clinic
+    public clinic: Clinic;
+    public vacations: any;
+    public doctors: any;
+    public doctor:any;
+    public doctorsVacations: Array<VacationRequestShow> = new Array<VacationRequestShow>();
+    public v:VacationRequestShow;
+    public reasone:string;
 
     constructor(private data: DataService, private router: Router) {}
 
@@ -31,7 +40,18 @@ export class AdminKCHomePageComponent {
         this.data.GetRegisterRequests().subscribe( response => {
             this.users = response.sort();
         });
+        this.data.GetVacationRequests().subscribe( vacations => {
+            vacations.forEach(x => {
+                this.data.GetUserById(x.doctorId).subscribe(y => {
+                    this.doctor= y; 
+                    this.v = new VacationRequestShow(x,this.doctor);
+                    this.doctorsVacations.push(this.v);
+                })
+                
+            });
+        });
     }
+
 
     Accept(email: any){
        
@@ -70,6 +90,46 @@ export class AdminKCHomePageComponent {
                 alert('Something went wrong :(');
             }
             this.ngOnInit();
+        });
+    }
+
+    AcceptVocation(email: any){
+       
+        const mail = new Mail
+        (
+            "HOSPITAL ISA - vocation ACCEPTED",
+            "",
+            email,
+            "Your vocation request has been accepted."
+        );
+        this.data.AcceptVacationRequests(mail).subscribe( response => {
+            if(response){
+                alert('Vocation request has been ACCEPTED.');
+            }else {
+                alert('Something went wrong :(');
+            }
+            window.location.reload();
+        });   
+    }
+
+    DenyVocation(email: any){
+        
+        const mail = new Mail
+        (
+            "HOSPITAL ISA - vocation DENIED",
+            "",
+            email,
+            this.reasone
+            
+            
+        );
+        this.data.DenyVacationRequests(mail).subscribe( response => {
+            if(response){
+                alert('vocation request has been DENIED.');
+            }else {
+                alert('Something went wrong :(');
+            }
+            window.location.reload();
         });
     }
     GetUsers(){

@@ -54,7 +54,7 @@ export class BookExaminationPageComponent implements OnInit {
             const examination = new NewExamination(this.examinationDate, this.doctorId, this.patientId, this.examinationType);
             this.data.AddExamination(examination).subscribe( response =>{
                 if(!response) {
-                    alert('Your session has expired, please log in again!');
+                    alert('Your session has expired, please log in again!'); //VREME ZADRZAVANAJ PREGLEDA ZA PACIJENTA(drzi bukiranim tipa 3 min)
                     localStorage.clear();
                     this.router.navigate(["/login"])
                 } else {
