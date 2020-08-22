@@ -24,6 +24,9 @@ export class ExaminationViewComponent implements OnInit {
     clinicReviewFormHidden = true;
     doctorReviewForm: FormGroup;
     clinicReviewForm: FormGroup;
+    isAdminClinic = false; 
+    adminId: any;
+    patient: User[];
     
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
 
@@ -39,7 +42,11 @@ export class ExaminationViewComponent implements OnInit {
         
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        this.patientId = decodeToken.jti;
+        this.adminId = decodeToken.jti;
+
+        if(decodeToken.Role=="ClinicAdmin"){
+            this.isAdminClinic = true;
+        }
         this.examinationId = localStorage.getItem('examinationId');
 
         this.data.GetExaminationById(this.examinationId).subscribe ( response => {
@@ -50,7 +57,14 @@ export class ExaminationViewComponent implements OnInit {
             this.data.GetUserById(this.examination.doctorId).subscribe(response => {
                 this.doctor=response;
             });
+            this.data.GetUserById(this.examination.patientId).subscribe(response => {
+                this.patient = response;
+            })
         });
+
+        if(decodeToken.Role=="ClinicAdmin"){
+            this.isAdminClinic = true;
+        }
         
     }
 
@@ -71,7 +85,6 @@ export class ExaminationViewComponent implements OnInit {
         })
             
     }
-
     CancelDoctorReview(){
         this.doctorReviewFormHidden=true;
     }
@@ -90,7 +103,6 @@ export class ExaminationViewComponent implements OnInit {
         })
 
     }
-
     OpenClinicReviewForm(){
         this.data.CheckIfAlreadyReviewed(this.patientId,this.clinic.clinicId).subscribe ( response => {
            if(!response){
@@ -107,13 +119,9 @@ export class ExaminationViewComponent implements OnInit {
         })
           
     }
-
     CancelClinicReview(){
         this.clinicReviewFormHidden=true;
     }
-
-    
-
     SubmitClinicReview(){
         var clinicReview = new Review (
             this.patientId, 
@@ -128,5 +136,15 @@ export class ExaminationViewComponent implements OnInit {
                 this.router.navigate(["/searchExaminations"])
             }
         })
+    }
+    ShowPatientProfile(){
+        localStorage.setItem('alienProfile',"true");
+        localStorage.setItem('showUserId', this.examination.patientId)
+        this.router.navigate(["/userProfile"]);
+    }
+    ShowDoctorProfile(){
+        localStorage.setItem('alienProfile',"true");
+        localStorage.setItem('showUserId', this.examination.doctorId)
+        this.router.navigate(["/userProfile"]);
     }
 }

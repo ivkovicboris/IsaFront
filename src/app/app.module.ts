@@ -41,6 +41,7 @@ import {  BookExaminationPageComponent } from './bookExaminationPage/bookExamina
 import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
 import { ExaminationViewComponent }from './examinationView/examinationView.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { BusinessStatisticsComponent } from './bussinesStatistics/businessStatistics.component';
 
 
 const route = [
@@ -75,7 +76,8 @@ const route = [
   {path: 'changePassword', component: ChangePasswordComponent},
 
   {path: 'bookExaminationPage', component: BookExaminationPageComponent},
-  {path: 'examinationView', component: ExaminationViewComponent}
+  {path: 'examinationView', component: ExaminationViewComponent},
+  {path: 'businessStatistics', component: BusinessStatisticsComponent}
 
 ];
 
@@ -108,6 +110,7 @@ const route = [
     BookExaminationPageComponent,
     SearchExaminationsComponent,
     ExaminationViewComponent,
+    BusinessStatisticsComponent,
   ],
   imports: [
     BrowserModule,
