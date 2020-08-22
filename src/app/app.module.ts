@@ -34,10 +34,16 @@ import { EditRoomComponent } from './editRoom/editRoom.component';
 import { PriceListComponent } from './priceList/priceList.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
 
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatDatepickerModule, MatInputModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import {  BookExaminationPageComponent } from './bookExaminationPage/bookExaminationPage.component';
+import { AddPredefinitionExaminationComponent } from './addPredefinitionExamination/addPredefinitionExamination.component';
+
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+
+
+
 
 const route = [
   { path: '', component: LoginComponent},
@@ -69,7 +75,9 @@ const route = [
   { path: 'priceEdit', component: PriceEditComponent},
   {path: 'changePassword', component: ChangePasswordComponent},
 
-  {path: 'bookExaminationPage', component: BookExaminationPageComponent}
+  {path: 'bookExaminationPage', component: BookExaminationPageComponent},
+  {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent}
+
 
 ];
 
@@ -101,6 +109,7 @@ const route = [
     SearchDoctorsComponent,
     SearchPatientsComponent,
     BookExaminationPageComponent,
+    AddPredefinitionExaminationComponent
   ],
   imports: [
     BrowserModule,
@@ -112,10 +121,15 @@ const route = [
     ),
     BrowserAnimationsModule,
     MaterialModule,
+    MatDatepickerModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatDialogModule,
-    Ng2SearchPipeModule 
+    MatInputModule,
+    Ng2SearchPipeModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule, 
+    NgxMatNativeDateModule
   ],
   providers: [DatePipe,
     DataService,

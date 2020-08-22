@@ -1,16 +1,31 @@
-import { User } from '../share/User';
-import { Clinic } from './Clinic';
-
 export class Examination
 {
-    doctor: User;
-    freeExaminations: Array<Date>;
+    examinationId: string;
+    dateTime:Date;
+    roomId:string;
+    doctorId: string;
+    patientId:string;
+    //status:string;
+    type:string;
+    price:number;
 
     constructor(
-        doctor: User,
-        freeExaminations: Array<Date>
+        examinationId: string,
+        date:Date,
+        roomId:string,
+        doctorId: string,
+        patientId:string,
+        //status:string,
+        type:string,
+        price:number,
     ){
-        this.doctor = doctor;
-        this.freeExaminations = freeExaminations;
+        this.examinationId = examinationId;
+        this.dateTime = date;
+        this.roomId=roomId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        //this.status = status;
+        this.type = type;
+        this.price= price;
     }
 }

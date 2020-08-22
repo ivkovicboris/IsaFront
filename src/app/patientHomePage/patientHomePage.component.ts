@@ -20,6 +20,7 @@ export class PatientHomePageComponent implements OnInit {
     public clinics:any;
     public DoctorsFreeExaminations: any;
     public id: any;
+    public preDefExaminations:any;
     public items: Examination[];
     public examinationDate: Date;
     public selectedType: string;
@@ -45,8 +46,10 @@ export class PatientHomePageComponent implements OnInit {
         this.id = decodeToken.jti;
         this.data.GetAllClinics().subscribe( response => {
             this.clinics = response;
+            this.data.GetPreDefinitionExamination().subscribe( response => {
+                this.preDefExaminations = response;
         });
-        
+    });
     }
 
     public  examinationRequest(form: NgForm){
@@ -81,4 +84,20 @@ export class PatientHomePageComponent implements OnInit {
         });
         
     }
+
+    public AcceptPreDefinitionExamination(preDefinitionExamination: Examination){
+        preDefinitionExamination.patientId = this.id;
+        this.data.AcceptPreDefinitionExamination(preDefinitionExamination).subscribe( response =>{
+            if(response) {
+                alert('Your examination request has been recieved. Please check your email');
+                window.location.reload();
+            } else {
+                alert('error');
+            }
+            
+        });
+        
+    }
+
+
 }

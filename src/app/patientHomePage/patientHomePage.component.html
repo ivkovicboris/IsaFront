@@ -2,3 +2,23 @@
 <button routerLink="/searchClinics">Search Clinics</button>
 <button>My Medical Record ***</button>
 <button> My examinations ***</button>
+
+<table class="table table-hover sortable"  >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Specialization</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr *ngFor="let preDefExamination of preDefExaminations | filter:term; let i = index " >
+    <td scope="row" >{{i+1}}</td>
+    <td class="vertical-center">{{preDefExamination.dateTime}}</td>
+    <td class="vertical-center">{{preDefExamination.type}}</td>
+    <td>
+      <button class="btn btn-success mr-3"(click)="AcceptPreDefinitionExamination(preDefExamination)" >Book</button>  
+    </td>
+</tr>
+</tbody>
+</table>
