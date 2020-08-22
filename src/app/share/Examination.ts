@@ -1,6 +1,3 @@
-import { User } from '../share/User';
-import { Clinic } from './Clinic';
-
 
 export class Examination
 {
@@ -9,9 +6,9 @@ export class Examination
     roomId:string;
     doctorId: string;
     patientId:string;
-    status:string;
+    //status:string;
     type:string;
-    price:string;
+    price:number;
     
     constructor(
         examinationId: string,
@@ -19,16 +16,15 @@ export class Examination
         roomId:string,
         doctorId: string,
         patientId:string,
-        status:string,
+        //status:string,
         type:string,
-        price:string,
+        price:number,
     ){
         this.examinationId = examinationId;
-        this.date = date;
+        this.dateTime = date;
         this.roomId=roomId;
         this.doctorId = doctorId;
         this.patientId = patientId;
-        this.status = status;
         this.type = type;
         this.price= price;
     }
