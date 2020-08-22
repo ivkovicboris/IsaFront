@@ -220,7 +220,7 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination);
     }
 
-    public AcceptPreDefinitionExamination(examination: NewExamination){
+    public AcceptPreDefinitionExamination(examination: Examination){
         return this.http.post(environment.webApiBaseUrl + 'Examination/AcceptPreDefinitionExamination', examination);
     }
 

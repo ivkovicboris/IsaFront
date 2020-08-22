@@ -15,6 +15,7 @@ export class User
     specialization:string;
     employeeId:string;
     examinations:any
+    am:number;
 
     constructor
     (
@@ -32,7 +33,8 @@ export class User
         state:string,
         specialization:string,
         employeeId:string,
-        examinations:any[]
+        examinations:any[],
+        am:number
 
     ){
         this.firstName = firstName;
@@ -48,6 +50,7 @@ export class User
         this.state = state;
         this.specialization = specialization;
         this.employeeId = employeeId;
+        this.am = am;
 
     }
 }
