@@ -56,6 +56,13 @@ export class PatientHomePageComponent implements OnInit {
         this.router.navigate(["/searchExaminations"]);
     }
 
+    MyProfile()
+    {
+        localStorage.setItem('alienProfile', "false")
+        this.router.navigate(["/userProfile"])
+    }
+
+
     public AcceptPreDefinitionExamination(preDefinitionExamination: Examination){
         preDefinitionExamination.patientId = this.id;
         this.data.AcceptPreDefinitionExamination(preDefinitionExamination).subscribe( response =>{
@@ -69,6 +76,7 @@ export class PatientHomePageComponent implements OnInit {
         });
         
     }
+
 
 
 }

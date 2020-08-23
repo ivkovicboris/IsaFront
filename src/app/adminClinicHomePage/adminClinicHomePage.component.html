@@ -1,16 +1,11 @@
-<button routerLink="/userProfile">My profile</button><br>
+<button (click)="MyProfile()">My profile</button><br>
 <button routerLink="/addDoctor"> Add Doctor</button>
 <button (click)="ShowDoctors()">All Doctors</button><br>
 <button routerLink="/addRoom"> Add Room</button>
 <button (click)="SearchRooms()">All Rooms</button><br>
+
+<button routerLink="/businessStatistics">Bussines statistics</button>
 <button routerLink="/addPredefinitionExamination"> Add Predefinition Examination</button>
-<button>Bussines statistics</button> ● prosečnu ocenu klinike,
-● prosečnu ocenu svakog lekara,
-● prikaz grafika održanih pregleda na dnevnom, nedeljnom i mesečnom
-nivou,
-● prihode klinike u određenom vremenskom periodu.
-
-
 <button routerLink="/priceList">Edit Price List</button>
 
 <div class="wrapper fadeInDown">
@@ -30,7 +25,7 @@ nivou,
               <td class="vertical-center">{{examination.dateTime | date:'medium'}}</td>
               <td>
                 <button initial class="btn btn-success mr-2" (click)="BookRoom(examination.dateTime,examination.id)">Choose Room</button>
-                <button initial class="btn btn-danger" (click)="Deny(examination.id)">Deny</button>
+                <!-- <button initial class="btn btn-danger" (click)="Deny(examination.id)">Deny</button> -->
               </td>
           </tr>
 

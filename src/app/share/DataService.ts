@@ -247,4 +247,16 @@ export class DataService {
             responseType: 'json'
         });
     }
+
+    public GetAllFinishedExaminationsByClinic(clinicId:string): Observable<any>{
+        return this.http.get<any>(environment.webApiBaseUrl + 'Examination/GetAllFinishedExaminationsByClinic/'+ clinicId, {
+            responseType: 'json'
+        });
+    }
+
+    public GetAllReviewsFromClinic(clinicId: string): Observable<any>{
+        return this.http.get<any>(environment.webApiBaseUrl + 'Clinic/GetAllReviewsFromClinic/'+ clinicId, {
+            responseType: 'json'
+        });
+    }
 }

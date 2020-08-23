@@ -40,13 +40,14 @@ export class PriceListComponent implements OnInit {
 
         this.data.GetClinicByAdminId(this.id).subscribe( response => {
           this.clinic = response;
+          this.data.GetPriceList(this.clinic.clinicId).subscribe ( response =>{
+            this.priceList = response;
+          });
         });
         this.data.GetAllSpecializations().subscribe( response => {
             this.specializations = response;
         });
-        this.data.GetPriceList(this.id).subscribe ( response =>{
-            this.priceList = response;
-        });
+        
 
         
         var s = this.specializations;

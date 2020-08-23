@@ -1,0 +1,31 @@
+<div class="wrapper fadeInDown">
+        <div id="formContent"> 
+          <h2>{{this.clinic.name}} Reviews</h2>
+          <div class="form-group">
+              <label style="font-size: 25px">Average Clinic Mark: {{clinic.averageMark}} ☆ </label><br>
+          </div>
+
+          <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Patient Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
+                    <th scope="col">Stars<i id="arrow" (click)="sortAsc('mark')">▼</i><span id="arrow" (click)="sortDesc('mark')">▲</span></th>
+                    <th scope="col">Comment<i id="arrow" (click)="sortAsc('comment')">▼</i><span id="arrow" (click)="sortDesc('comment')">▲</span></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let review of reviews | filter:termExaminations; let i =index" >
+                      <td scope="row">{{i+1}}</td>
+                      <td class="vertical-center">Patient Name</td>
+                      <td class="vertical-center">{{review.mark}}</td>
+                      <td class="vertical-center">{{review.comment}} </td>  
+                      
+                                  
+                    </tr>
+                </tbody>
+              </table>
+
+            </div>
+        </div>

@@ -1,0 +1,58 @@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent"> 
+      <h2>{{clinic.name}} Bussines Statistics</h2>
+      <div class="form-group">
+          <label style="font-size: 25px">Average Clinic Mark: {{clinic.averageMark}} ☆ </label><br><a class="underlineHover" href="/allReviews">Show All Reviews</a>
+      </div>
+      <div>
+        <button class="btn btn-secondary" routerLink="/searchDoctors">Show All Doctors</button>
+      </div>
+        <h2>Financial Statistics</h2><br>
+        <label>Choose period</label> 
+        <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px" >
+          <mat-label>Select year</mat-label>
+          <mat-select [(ngModel)]="selectedYear" name="selectedYear" (selectionChange)="FilterDatePeriod(selectedYear,selectedMonth)">
+              <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px">
+        <mat-label>Select month</mat-label>
+        <mat-select [(ngModel)]="selectedMonth" name="month" (selectionChange)="FilterDatePeriod(selectedYear,selectedMonth)">
+            <option value="" selected></option>
+            <mat-option *ngFor="let month of months" [value]="month.number" >
+            {{month.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button class="btn btn-secondary" style="margin:0px 0px 0px 20px" (click)="ngOnInit()"> Clear</button>
+        
+    <br><label>Total Income for selected period: </label> {{totalIncome}} rsd
+            <div style="margin: 0px 15px 5px 0px; width: 200px;">
+                <input type="text" class="form-control" placeholder="Filter Examinations" [(ngModel)]="termExaminations"> 
+            </div>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Examination Date<i id="arrow" (click)="sortAsc('dateTime')">▼</i><span id="arrow" (click)="sortDesc('dateTime')">▲</span></th>
+                    <th scope="col">Examination Type<i id="arrow" (click)="sortAsc('type')">▼</i><span id="arrow" (click)="sortDesc('type')">▲</span></th>
+                    <th scope="col">Examination Charged Price<i id="arrow" (click)="sortAsc('price')">▼</i><span id="arrow" (click)="sortDesc('price')">▲</span></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let examination of examinations | filter:termExaminations; let i =index" (click)="ShowExaminationInfo(examination.id)">
+                      <td scope="row">{{i+1}}</td>
+                      <td class="vertical-center">{{examination.dateTime | date:'medium'}}</td>
+                      <td class="vertical-center">{{examination.type}}</td>
+                      <td class="vertical-center">{{examination.price}} rsd</td>              
+                    </tr>
+                </tbody>
+              </table>
+    </div>
+</div>
+
+ 

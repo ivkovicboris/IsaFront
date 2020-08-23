@@ -47,6 +47,8 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
 import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
 import { ExaminationViewComponent }from './examinationView/examinationView.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { BusinessStatisticsComponent } from './bussinesStatistics/businessStatistics.component';
+import { AllReviewsComponent } from './allReviews/allReviews.component';
 
 
 const route = [
@@ -81,9 +83,15 @@ const route = [
   {path: 'changePassword', component: ChangePasswordComponent},
 
   {path: 'bookExaminationPage', component: BookExaminationPageComponent},
+
+  {path: 'examinationView', component: ExaminationViewComponent},
+  {path: 'businessStatistics', component: BusinessStatisticsComponent},
+  {path: 'allReviews', component: AllReviewsComponent}
+
   {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
 
   {path: 'examinationView', component: ExaminationViewComponent}
+
 
 
 ];
@@ -118,6 +126,9 @@ const route = [
     AddPredefinitionExaminationComponent,
     SearchExaminationsComponent,
     ExaminationViewComponent,
+
+    BusinessStatisticsComponent,
+    AllReviewsComponent,
 
   ],
   imports: [

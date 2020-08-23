@@ -13,25 +13,45 @@ import * as jwt_decode from "jwt-decode";
 })
 export class UserProfileComponent implements OnInit {
 
-    public id: any;
+    public userId: any;
     public error = true;
     public user: any;
-    
+    isAlienUser = false;
+    patientId: string;
+    isPatient = false;
+    userRole: any;
     constructor(private data: DataService, private router: Router) {}
 
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        this.id = decodeToken.jti;
-        this.data.GetUserById(this.id).subscribe( response => {
+        this.userId = decodeToken.jti;
+        this.userRole=decodeToken.Role;
+        if(localStorage.getItem('alienProfile')=="true")
+            if( this.userRole=="ClinicAdmin"){
+                this.isAlienUser=true;
+                this.userId = localStorage.getItem('showUserId');
+            } else if ( this.userRole=="Doctor"){
+                this.isAlienUser=true;
+                this.userId = localStorage.getItem('showUserId');
+            }else if( this.userRole=="Patient"){
+                this.isAlienUser=true;
+                this.isPatient=true;
+                this.userId = localStorage.getItem('showUserId');
+            }
+        
+        this.data.GetUserById(this.userId).subscribe( response => {
             this.user = response;
         });
     
     }
+
+    EditInformation(form) {
+        this.router.navigate(["/updateProfile"]);
+    }
     
-        EditInformation(form) {
-            this.router.navigate(["/updateProfile"]);
-        }
-    
+    ShowMedicalRecord(){
+        //this.router.navigate(["/medicalRecord"])
+    }
         
 }

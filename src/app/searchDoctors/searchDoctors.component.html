@@ -45,9 +45,9 @@
           <tbody>
             <tr *ngFor="let doctor of doctors | filter:term; let i = index " >
                 <td scope="row" >{{i+1}}</td>
-                <td class="vertical-center">{{doctor.doctor.firstName}}  {{doctor.doctor.lastName}}</td>
-                <td class="vertical-center">{{doctor.doctor.specialization}}</td>
-                <td class="vertical-center">{{doctor.doctor.averageMark}}</td>
+                <td class="vertical-center" (click)="showDoctor(doctor.doctor.employeeId)">{{doctor.doctor.firstName}}  {{doctor.doctor.lastName}}</td>
+                <td class="vertical-center" (click)="showDoctor(doctor.doctor.employeeId)">{{doctor.doctor.specialization}}</td>
+                <td class="vertical-center" (click)="showDoctor(doctor.doctor.employeeId)">{{doctor.doctor.averageMark}}</td>
                 <td class="vertical-center" [hidden]="adminClinicVisible" >
                     <mat-form-field appearance="fill">
                         <mat-label>Select Examination</mat-label>

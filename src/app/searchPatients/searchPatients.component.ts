@@ -46,7 +46,6 @@ export class SearchPatientsComponent implements OnInit {
 
     MyPatients(){
         this.patientsInClinic = this.patientsOfDoctor;
-        
     }
     AllPatients(){
         this.ngOnInit();
