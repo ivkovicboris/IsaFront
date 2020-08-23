@@ -18,6 +18,7 @@ import { NewExamination } from '../share/NewExamination';
 export class SearchExaminationsComponent implements OnInit {
     userId: any;
     examinations: any;
+    todayDate = new Date();
 
     constructor(private data: DataService,  private router: Router) {}
     ngOnInit() {
@@ -31,9 +32,13 @@ export class SearchExaminationsComponent implements OnInit {
 
     }
 
-    LeaveReview(examinationId:string){
-        localStorage.setItem('examinationId', examinationId);
+    LeaveReview(examination:Examination){
+      // if(examination.status!="2"){
+      //   alert("Cannot leave a review for an unfinished examinaiton!");
+      // } else {
+        localStorage.setItem('examinationId', examination["id"]);
         this.router.navigate(["/examinationView"]);
+      //}
     }
 
     sortAsc(colName:any){

@@ -52,4 +52,9 @@ export class PatientHomePageComponent implements OnInit {
     MyExaminations(){
         this.router.navigate(["/searchExaminations"]);
     }
+    MyProfile()
+    {
+        localStorage.setItem('alienProfile', "false")
+        this.router.navigate(["/userProfile"])
+    }
 }

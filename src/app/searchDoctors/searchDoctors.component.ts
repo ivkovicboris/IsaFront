@@ -151,5 +151,11 @@ export class SearchDoctorsComponent implements OnInit {
           }
         })
     }
+
+    showDoctor(doctorId:string){
+      localStorage.setItem('alienProfile',"true");
+      localStorage.setItem('showUserId', doctorId)
+      this.router.navigate(["/userProfile"])
+    }
    
 }

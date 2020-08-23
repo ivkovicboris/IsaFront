@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Route } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import { Vacation } from '../share/Vacation';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
@@ -23,7 +23,7 @@ export class DoctorHomePageComponent implements OnInit {
     public startDate: Date;
     public endDate: Date;
     
-    constructor(private data: DataService, private arouter: ActivatedRoute) {}
+    constructor(private data: DataService, private router: Router) {}
 
     ngOnInit() {
 
@@ -56,6 +56,11 @@ export class DoctorHomePageComponent implements OnInit {
         this.data.UpdateEmployee(this.user).subscribe(response => {
             location.reload();
         });
+    }
+
+    MyProfile(){
+        localStorage.setItem('alienProfile', "false")
+        this.router.navigate(["/userProfile"])
     }
 
 }

@@ -70,7 +70,7 @@ export class ExaminationViewComponent implements OnInit {
 
     OpenDoctorReviewForm(){
         
-        this.data.CheckIfAlreadyReviewed(this.patientId,this.examination.doctorId).subscribe ( response => {
+        this.data.CheckIfAlreadyReviewed(this.examination.patientId,this.examination.doctorId).subscribe ( response => {
             if(!response){
                 if(this.examination.status==2){
                     this.doctorReviewFormHidden = false;
@@ -90,7 +90,7 @@ export class ExaminationViewComponent implements OnInit {
     }
     SubmitDoctorReview(){
         var doctorReview = new Review (
-            this.patientId, 
+            this.examination.patientId, 
             this.doctorReviewForm.value.ratingDoctor,
             this.doctorReviewForm.value.commentDoctor, 
             this.examination.doctorId, 
@@ -104,7 +104,7 @@ export class ExaminationViewComponent implements OnInit {
 
     }
     OpenClinicReviewForm(){
-        this.data.CheckIfAlreadyReviewed(this.patientId,this.clinic.clinicId).subscribe ( response => {
+        this.data.CheckIfAlreadyReviewed(this.examination.patientId,this.clinic.clinicId).subscribe ( response => {
            if(!response){
                 if(this.examination.status==2){
                     this.clinicReviewFormHidden = false;
@@ -124,7 +124,7 @@ export class ExaminationViewComponent implements OnInit {
     }
     SubmitClinicReview(){
         var clinicReview = new Review (
-            this.patientId, 
+            this.examination.patientId, 
             this.clinicReviewForm.value.ratingClinic,
             this.clinicReviewForm.value.commentClinic, 
             this.clinic.clinicId 

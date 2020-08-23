@@ -1,7 +1,7 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <h2>My Examinations</h2>
+        <h2>Examinations</h2>
         <div style="margin: 0px 15px 5px 0px; width: 200px;">
             <input type="text" class="form-control" placeholder="Filter Examinations" [(ngModel)]="term"> 
         </div>
@@ -22,7 +22,7 @@
                   <td class="vertical-center">{{examination.type}}</td>
                   <td class="vertical-center">{{examination.price}}</td>
                   <td class="vertical-center">
-                      <button class="btn btn-secondary" (click)="LeaveReview(examination.id)">Leave a Review</button>
+                      <button class="btn btn-secondary" (click)="LeaveReview(examination)">Leave a Review</button>
                   </td>                  
                 </tr>
             </tbody>

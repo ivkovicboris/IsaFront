@@ -16,25 +16,26 @@ export class UserProfileComponent implements OnInit {
     public userId: any;
     public error = true;
     public user: any;
-    isAdminClinic = false;
-    isDoctor = false;
-    isPatient = false;
+    isAlienUser = false;
     patientId: string;
+    isPatient = false;
+    userRole: any;
     constructor(private data: DataService, private router: Router) {}
 
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.userId = decodeToken.jti;
-       
+        this.userRole=decodeToken.Role;
         if(localStorage.getItem('alienProfile')=="true")
-            if(decodeToken.Role=="ClinicAdmin"){
-                this.isAdminClinic=true;
+            if( this.userRole=="ClinicAdmin"){
+                this.isAlienUser=true;
                 this.userId = localStorage.getItem('showUserId');
-            } else if (decodeToken.Role=="Doctor"){
-                this.isDoctor=true;
+            } else if ( this.userRole=="Doctor"){
+                this.isAlienUser=true;
                 this.userId = localStorage.getItem('showUserId');
-            }else if(decodeToken.Role=="Patient"){
+            }else if( this.userRole=="Patient"){
+                this.isAlienUser=true;
                 this.isPatient=true;
                 this.userId = localStorage.getItem('showUserId');
             }

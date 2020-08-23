@@ -74,5 +74,6 @@ export class AdminClinicHomePageComponent {
 
     MyProfile(){
         localStorage.setItem('alienProfile', "false")
+        this.router.navigate(["/userProfile"])
     }
 }

@@ -239,4 +239,10 @@ export class DataService {
             responseType: 'json'
         });
     }
+
+    public GetAllReviewsFromClinic(clinicId: string): Observable<any>{
+        return this.http.get<any>(environment.webApiBaseUrl + 'Clinic/GetAllReviewsFromClinic/'+ clinicId, {
+            responseType: 'json'
+        });
+    }
 }

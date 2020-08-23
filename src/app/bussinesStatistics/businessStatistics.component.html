@@ -1,12 +1,37 @@
-<label>Clinic average mark: </label> {{clinic.averageMark}}
-<label></label>
-
 
 <div class="wrapper fadeInDown">
-    <div id="formContent">    
-        <h2>My Examinations</h2>
+    <div id="formContent"> 
+      <h2>{{clinic.name}} Bussines Statistics</h2>
+      <div class="form-group">
+          <label style="font-size: 25px">Average Clinic Mark: {{clinic.averageMark}} ☆ </label><br><a class="underlineHover" href="/allReviews">Show All Reviews</a>
+      </div>
+      <div>
+        <button class="btn btn-secondary" routerLink="/searchDoctors">Show All Doctors</button>
+      </div>
+        <h2>Financial Statistics</h2><br>
+        <label>Choose period</label> 
+        <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px" >
+          <mat-label>Select year</mat-label>
+          <mat-select [(ngModel)]="selectedYear" name="selectedYear" (selectionChange)="FilterDatePeriod(selectedYear,selectedMonth)">
+              <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="margin:0px 0px 0px 20px">
+        <mat-label>Select month</mat-label>
+        <mat-select [(ngModel)]="selectedMonth" name="month" (selectionChange)="FilterDatePeriod(selectedYear,selectedMonth)">
+            <option value="" selected></option>
+            <mat-option *ngFor="let month of months" [value]="month.number" >
+            {{month.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button class="btn btn-secondary" style="margin:0px 0px 0px 20px" (click)="ngOnInit()"> Clear</button>
+        
+    <br><label>Total Income for selected period: </label> {{totalIncome}} rsd
             <div style="margin: 0px 15px 5px 0px; width: 200px;">
-                <input type="text" class="form-control" placeholder="Filter Examinations" [(ngModel)]="term"> 
+                <input type="text" class="form-control" placeholder="Filter Examinations" [(ngModel)]="termExaminations"> 
             </div>
             <table class="table table-hover">
                 <thead>
@@ -19,41 +44,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let examination of examinations | filter:term; let i =index" (click)="ShowExaminationInfo(examination.id)">
+                    <tr *ngFor="let examination of examinations | filter:termExaminations; let i =index" (click)="ShowExaminationInfo(examination.id)">
                       <td scope="row">{{i+1}}</td>
                       <td class="vertical-center">{{examination.dateTime | date:'medium'}}</td>
                       <td class="vertical-center">{{examination.type}}</td>
-                      <td class="vertical-center">{{examination.price}}</td>              
+                      <td class="vertical-center">{{examination.price}} rsd</td>              
                     </tr>
                 </tbody>
               </table>
     </div>
 </div>
-              
-        <!-- <h2>Doctors </h2>
-        <div class="form-group">
-        </div>
-        <div style="margin: 0px 15px 5px 0px; width: 200px;">
-            <input type="text" class="form-control" placeholder="Filter" [(ngModel)]="term"> 
-            <button type="button" id="addButton" class="btn btn-success mr-3" style="position: absolute; right: 10px; " routerLink="/addDoctor" [hidden]="!adminClinicVisible">New Doctor</button>
-        </div>
-        <table class="table table-hover sortable"  >
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Doctor Name<i id="arrow" (click)="sortAsc('firstName')">▼</i><span id="arrow" (click)="sortDesc('firstName')">▲</span></th>
-              <th scope="col">Specialization<i id="arrow" (click)="sortAsc('specialization')">▼</i><span id="arrow" (click)="sortDesc('specialization')">▲</span></th>
-              <th scope="col">Average Mark<i id="arrow" (click)="sortAsc('averageMark')">▼</i><span id="arrow" (click)="sortDesc('averageMark')">▲</span></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let doctor of doctors | filter:term; let i = index " >
-                <td scope="row" >{{i+1}}</td>
-                <td class="vertical-center">{{doctor.firstName}}  {{doctor.lastName}}</td>
-                <td class="vertical-center">{{doctor.specialization}}</td>
-                <td class="vertical-center">{{doctor.averageMark}}</td>
-            </tr>
-          </tbody>
-        </table> -->
+
  
