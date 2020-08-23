@@ -31,7 +31,15 @@
                         {{room.name}} {{room.number}}
                         </mat-option>
                     </mat-select>
-                  </div> 
+                  </div>
+                  <br><div class="form-group col">
+                    <mat-label>Price </mat-label>
+                    <input name="price" ngModel required #price="ngModel">
+                  </div>
+                  <br><div class="form-group col">
+                    <mat-label>Discount% </mat-label>
+                    <input name="discount" ngModel required #discount="ngModel">
+                  </div>
               <div class="text-center">
                     <button (click)="onSubmit(room,doctor,form)">Confirm</button><br>
                     <button (click)="Cencel()">Cancel</button><br>

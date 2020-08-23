@@ -50,7 +50,8 @@ export class AddPredefinitionExaminationComponent implements OnInit {
             this.time.setSeconds(0);
             this.time.setMilliseconds(0);
         }
-        const ex = new Examination('00000000-0000-0000-0000-000000000000',this.time,room.roomId,doctor.employeeId,'00000000-0000-0000-0000-000000000000', doctor.specialization, 0);
+        var disprice = Math.floor(form.value.price - ((form.value.price/ 100*form.value.discount)))
+        const ex = new Examination('00000000-0000-0000-0000-000000000000',this.time,room.roomId,doctor.employeeId,'00000000-0000-0000-0000-000000000000', doctor.specialization, disprice);
         this.data.AddPreDefinitionExamination(ex).subscribe(response => {
             this.massage=response;
                 alert(this.massage);
