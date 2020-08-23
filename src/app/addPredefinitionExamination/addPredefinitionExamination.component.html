@@ -1,0 +1,49 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h1>Add predifinition examination</h1>
+      <!-- Icon -->
+      <form #form="ngForm" >
+          <label>Please fill in information for predifinition examination</label><br>
+              <br><div class="form-group col">
+                <mat-label>Doctor</mat-label>
+                <mat-select [(ngModel)]="doctor" name="doctor">
+                    <mat-option *ngFor="let doctor of doctors" [value]="doctor">
+                    {{doctor.firstName}} {{doctor.lastName}}
+                    </mat-option>
+                </mat-select>
+              </div> <br>
+              <div class="form-group"  >    
+                <mat-form-field>
+                  <input matInput [ngxMatDatetimePicker]="examinationDate" placeholder="Choose a date" ngModel #examinationDate="ngModel" name="examinationDate" [value]="dateControl"
+                     [disabled]="disabled">
+                  <mat-datepicker-toggle matSuffix [for]="examinationDate"></mat-datepicker-toggle>
+                  <ngx-mat-datetime-picker #examinationDate [showSpinners]="showSpinners" 
+                    [stepHour]="stepHour" [stepMinute]="stepMinute"  [touchUi]="touchUi"
+                    [color]="color" [enableMeridian]="enableMeridian">
+                  </ngx-mat-datetime-picker>
+                </mat-form-field>
+                  </div>
+                  <br><div class="form-group col">
+                    <mat-label>Room</mat-label>
+                    <mat-select [(ngModel)]="room" name="room">
+                        <mat-option *ngFor="let room of rooms" [value]="room">
+                        {{room.name}} {{room.number}}
+                        </mat-option>
+                    </mat-select>
+                  </div>
+                  <br><div class="form-group col">
+                    <mat-label>Price </mat-label>
+                    <input name="price" ngModel required #price="ngModel">
+                  </div>
+                  <br><div class="form-group col">
+                    <mat-label>Discount% </mat-label>
+                    <input name="discount" ngModel required #discount="ngModel">
+                  </div>
+              <div class="text-center">
+                    <button (click)="onSubmit(room,doctor,form)">Confirm</button><br>
+                    <button (click)="Cencel()">Cancel</button><br>
+            </div><br>
+          </form>
+    </div>      
+  </div>

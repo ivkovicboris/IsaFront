@@ -33,10 +33,16 @@ import { EditRoomComponent } from './editRoom/editRoom.component';
 import { PriceListComponent } from './priceList/priceList.component';
 import { PriceEditComponent } from './priceEdit/priceEdit.component';
 
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatDatepickerModule, MatInputModule } from '@angular/material';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DatePipe } from '@angular/common';
 import {  BookExaminationPageComponent } from './bookExaminationPage/bookExaminationPage.component';
+import { AddPredefinitionExaminationComponent } from './addPredefinitionExamination/addPredefinitionExamination.component';
+
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+
+
+
 
 import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
 import { ExaminationViewComponent }from './examinationView/examinationView.component';
@@ -77,9 +83,16 @@ const route = [
   {path: 'changePassword', component: ChangePasswordComponent},
 
   {path: 'bookExaminationPage', component: BookExaminationPageComponent},
+
   {path: 'examinationView', component: ExaminationViewComponent},
   {path: 'businessStatistics', component: BusinessStatisticsComponent},
   {path: 'allReviews', component: AllReviewsComponent}
+
+  {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
+
+  {path: 'examinationView', component: ExaminationViewComponent}
+
+
 
 ];
 
@@ -110,10 +123,13 @@ const route = [
     SearchDoctorsComponent,
     SearchPatientsComponent,
     BookExaminationPageComponent,
+    AddPredefinitionExaminationComponent,
     SearchExaminationsComponent,
     ExaminationViewComponent,
+
     BusinessStatisticsComponent,
     AllReviewsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -125,9 +141,15 @@ const route = [
     ),
     BrowserAnimationsModule,
     MaterialModule,
+    MatDatepickerModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatInputModule,
+    Ng2SearchPipeModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule, 
+    NgxMatNativeDateModule,
     Ng2SearchPipeModule,
     NgxDaterangepickerMd.forRoot()
   ],

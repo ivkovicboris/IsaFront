@@ -26,6 +26,7 @@ export class AddClinicCenterAdminComponent {
     public submitted: boolean;
     result: any;
     randomPassword: string;
+    public receivers: Array<string>;
 
     constructor(private data: DataService, private router: Router,private formBuilder: FormBuilder) {}
     
@@ -71,7 +72,8 @@ export class AddClinicCenterAdminComponent {
             this.registerForm.value.state,
             "ClinicCenterAdmin",
             "",
-            ""
+            "",
+            0
         )
         this.data.Register(user).subscribe(response =>
         {
@@ -84,10 +86,12 @@ export class AddClinicCenterAdminComponent {
             
             
         });
+        this.receivers = new Array<string>();
+        this.receivers.push(this.registerForm.value.email)
         const mail = new Mail (
             "HOSPITAL ISA - Account created",
             "",
-            this.registerForm.value.email,
+            this.receivers,
             //body:
             "Hi, " + this.registerForm.value.firstName + ",\n"
             + "You have been added to HOSPITAL ISA as Clinic Center Admin for clinic: "

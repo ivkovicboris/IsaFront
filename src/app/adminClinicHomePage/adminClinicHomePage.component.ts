@@ -51,7 +51,7 @@ export class AdminClinicHomePageComponent {
         localStorage.setItem('examinationType',this.examinationRequests.examinationType);
         localStorage.setItem('examinationId',examinationId);
         //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
-        localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:ss:mm'));
+        localStorage.setItem("examinationDate", this.datepipe.transform(date, 'yyyy-MM-ddTHH:mm:ss'));
         this.router.navigate(["/searchRooms"])
       }
 

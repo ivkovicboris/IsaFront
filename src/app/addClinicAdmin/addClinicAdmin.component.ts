@@ -72,7 +72,8 @@ export class AddClinicAdminComponent {
             this.registerForm.value.state,
             "ClinicAdmin",
             "",
-            this.selectedClinic
+            this.selectedClinic,
+            0
         )
         
 

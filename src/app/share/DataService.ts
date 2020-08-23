@@ -220,6 +220,20 @@ export class DataService {
         return this.http.post(environment.webApiBaseUrl + 'Examination/AddExamination', examination);
     }
 
+    public AcceptPreDefinitionExamination(examination: Examination){
+        return this.http.post(environment.webApiBaseUrl + 'Examination/AcceptPreDefinitionExamination', examination);
+    }
+
+    public AddPreDefinitionExamination(examination: Examination){
+        return this.http.post(environment.webApiBaseUrl + 'Examination/AddPreDefinitionExamination', examination);
+    }
+
+    public GetPreDefinitionExamination(): Observable<Examination[]>{
+        return this.http.get<Examination[]>(environment.webApiBaseUrl + 'Examination/GetPreDefinitionExamination', {
+            responseType: 'json'
+        });
+    }
+
     public GetClinicByTypeDateExamination(request: RequestExamination): Observable<Clinic[]> {
          let result: any;
         return this.http.post(environment.webApiBaseUrl + 'Examination/GetClinicByTypeDateExamination/', request) as Observable<Clinic[]>;

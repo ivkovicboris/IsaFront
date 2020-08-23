@@ -37,7 +37,7 @@
                           <mat-label>Occupancy time</mat-label>
                           <mat-select >
                               <mat-option *ngFor="let date of datesByRoom | filter:term; let i = index " [value]="date">
-                              {{date | date:'medium'}}
+                              {{date.dateTime | date:'medium'}}
                               </mat-option>
                           </mat-select>
                       </mat-form-field>
