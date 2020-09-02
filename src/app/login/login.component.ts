@@ -39,7 +39,7 @@ export class LoginComponent {
                 } else {
                       this.data.CheckIfSignedBefore(this.id).subscribe (response =>{
                         if (!response){
-                          alert('Please change your predefined password before proceeding.')
+                          alert('Please change your predefined password before proceeding.\n You have been given the predefined password on your registration email!')
                           this.router.navigate(['/changePassword']);
                         }
                       });

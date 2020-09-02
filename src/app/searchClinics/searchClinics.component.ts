@@ -6,7 +6,12 @@ import { Router, Route } from '@angular/router';
 import { RequestExamination } from '../share/RequestExamination';
 import { Price } from '../share/Price';
 import { DatePipe } from '@angular/common';
+import { AgmCoreModule} from '@agm/core'
+import { GoogleMapsScriptProtocol, AgmGeocoder } from '@agm/core';
+import { GoogleMapsAPIWrapper, MapsAPILoader } from '@agm/core';
+import { Observable } from 'rxjs';
 
+import {GeocodeLatLngToAddress} from '../GeocodeLatLngToAddress';
 
 
 @Component({
@@ -34,6 +39,16 @@ export class SearchClinicsComponent implements OnInit {
   selectedType: string = "";
   examinationPrice: any;
   priceList: any;
+  latitude= 45.252315;
+  longitude= 19.821111;
+  zoom = 13;
+  icon = {
+    url: '../../assets/images/hospital.svg',
+    scaledSize: {
+      width: 50,
+      height: 50
+    }
+  }
 
     constructor(private data: DataService, private router: Router, public datepipe: DatePipe ) {}
 
@@ -43,9 +58,9 @@ export class SearchClinicsComponent implements OnInit {
             this.examinationPrice="Select Examination Type"
         });
     }
+    
     public  examinationRequest(form: NgForm){
         this.examinationDate = form.value.examinationDate;
-        //this.examinationDate=convertUTCDateToLocalDate(this.examinationDate);
         this.selectedType = form.value.selectedType;
         const requestExamination = new RequestExamination('00000000-0000-0000-0000-000000000000',this.examinationDate, this.selectedType);
         this.data.GetClinicByTypeDateExamination(requestExamination).subscribe(response => { 
@@ -64,7 +79,10 @@ export class SearchClinicsComponent implements OnInit {
         })
         
     }
-    
+    ShowClinic(clinicId:string){
+      localStorage.setItem('clinicId',clinicId);
+      this.router.navigate(["/showClinic"]);
+    }
     GetExaminationPriceByClinic(clinicId: string){
       if(this.selectedType==""){
         this.examinationPrice = "Choose Examination Type"
@@ -113,5 +131,7 @@ export class SearchClinicsComponent implements OnInit {
       localStorage.setItem("examinationDate", this.datepipe.transform(this.examinationDate, 'yyyy-MM-ddTHH:mm:ss'));
       this.router.navigate(["/searchDoctors"])
     }
+
+    
 
 }

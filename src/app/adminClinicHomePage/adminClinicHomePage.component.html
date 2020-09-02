@@ -1,8 +1,10 @@
-<button (click)="MyProfile()">My profile</button><br>
+<button (click)="MyProfile()">My profile</button>
+<button (click)="ShowClinic()">My Clinic Profile</button> <br>
 <button routerLink="/addDoctor"> Add Doctor</button>
 <button (click)="ShowDoctors()">All Doctors</button><br>
 <button routerLink="/addRoom"> Add Room</button>
 <button (click)="SearchRooms()">All Rooms</button><br>
+
 
 <button routerLink="/businessStatistics">Bussines statistics</button>
 <button routerLink="/addPredefinitionExamination"> Add Predefinition Examination</button>
@@ -34,4 +36,36 @@
     </div>
 </div>
 
-
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h2>Vacation requests</h2>
+    <table class="table table-hover sortable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" >Start date<i id="arrow" (click)="sortAsc('email')">▼</i><span id="arrow" (click)="sortDesc('email')">▲</span></th>
+          <th scope="col" >End date</th>
+          <th scope="col" >Doctor</th>
+          <th scope="col">Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vacationdoctor of doctorsVacations; let i =index">
+            <td scope="row">{{i+1}}</td>
+            <td class="vertical-center">{{vacationdoctor.vacations.startDate}}</td>
+            <td class="vertical-center">{{vacationdoctor.vacations.endDate}}</td>
+            <td class="vertical-center">{{vacationdoctor.doctors.firstName}} {{vacationdoctor.doctors.lastName}}</td>
+              <button initial class="btn btn-success" (click)="AcceptVacation(vacationdoctor.doctors.email)">Accept</button>
+              <button initial class="btn btn-danger" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Deny</button>
+              <div class="collapse" id="collapseExample">
+              <mat-form-field class="example-full-width">
+                <mat-label>Reason for deny:</mat-label>
+                <textarea matInput [(ngModel)]='reasone'></textarea>
+                <button initial class="btn btn-danger" (click)="DenyVacation(vacationdoctor.doctors.email)">Confirm</button>
+              </mat-form-field>
+            </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

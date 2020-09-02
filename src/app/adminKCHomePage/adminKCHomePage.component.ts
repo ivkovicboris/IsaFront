@@ -96,47 +96,7 @@ export class AdminKCHomePageComponent {
         });
     }
 
-    AcceptVocation(email: any){
-        this.receivers = new Array<string>();
-        this.receivers.push(email)
-        const mail = new Mail
-        (
-            "HOSPITAL ISA - vocation ACCEPTED",
-            "",
-            this.receivers,
-            "Your vocation request has been accepted."
-        );
-        this.data.AcceptVacationRequests(mail).subscribe( response => {
-            if(response){
-                alert('Vocation request has been ACCEPTED.');
-            }else {
-                alert('Something went wrong :(');
-            }
-            window.location.reload();
-        });   
-    }
-
-    DenyVocation(email: any){
-        this.receivers = new Array<string>();
-        this.receivers.push(email)
-        const mail = new Mail
-        (
-            "HOSPITAL ISA - vocation DENIED",
-            "",
-            this.receivers,
-            this.reasone
-            
-            
-        );
-        this.data.DenyVacationRequests(mail).subscribe( response => {
-            if(response){
-                alert('vocation request has been DENIED.');
-            }else {
-                alert('Something went wrong :(');
-            }
-            window.location.reload();
-        });
-    }
+   
     GetUsers(){
         this.data.GetUsers().subscribe(respone => {
             ;

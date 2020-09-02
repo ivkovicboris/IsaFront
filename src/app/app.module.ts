@@ -40,16 +40,15 @@ import {  BookExaminationPageComponent } from './bookExaminationPage/bookExamina
 import { AddPredefinitionExaminationComponent } from './addPredefinitionExamination/addPredefinitionExamination.component';
 
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
-
-
-
-
 import { SearchExaminationsComponent } from './searchExaminations/searchExaminations.component';
 import { ExaminationViewComponent }from './examinationView/examinationView.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { BusinessStatisticsComponent } from './bussinesStatistics/businessStatistics.component';
 import { AllReviewsComponent } from './allReviews/allReviews.component';
-
+import { MedicalRecordComponent } from './medicalRecord/medicalRecord.component';
+import {AgmCoreModule} from '@agm/core'
+import { GeocodeService } from './geocode.service';
+import { ShowClinicComponent } from './showClinic/showClinic.component';
 
 const route = [
   { path: '', component: LoginComponent},
@@ -86,14 +85,14 @@ const route = [
 
   {path: 'examinationView', component: ExaminationViewComponent},
   {path: 'businessStatistics', component: BusinessStatisticsComponent},
-  {path: 'allReviews', component: AllReviewsComponent}
+  {path: 'allReviews', component: AllReviewsComponent},
 
   {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
 
-  {path: 'examinationView', component: ExaminationViewComponent}
+  {path: 'examinationView', component: ExaminationViewComponent},
 
-
-
+  {path: 'medicalRecord', component: MedicalRecordComponent},
+  {path: 'showClinic', component: ShowClinicComponent}
 ];
 
 
@@ -126,10 +125,10 @@ const route = [
     AddPredefinitionExaminationComponent,
     SearchExaminationsComponent,
     ExaminationViewComponent,
-
+    MedicalRecordComponent,
     BusinessStatisticsComponent,
     AllReviewsComponent,
-
+    ShowClinicComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,9 +150,14 @@ const route = [
     NgxMatTimepickerModule, 
     NgxMatNativeDateModule,
     Ng2SearchPipeModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA-Ds9r4qC5cHu_wkpLO4axWUNduIVWX_0'
+    })
   ],
-  providers: [DatePipe,
+  providers: [
+    GeocodeService,
+    DatePipe,
     DataService,
     {
       provide: HTTP_INTERCEPTORS,

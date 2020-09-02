@@ -21,11 +21,28 @@
 
             <input type="submit" value="Search">  
         </form>
-
       </div>
+      <div >
+      <agm-map style="text-shadow: 0px 0px 6.2px grey;" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker 
+        *ngFor="let clinic of clinics | filter:term; let i = index"  
+        [latitude]="clinic.latitude" 
+        [longitude]="clinic.longitude"
+        [iconUrl]="icon"
+        [label]="{ fontWeight: 'bold', color: 'blue',  text: clinic.name}"
+        [markerClickable]="true"
+        (markerClick)="ShowClinic(clinic.clinicId)"
+        >   
+        </agm-marker>
+      </agm-map>
+    </div>
+      
+
+
       <div style="margin: 0px 15px 5px 0px; width: 200px;">
           <input type="text" class="form-control" placeholder="Filter Clinics: " [(ngModel)]="term"> 
       </div>
+
       
       <table class="table table-hover">
           <thead>
@@ -41,10 +58,10 @@
           <tbody>
               <tr *ngFor="let clinic of clinics | filter:term; let i =index">
                 <td scope="row">{{i+1}}</td>
-                <td class="vertical-center">{{clinic.name}}</td>
-                <td class="vertical-center">{{clinic.address}}</td>
-                <td class="vertical-center">{{clinic.averageMark}}</td>
-                <td class="vertical-center">{{examinationPrice}}</td>
+                <td class="vertical-center" (click)="ShowClinic(clinic.clinicId)">{{clinic.name}}</td>
+                <td class="vertical-center" (click)="ShowClinic(clinic.clinicId)">{{clinic.address}} </td>
+                <td class="vertical-center" (click)="ShowClinic(clinic.clinicId)">{{clinic.averageMark}}</td>
+                <td class="vertical-center" (click)="ShowClinic(clinic.clinicId)">{{examinationPrice}}</td>
                 <td class="vertical-center">
                   <button class="btn btn-secondary mr-3" (click)="ShowDoctors(clinic.clinicId)">Show Doctors</button>
                 </td>

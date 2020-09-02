@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2>{{clinic.name}} Clinic Information</h2>
+            <div class="form-group">
+                <label>About: </label> {{clinic.about}}<br>
+                <div class="form-group">
+                    <label style="font-size: 25px">Average Clinic Mark: {{clinic.averageMark}} ☆ </label><br><a class="underlineHover" href="/allReviews">Show All Reviews</a>
+                </div>
+                <label>Address: </label>  {{clinic.address}}
+            </div>
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                <agm-marker [latitude]="latitude" [longitude]="longitude">   
+                </agm-marker>
+            </agm-map>
+
+    </div>
+</div>

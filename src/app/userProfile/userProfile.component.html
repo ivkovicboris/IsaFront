@@ -3,6 +3,7 @@
             <!-- Tabs Titles -->
             <h2>{{user.firstName}} {{user.lastName}} Profile</h2>
             <br>({{userRole}})
+            <button class="btn btn-secondary" (click)="ShowMedicalRecord()" [hidden]="!isPatient">Show Medical Record</button>
 
             <form #form="ngForm" (ngSubmit)="EditInformation(form)"  >
                     <div class='form-row' style="align-items: center">

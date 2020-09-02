@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../share/DataService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../share/User';
 
+import {MatDatepicker} from '@angular/material/datepicker';
 import * as jwt_decode from "jwt-decode";
+import { NewExamination } from '../share/NewExamination';
+import { Mail } from '../share/Mail';
+import { Examination } from '../share/Examination';
+
 
 @Component({
-    selector: 'userProfile-component',
-    templateUrl: 'userProfile.component.html',
-    styleUrls: ['userProfile.component.css']
+    selector: 'medicalRecord-component',
+    templateUrl: 'medicalRecord.component.html',
+    styleUrls: ['medicalRecord.component.css']
 })
-export class UserProfileComponent implements OnInit {
-
+export class MedicalRecordComponent implements OnInit{
     public userId: any;
     public error = true;
     public user: any;
@@ -20,6 +24,7 @@ export class UserProfileComponent implements OnInit {
     patientId: string;
     isPatient = false;
     userRole: any;
+    patient: any;
     constructor(private data: DataService, private router: Router) {}
 
     ngOnInit() {
@@ -39,22 +44,13 @@ export class UserProfileComponent implements OnInit {
                 this.isPatient=true;
                 this.userId = localStorage.getItem('showUserId');
             }
-        
-        this.data.GetUserById(this.userId).subscribe( response => {
-            this.user = response;
-            
-        });
-    
+
+            this.data.GetUserById(this.userId).subscribe( response => {
+                this.patient = response;
+            });
     }
 
-    EditInformation(form) {
-        this.router.navigate(["/updateProfile"]);
-    }
     
-    ShowMedicalRecord(){
-        localStorage .setItem('alienProfile', this.isAlienUser.toString());
-        localStorage.setItem('showUserId', this.userId);
-        //this.router.navigate(["/medicalRecord"])
-    }
-        
+
 }
+

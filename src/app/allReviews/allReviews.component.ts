@@ -15,6 +15,7 @@ export class AllReviewsComponent implements OnInit{
     patient: any;
     patients: any;
     doctor: any;
+  clinicId: string;
 
 
 constructor(private data: DataService, private router: Router) {}
@@ -23,11 +24,11 @@ constructor(private data: DataService, private router: Router) {}
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.adminId = decodeToken.jti;
-
-        this.data.GetClinicByAdminId(this.adminId).subscribe (response => {
-            this.clinic = response;
+        this.clinicId = localStorage.getItem('clinicId');
+        this.data.GetClinicById(this.clinicId).subscribe (response => {
+            this.clinic = response[0];
             
-            this.data.GetAllReviewsFromClinic(this.clinic.clinicId).subscribe (response=>{
+            this.data.GetAllReviewsFromClinic( this.clinicId).subscribe (response=>{
                     this.reviews = response;
                     // this.reviews.forEach(review => {
                     //     this.data.GetUserById(review.patientId).subscribe (response => {

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as jwt_decode from "jwt-decode";
 import { RequestExamination } from "../share/RequestExamination";
 import { DatePipe } from '@angular/common';
+import { Mail } from '../share/Mail';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class AdminClinicHomePageComponent {
     public specializations: any;
     public clinic:any;
     public examinationRequests: any;
+    receivers: string[];
+    public reasone:string;
 
     constructor(private data: DataService, private router: Router, public datepipe: DatePipe ) {}
 
@@ -75,5 +78,50 @@ export class AdminClinicHomePageComponent {
     MyProfile(){
         localStorage.setItem('alienProfile', "false")
         this.router.navigate(["/userProfile"])
+    }
+
+    AcceptVacation(email: any){
+        this.receivers = new Array<string>();
+        this.receivers.push(email)
+        const mail = new Mail
+        (
+            "HOSPITAL ISA - vocation ACCEPTED",
+            "",
+            this.receivers,
+            "Your vocation request has been accepted."
+        );
+        this.data.AcceptVacationRequests(mail).subscribe( response => {
+            if(response){
+                alert('Vocation request has been ACCEPTED.');
+            }else {
+                alert('Something went wrong :(');
+            }
+            window.location.reload();
+        });   
+    }
+
+    DenyVacation(email: any){
+        this.receivers = new Array<string>();
+        this.receivers.push(email)
+        const mail = new Mail
+        (
+            "HOSPITAL ISA - vocation DENIED",
+            "",
+            this.receivers,
+            this.reasone
+        );
+        this.data.DenyVacationRequests(mail).subscribe( response => {
+            if(response){
+                alert('vocation request has been DENIED.');
+            }else {
+                alert('Something went wrong :(');
+            }
+            window.location.reload();
+        });
+    }
+
+    ShowClinic(){
+        localStorage.setItem('clinicId', this.clinic.clinicId);
+        this.router.navigate(["/showClinic"]);
     }
 }
