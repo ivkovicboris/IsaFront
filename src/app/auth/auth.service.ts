@@ -16,8 +16,8 @@ export class AuthService {
       return false;
     }
     // decode the token to get its payload
-    const tokenPayload = decode(token);
-    if ( tokenPayload.Role === 'Administrator') {
+    //const tokenPayload = decode(token);
+    if ( localStorage.getItem('Role') === 'Administrator') {
       return true;
     }
     return false;

@@ -58,7 +58,7 @@ export class SearchDoctorsComponent implements OnInit {
     ngOnInit() {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        this.userRole = decodeToken.Role;
+        this.userRole = localStorage.getItem('Role');;
         this.userId = decodeToken.jti;
         if (this.userRole=="ClinicAdmin"){
           this.clinicId=localStorage.getItem('clinicId');

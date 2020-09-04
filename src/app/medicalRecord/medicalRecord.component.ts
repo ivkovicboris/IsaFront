@@ -31,7 +31,7 @@ export class MedicalRecordComponent implements OnInit{
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.userId = decodeToken.jti;
-        this.userRole=decodeToken.Role;
+        this.userRole=localStorage.getItem('Role');
         if(localStorage.getItem('alienProfile')=="true")
             if( this.userRole=="ClinicAdmin"){
                 this.isAlienUser=true;

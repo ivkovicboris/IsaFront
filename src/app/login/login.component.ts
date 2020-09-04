@@ -35,7 +35,9 @@ export class LoginComponent {
               localStorage.setItem('expires_in', this.token.expiration);
               const tokenPayload = jwt_decode(this.token.token);
               this.id = tokenPayload.jti;
-              if (tokenPayload.Role=='Patient') { this.router.navigate(['/patientHomePage/']);
+              localStorage.setItem('Role',tokenPayload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+              const userRole=localStorage.getItem('Role');
+              if (userRole=='Patient') { this.router.navigate(['/patientHomePage/']);
                 } else {
                       this.data.CheckIfSignedBefore(this.id).subscribe (response =>{
                         if (!response){
@@ -43,10 +45,10 @@ export class LoginComponent {
                           this.router.navigate(['/changePassword']);
                         }
                       });
-                      if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
-                      else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
-                      else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
-                      else if (tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}
+                      if (userRole=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
+                      else if (userRole=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
+                      else if (userRole=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
+                      else if (userRole=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}
                   }
           } 
       });

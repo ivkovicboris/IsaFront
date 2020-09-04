@@ -43,8 +43,8 @@ export class ExaminationViewComponent implements OnInit {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.adminId = decodeToken.jti;
-
-        if(decodeToken.Role=="ClinicAdmin"){
+        const userRole=localStorage.getItem('Role');
+        if(userRole=="ClinicAdmin"){
             this.isAdminClinic = true;
         }
         this.examinationId = localStorage.getItem('examinationId');
@@ -62,7 +62,7 @@ export class ExaminationViewComponent implements OnInit {
             })
         });
 
-        if(decodeToken.Role=="ClinicAdmin"){
+        if(userRole=="ClinicAdmin"){
             this.isAdminClinic = true;
         }
         

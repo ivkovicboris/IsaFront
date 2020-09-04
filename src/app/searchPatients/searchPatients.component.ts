@@ -29,7 +29,7 @@ export class SearchPatientsComponent implements OnInit {
     ngOnInit(): void {
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        this.userRole = decodeToken.Role;
+        this.userRole = localStorage.getItem('Role');
         this.userId = decodeToken.jti;
 
         this.data.GetClinicByAdminId(this.userId).subscribe( response => {

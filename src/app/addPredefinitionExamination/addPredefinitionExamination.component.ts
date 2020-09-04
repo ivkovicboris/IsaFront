@@ -28,7 +28,7 @@ export class AddPredefinitionExaminationComponent implements OnInit {
     ngOnInit(){
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
-        this.userRole = decodeToken.Role;
+        this.userRole = localStorage.geti('Role');
         this.userId = decodeToken.jti;
           this.clinicId=localStorage.getItem('clinicId');
           this.data.GetAllDoctorsFromClinic(this.clinicId).subscribe(x => {

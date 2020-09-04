@@ -39,7 +39,7 @@ export class UpdateProfileComponent implements OnInit{
         const token = localStorage.getItem('token');
         const decodeToken = jwt_decode(token);
         this.id = decodeToken.jti;
-        this.userRole=decodeToken.Role;
+        this.userRole=localStorage.getItem('Role');
         //this.id = this.arouter.snapshot.paramMap.get('id');
         //this.id='b4d714ea-5536-46a0-8fe4-90b9a222b573';
         this.data.GetUserById(this.id).subscribe( response => {

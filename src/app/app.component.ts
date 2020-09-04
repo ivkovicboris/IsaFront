@@ -18,12 +18,13 @@ export class AppComponent {
     if(this.token==null){
       this.router.navigate(['/login'])
     }
+    const userRole=localStorage.getItem('Role');
     
-    if (tokenPayload.Role=='Patient') { this.router.navigate(['/patientHomePage/']);}      
-    else if (tokenPayload.Role=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
-    else if (tokenPayload.Role=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
-    else if (tokenPayload.Role=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
-    else if (tokenPayload.Role=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}
+    if (userRole=='Patient') { this.router.navigate(['/patientHomePage/']);}      
+    else if (userRole=='ClinicAdmin'){ this.router.navigate(['/adminClinicHomePage/']);}
+    else if (userRole=='Doctor'){ this.router.navigate(['/doctorHomePage/']);}
+    else if (userRole=='Nurse'){ this.router.navigate(['/doctorHomePage/']);}
+    else if (userRole=='ClinicCenterAdmin') { this.router.navigate(['/adminKCHomePage/'])}
   }
 
   LogOut(){

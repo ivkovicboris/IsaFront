@@ -5,6 +5,6 @@ export function GeneratePassword(length) {
     for ( var i = 0; i < length-3; i++ ) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    result ="Boris123!"
+    //result ="Boris123!" Za lakse logovanje
     return result;
  }

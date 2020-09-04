@@ -79,20 +79,20 @@ const route = [
 
   { path: 'priceList', component: PriceListComponent },
   { path: 'priceEdit', component: PriceEditComponent},
-  {path: 'changePassword', component: ChangePasswordComponent},
+  { path: 'changePassword', component: ChangePasswordComponent},
 
-  {path: 'bookExaminationPage', component: BookExaminationPageComponent},
+  { path: 'bookExaminationPage', component: BookExaminationPageComponent},
 
   {path: 'examinationView', component: ExaminationViewComponent},
   {path: 'businessStatistics', component: BusinessStatisticsComponent},
   {path: 'allReviews', component: AllReviewsComponent},
 
-  {path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
+  { path: 'addPredefinitionExamination', component: AddPredefinitionExaminationComponent},
 
-  {path: 'examinationView', component: ExaminationViewComponent},
+  { path: 'examinationView', component: ExaminationViewComponent},
 
-  {path: 'medicalRecord', component: MedicalRecordComponent},
-  {path: 'showClinic', component: ShowClinicComponent}
+  { path: 'medicalRecord', component: MedicalRecordComponent},
+  { path: 'showClinic', component: ShowClinicComponent}
 ];
 
 
